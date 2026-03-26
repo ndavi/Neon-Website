@@ -4,8 +4,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Description from '../components/Description.astro';
 import Footer from '../components/Footer.astro';
-import ProjectCard from '../components/ProjectCard.astro';
 import VideoSection from '../components/VideoSection.astro';
+import ProjectSection from '../components/ProjectSection.astro';
+import Home from '../components/Home.astro';
+import ProjectDialog from '../components/ProjectDialog.astro';
 
 const allProjects = await getCollection('projects');
 
@@ -27,111 +29,54 @@ const categories = [
     name: 'ARTS NUMERIQUES', 
     description: 'Installations artistiques et création de contenu génératif.',
     pictoClass: 'picto-an'
+  },
+  {
+    id: 'conception3d',
+    name: 'CONCEPTION 3D',
+    description: 'Réalisation de plans techniques & rendus 3D',
+    pictoClass: 'picto-3d'
   }
 ];
-
-const catConception3d = {
-  id: 'conception3d',
-  name: 'CONCEPTION 3D',
-  description: 'Réalisation de plans techniques & rendus 3D',
-  pictoClass: 'picto-3d'
-};
 ---
 
 <BaseLayout title="Stage Design & Arts Numériques">
 	<div id="app-root" class="app min-h-screen bg-[#dbdbdb]">
-    <!-- 1. Home Section -->
-    <section class="home">
-      <img src="/img/neon-main-2.jpeg" alt="neon-tapage" class="home-image" />
-      <div class="home-text">
-        <img src="/img/neonAssets/neon-noir-baseline.png" alt="logo-neon" class="home-logo" style="width: 60vw; max-width: 800px;" />
-      </div>
-      <div class="arrow-content cursor-pointer" id="home-arrow">
-        <svg id="more-arrows" viewBox="0 0 75 65">
-          <polygon class="arrow-top" points="37.6,27.9 1.8,1.3 3.3,0 37.6,25.3 71.9,0 73.7,1.3 "></polygon>
-          <polygon class="arrow-middle" points="37.6,45.8 0.8,18.7 4.4,16.4 37.6,41.2 71.2,16.4 74.5,18.7 "></polygon>
-        </svg>
-      </div>
-    </section>
-
-    <!-- 2. Header (Menu) -->
+    <Home />
     <Header />
-
-    <!-- 3. Description (Intro Text) -->
     <Description />
     
     <main>
       <div class="w-full">
         {categories.map((cat) => {
           const catProjects = allProjects.filter(p => p.data.category === cat.name);
+          // Special case: Conception 3D should be AFTER VideoSection in the original layout
+          if (cat.id === 'conception3d') return null;
+          
           return (
-            <section id={cat.id} class={`${cat.id.toLowerCase().replace(" ", "-")}`}>
-              <div class="headercontainer">
-                <div class="section-title">
-                  <h2>{cat.name}</h2>
-                  <div class={cat.pictoClass}>
-                    <img src="/img/neonAssets/picto1.png" width="24" alt="" />
-                  </div>
-                  <hr class="section-hr" />
-                </div>
-              </div>
-              <div class="section-description">
-                <p>{cat.description}</p>
-              </div>
-              
-              <div class="photos">
-                {catProjects.map((project) => (
-                  <ProjectCard 
-                    title={project.data.title}
-                    description={project.data.description || ""}
-                    coverImage={project.data.coverImage}
-                    srcSmall={project.data.srcSmall}
-                    credit={project.data.credit || ""}
-                    lienCredit={project.data.lienCredit || ""}
-                    alt={project.data.alt || ""}
-                    tag={project.data.tag || ""}
-                  />
-                ))}
-              </div>
-            </section>
+            <ProjectSection 
+              id={cat.id}
+              name={cat.name}
+              description={cat.description}
+              pictoClass={cat.pictoClass}
+              projects={catProjects}
+            />
           );
         })}
 
-        <!-- Video Section -->
         <VideoSection />
 
-        <!-- Conception 3D Section -->
         {(() => {
-          const catProjects = allProjects.filter(p => p.data.category === catConception3d.name);
+          const cat = categories.find(c => c.id === 'conception3d');
+          if (!cat) return null;
+          const catProjects = allProjects.filter(p => p.data.category === cat.name);
           return (
-            <section id={catConception3d.id} class="conception-3d">
-              <div class="headercontainer">
-                <div class="section-title">
-                  <h2>{catConception3d.name}</h2>
-                  <div class={catConception3d.pictoClass}>
-                    <img src="/img/neonAssets/picto1.png" width="24" alt="" />
-                  </div>
-                  <hr class="section-hr" />
-                </div>
-              </div>
-              <div class="section-description">
-                <p>{catConception3d.description}</p>
-              </div>
-              <div class="photos">
-                {catProjects.map((project) => (
-                  <ProjectCard 
-                    title={project.data.title}
-                    description={project.data.description || ""}
-                    coverImage={project.data.coverImage}
-                    srcSmall={project.data.srcSmall}
-                    credit={project.data.credit || ""}
-                    lienCredit={project.data.lienCredit || ""}
-                    alt={project.data.alt || ""}
-                    tag={project.data.tag || ""}
-                  />
-                ))}
-              </div>
-            </section>
+            <ProjectSection 
+              id={cat.id}
+              name={cat.name}
+              description={cat.description}
+              pictoClass={cat.pictoClass}
+              projects={catProjects}
+            />
           );
         })()}
       </div>
@@ -140,125 +85,5 @@ const catConception3d = {
     <Footer />
   </div>
 
-  <!-- Dialog / Modal -->
-  <dialog id="project-dialog" class="dialog">
-    <div id="dialog-content" class="flex flex-col items-center w-full">
-      <img id="modal-image" src="" alt="" class="max-h-[75vh] object-contain w-[85%]" />
-      <div class="text mt-4 max-w-4xl px-4">
-        <h2 id="modal-title" class="title"></h2>
-        <div id="modal-description" class="description mb-4"></div>
-        <div class="credit">
-          Crédit photo : <a id="modal-credit-link" href="" target="_blank" rel="noreferrer"></a>
-        </div>
-      </div>
-    </div>
-  </dialog>
-
-  <script>
-    const dialog = document.getElementById('project-dialog') as HTMLDialogElement;
-    const appRoot = document.getElementById('app-root');
-    const triggers = document.querySelectorAll('.project-trigger');
-    const homeArrow = document.getElementById('home-arrow');
-    
-    // Scroll arrow logic
-    homeArrow?.addEventListener('click', () => {
-      const descElement = document.getElementById('description');
-      descElement?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-
-    const modalImg = document.getElementById('modal-image') as HTMLImageElement;
-    const modalTitle = document.getElementById('modal-title');
-    const modalDesc = document.getElementById('modal-description');
-    const modalCreditLink = document.getElementById('modal-credit-link') as HTMLAnchorElement;
-
-    triggers.forEach(trigger => {
-      trigger.addEventListener('click', () => {
-        const data = (trigger as HTMLElement).dataset;
-        
-        if (modalImg) modalImg.src = data.image || '';
-        if (modalTitle) modalTitle.textContent = data.title || '';
-        if (modalDesc) modalDesc.textContent = data.description || '';
-        if (modalCreditLink) {
-          modalCreditLink.href = data.lienCredit || '';
-          modalCreditLink.textContent = data.credit || '';
-        }
-
-        dialog?.showModal();
-        appRoot?.classList.remove('app');
-        appRoot?.classList.add('app-opacity');
-      });
-    });
-
-    dialog?.addEventListener('click', () => {
-      closeDialog();
-    });
-
-    function closeDialog() {
-      dialog?.close();
-      appRoot?.classList.remove('app-opacity');
-      appRoot?.classList.add('app');
-    }
-
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && dialog?.open) {
-        closeDialog();
-      }
-    });
-  </script>
+  <ProjectDialog />
 </BaseLayout>
-
-<style>
-  .app-opacity {
-    background: rgba(0, 0, 0, 0.95) !important;
-  }
-  .app-opacity img {
-    opacity: 0.25;
-  }
-  
-  dialog::backdrop {
-    background: transparent;
-  }
-  .dialog {
-    background: none;
-    border: none;
-    color: white;
-    max-width: 100vw;
-    max-height: 100vh;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 10px;
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 100;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .dialog[open] {
-    display: flex;
-  }
-
-  .dialog .title {
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 2rem;
-    margin: 0;
-    margin-top: 4%;
-    text-align: center;
-  }
-
-  .dialog .description {
-    text-align: center;
-    font-weight: 300;
-    font-size: 1.3rem;
-  }
-
-  .dialog .credit {
-    text-align: center;
-    font-weight: 100;
-  }
-</style>

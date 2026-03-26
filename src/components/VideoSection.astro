@@ -1,4 +1,6 @@
 ---
+import SectionHeader from './SectionHeader.astro';
+
 const videos = [
   { url: "https://www.youtube.com/embed/U-vAoyMSEMA", alt: "video la box" },
   { url: "https://www.youtube.com/embed/ZVFyFldJ_cg", alt: "video la box" },
@@ -12,18 +14,7 @@ const videos = [
 ];
 ---
 <section id="VIDEOS" class="video py-10">
-  <div class="headercontainer text-center">
-    <div class="section-title">
-      <h2>VIDEOS</h2>
-      <div class="picto-v">
-        <img src="/img/neonAssets/picto1.png" width="24" alt="" />
-      </div>
-      <hr class="section-hr" />
-    </div>
-  </div>
-  <div class="section-description">
-    <p>Capsules vidéos et aftermovies.</p>
-  </div>
+  <SectionHeader title="VIDEOS" pictoClass="picto-v" description="Capsules vidéos et aftermovies." />
 
   <div class="video-grid flex flex-wrap justify-center gap-4 px-4 max-w-[1400px] mx-auto">
     {videos.map((vid) => (

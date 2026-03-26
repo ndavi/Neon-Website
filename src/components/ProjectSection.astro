@@ -1,0 +1,84 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import SectionHeader from './SectionHeader.astro';
+
+interface Props {
+  id: string;
+  name: string;
+  description: string;
+  pictoClass: string;
+  projects: any[];
+}
+
+const { id, name, description, pictoClass, projects } = Astro.props;
+---
+
+<section id={id} class={id.toLowerCase().replace(" ", "-")}>
+  <SectionHeader title={name} pictoClass={pictoClass} description={description} />
+  
+  <div class="photos">
+    {projects.map((project) => (
+      <ProjectCard 
+        title={project.data.title}
+        description={project.data.description || ""}
+        coverImage={project.data.coverImage}
+        srcSmall={project.data.srcSmall}
+        credit={project.data.credit || ""}
+        lienCredit={project.data.lienCredit || ""}
+        alt={project.data.alt || ""}
+        tag={project.data.tag || ""}
+      />
+    ))}
+  </div>
+</section>
+
+<style>
+  .photos {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
+  }
+
+  :global(.photos .image-div) {
+    position: relative;
+    transition: 0.4s;
+    text-align: center;
+    padding: 1.5vh;
+    box-sizing: border-box;
+  }
+
+  :global(.photos img) {
+    width: 95%;
+    height: 95%;
+    object-fit: cover;
+    cursor: pointer;
+  }
+
+  :global(.photos .image-div:hover) {
+    transform: scale(0.98);
+    opacity: 0.7;
+  }
+
+  @media screen and (min-width: 769px) {
+    :global(.photos .image-div) {
+      width: calc(100vw / 3.5);
+      height: calc(100vh / 3.5);
+    }
+  }
+
+  @media screen and (min-width: 481px) and (max-width: 768px) {
+    :global(.photos .image-div) {
+      width: calc(100vw / 3);
+      height: calc(100vh / 3);
+    }
+  }
+
+  @media screen and (min-width: 321px) and (max-width: 480px) {
+    :global(.photos .image-div) {
+      width: calc(100vw / 2);
+      height: calc(100vh / 2);
+    }
+  }
+</style>
