@@ -1,0 +1,190 @@
+@import "tailwindcss";
+
+@theme {
+  --color-neon-cyan: #00f3ff;
+  --color-neon-magenta: #ff00ff;
+  --font-sans: "M PLUS Rounded 1c", "Raleway", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  body, html {
+    @apply bg-[#dbdbdb] text-black;
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  h1, h2, h3, h4, .font-raleway {
+    font-family: "Raleway", sans-serif;
+  }
+
+  .m-plus {
+    font-family: "M PLUS Rounded 1c", sans-serif;
+  }
+
+  a { 
+    text-decoration: none; 
+    color: white; 
+    font-style: italic;
+  }
+}
+
+/* --- ORIGINAL CSS REPRODUCTION --- */
+
+.section-title {
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  text-align: center;
+  justify-content: center;
+  position: relative;
+  padding-top: 2vh;
+  color: #0D0802;
+  display: inline-block;
+}
+
+.section-description {
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  font-weight: 300;
+  text-align: center;
+  justify-content: center;
+  padding-bottom: 5vh;
+  font-size: 1.3rem;
+}
+
+hr {
+  border: none;
+  border-top: 2px solid #000000;
+  overflow: visible;
+  text-align: center;
+  width: 40vw;
+}
+
+.section-hr {
+  width: 200px;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: stretch;
+  align-content: center;
+  margin: 1rem 5rem 0rem 5rem;
+}
+
+.header-item {
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  font-weight: 500;
+  font-size: 1.4rem;
+  display: block;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: auto;
+  order: 0;
+}
+
+.header-item p {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  margin: 0;
+}
+
+.header-item p::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #000000;
+  transform-origin: center;
+  transition: transform 0.25s ease-in-out;
+}
+
+.header-item p:hover::after {
+  transform: scaleX(1);
+  transform-origin: center;
+}
+
+.photos {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0;
+}
+
+.photos .image-div {
+  position: relative;
+  transition: 0.4s;
+  text-align: center;
+  padding: 0.5vh;
+  box-sizing: border-box;
+}
+
+.photos img {
+  width: 95%;
+  height: 95%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.photos .image-div:hover {
+  transform: scale(0.98);
+  opacity: 0.7;
+}
+
+/* Desktop Grid - Original Calculation */
+@media screen and (min-width: 769px) {
+  .photos .image-div {
+    width: calc(100vw / 3.5);
+    height: calc(100vh / 3.5);
+  }
+}
+
+/* Tablet Grid */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .photos .image-div {
+    width: calc(100vw / 3);
+    height: calc(100vh / 3);
+  }
+}
+
+/* Mobile Grid */
+@media screen and (min-width: 321px) and (max-width: 480px) {
+  .photos .image-div {
+    width: calc(100vw / 2);
+    height: calc(100vh / 2);
+  }
+}
+
+/* Small Mobile */
+@media screen and (max-width: 320px) {
+  .photos .image-div {
+    width: 100vw;
+    height: 75vh;
+  }
+}
+
+.contact {
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  font-weight: 300;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  background: #5e5e5e;
+  color: white;
+}
+
+.contact-section {
+  margin-left: 5%;
+  margin-right: 5%;
+  vertical-align: top;
+  display: inline-block;
+}

@@ -1,0 +1,40 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "NEON - Arts Numériques et Scénographie" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title} | NEON</title>
+		<meta name="description" content={description} />
+		
+		<!-- Preload and Load Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Raleway:wght@100..900&display=swap" rel="stylesheet">
+	</head>
+	<body class="bg-black text-white selection:bg-neon-cyan/30 selection:text-white overflow-x-hidden">
+		<slot />
+		
+		<script>
+			import { gsap } from 'gsap';
+			import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+			// Register GSAP plugins
+			gsap.registerPlugin(ScrollTrigger);
+
+			// Lenis removed for native "snappy" feel
+		</script>
+	</body>
+</html>
