@@ -2,49 +2,82 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
+import Description from '../components/Description.astro';
 import Footer from '../components/Footer.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import VideoSection from '../components/VideoSection.astro';
 
 const allProjects = await getCollection('projects');
 
 const categories = [
   { 
+    id: 'stageDesign',
     name: 'STAGE DESIGN', 
-    description: 'Conception et exploitation de scénographies.' 
+    description: 'Conception et exploitation de scénographies.',
+    pictoClass: 'picto-sd'
   },
   { 
+    id: 'tour',
     name: 'ON TOUR', 
-    description: 'Création lumière & video sur des tournées.' 
+    description: 'Création lumière & video sur des tournées.',
+    pictoClass: 'picto-sd'
   },
   { 
+    id: 'artsNumeriques',
     name: 'ARTS NUMERIQUES', 
-    description: 'Installations artistiques et création de contenu génératif.' 
-  },
-  { 
-    name: 'CONCEPTION 3D', 
-    description: 'Réalisation de plans techniques & rendus 3D.' 
+    description: 'Installations artistiques et création de contenu génératif.',
+    pictoClass: 'picto-an'
   }
 ];
+
+const catConception3d = {
+  id: 'conception3d',
+  name: 'CONCEPTION 3D',
+  description: 'Réalisation de plans techniques & rendus 3D',
+  pictoClass: 'picto-3d'
+};
 ---
 
 <BaseLayout title="Stage Design & Arts Numériques">
 	<div id="app-root" class="app min-h-screen bg-[#dbdbdb]">
+    <!-- 1. Home Section -->
+    <section class="home">
+      <img src="/img/neon-main-2.jpeg" alt="neon-tapage" class="home-image" />
+      <div class="home-text">
+        <img src="/img/neonAssets/neon-noir-baseline.png" alt="logo-neon" class="home-logo" style="width: 60vw; max-width: 800px;" />
+      </div>
+      <div class="arrow-content cursor-pointer" id="home-arrow">
+        <svg id="more-arrows" viewBox="0 0 75 65">
+          <polygon class="arrow-top" points="37.6,27.9 1.8,1.3 3.3,0 37.6,25.3 71.9,0 73.7,1.3 "></polygon>
+          <polygon class="arrow-middle" points="37.6,45.8 0.8,18.7 4.4,16.4 37.6,41.2 71.2,16.4 74.5,18.7 "></polygon>
+        </svg>
+      </div>
+    </section>
+
+    <!-- 2. Header (Menu) -->
     <Header />
+
+    <!-- 3. Description (Intro Text) -->
+    <Description />
     
     <main>
       <div class="w-full">
         {categories.map((cat) => {
           const catProjects = allProjects.filter(p => p.data.category === cat.name);
           return (
-            <section id={cat.name} class={`${cat.name.toLowerCase().replace(" ", "-")} py-10`}>
+            <section id={cat.id} class={`${cat.id.toLowerCase().replace(" ", "-")}`}>
               <div class="headercontainer">
-                <h2 class="section-title uppercase">{cat.name}</h2>
-                <div class={`picto-${cat.name === 'STAGE DESIGN' ? 'sd' : cat.name === 'ARTS NUMERIQUES' ? 'an' : cat.name === 'CONCEPTION 3D' ? '3d' : 'v'}`}>
-                  <!-- Picto placeholder logic if needed, but original uses relative positioning -->
+                <div class="section-title">
+                  <h2>{cat.name}</h2>
+                  <div class={cat.pictoClass}>
+                    <img src="/img/neonAssets/picto1.png" width="24" alt="" />
+                  </div>
+                  <hr class="section-hr" />
                 </div>
-                <hr class="section-hr mx-auto" />
               </div>
-              <p class="section-description">{cat.description}</p>
+              <div class="section-description">
+                <p>{cat.description}</p>
+              </div>
               
               <div class="photos">
                 {catProjects.map((project) => (
@@ -63,25 +96,45 @@ const categories = [
             </section>
           );
         })}
-      </div>
 
-      <!-- Contact section -->
-      <section id="contact" class="contact py-20 mt-20">
-        <div class="max-w-4xl mx-auto">
-          <h2 class="text-3xl font-bold mb-10 uppercase">Contact</h2>
-          <div class="flex flex-col md:flex-row justify-center gap-10 md:gap-20">
-            <div class="contact-section">
-              <p class="font-bold mb-2">EMAIL</p>
-              <a href="mailto:contact@neon-live.fr">contact@neon-live.fr</a>
-            </div>
-            <div class="contact-section">
-              <p class="font-bold mb-2">TELEPHONE</p>
-              <p>+33 6 32 63 23 30</p>
-              <p>+33 6 01 45 16 44</p>
-            </div>
-          </div>
-        </div>
-      </section>
+        <!-- Video Section -->
+        <VideoSection />
+
+        <!-- Conception 3D Section -->
+        {(() => {
+          const catProjects = allProjects.filter(p => p.data.category === catConception3d.name);
+          return (
+            <section id={catConception3d.id} class="conception-3d">
+              <div class="headercontainer">
+                <div class="section-title">
+                  <h2>{catConception3d.name}</h2>
+                  <div class={catConception3d.pictoClass}>
+                    <img src="/img/neonAssets/picto1.png" width="24" alt="" />
+                  </div>
+                  <hr class="section-hr" />
+                </div>
+              </div>
+              <div class="section-description">
+                <p>{catConception3d.description}</p>
+              </div>
+              <div class="photos">
+                {catProjects.map((project) => (
+                  <ProjectCard 
+                    title={project.data.title}
+                    description={project.data.description || ""}
+                    coverImage={project.data.coverImage}
+                    srcSmall={project.data.srcSmall}
+                    credit={project.data.credit || ""}
+                    lienCredit={project.data.lienCredit || ""}
+                    alt={project.data.alt || ""}
+                    tag={project.data.tag || ""}
+                  />
+                ))}
+              </div>
+            </section>
+          );
+        })()}
+      </div>
     </main>
 
     <Footer />
@@ -91,9 +144,9 @@ const categories = [
   <dialog id="project-dialog" class="dialog">
     <div id="dialog-content" class="flex flex-col items-center w-full">
       <img id="modal-image" src="" alt="" class="max-h-[75vh] object-contain w-[85%]" />
-      <div class="text text-white mt-4">
+      <div class="text mt-4 max-w-4xl px-4">
         <h2 id="modal-title" class="title"></h2>
-        <div id="modal-description" class="description"></div>
+        <div id="modal-description" class="description mb-4"></div>
         <div class="credit">
           Crédit photo : <a id="modal-credit-link" href="" target="_blank" rel="noreferrer"></a>
         </div>
@@ -105,7 +158,14 @@ const categories = [
     const dialog = document.getElementById('project-dialog') as HTMLDialogElement;
     const appRoot = document.getElementById('app-root');
     const triggers = document.querySelectorAll('.project-trigger');
+    const homeArrow = document.getElementById('home-arrow');
     
+    // Scroll arrow logic
+    homeArrow?.addEventListener('click', () => {
+      const descElement = document.getElementById('description');
+      descElement?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
     const modalImg = document.getElementById('modal-image') as HTMLImageElement;
     const modalTitle = document.getElementById('modal-title');
     const modalDesc = document.getElementById('modal-description');
@@ -129,13 +189,6 @@ const categories = [
       });
     });
 
-    dialog?.addEventListener('click', (e) => {
-      if (e.target === dialog) {
-        closeDialog();
-      }
-    });
-
-    // Original behavior: clicking anywhere in dialog closes it
     dialog?.addEventListener('click', () => {
       closeDialog();
     });
@@ -161,10 +214,7 @@ const categories = [
   .app-opacity img {
     opacity: 0.25;
   }
-  .app-opacity .text-black {
-    color: rgba(255, 255, 255, 0.2) !important;
-  }
-  /* Ensure the dialog is visible and styled correctly */
+  
   dialog::backdrop {
     background: transparent;
   }
@@ -182,8 +232,33 @@ const categories = [
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    z-index: 100;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
   .dialog[open] {
     display: flex;
+  }
+
+  .dialog .title {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 2rem;
+    margin: 0;
+    margin-top: 4%;
+    text-align: center;
+  }
+
+  .dialog .description {
+    text-align: center;
+    font-weight: 300;
+    font-size: 1.3rem;
+  }
+
+  .dialog .credit {
+    text-align: center;
+    font-weight: 100;
   }
 </style>

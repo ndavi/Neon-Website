@@ -3,29 +3,24 @@
 @theme {
   --color-neon-cyan: #00f3ff;
   --color-neon-magenta: #ff00ff;
-  --font-sans: "M PLUS Rounded 1c", "Raleway", ui-sans-serif, system-ui, sans-serif;
+  /* M PLUS Rounded 1c is the primary font for everything in the original site */
+  --font-sans: "M PLUS Rounded 1c", ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
   body, html {
-    @apply bg-[#dbdbdb] text-black;
+    @apply bg-[#dbdbdb];
+    color: #000000;
     text-rendering: optimizeLegibility !important;
     -webkit-font-smoothing: antialiased !important;
     margin: 0;
     padding: 0;
-  }
-
-  h1, h2, h3, h4, .font-raleway {
-    font-family: "Raleway", sans-serif;
-  }
-
-  .m-plus {
     font-family: "M PLUS Rounded 1c", sans-serif;
   }
 
   a { 
     text-decoration: none; 
-    color: white; 
+    color: inherit;
     font-style: italic;
   }
 }
@@ -39,9 +34,44 @@
   text-align: center;
   justify-content: center;
   position: relative;
-  padding-top: 2vh;
+  padding-top: 2vh; /* Restored to legacy value */
   color: #0D0802;
   display: inline-block;
+}
+
+/* Restore browser default styling for h2 that Tailwind reset removed */
+.section-title h2 {
+  font-size: 2.25rem; /* Reverted to 2.25rem as requested */
+  margin: 0;
+  padding: 0;
+  font-weight: 700;
+  line-height: 1.1;
+  padding-bottom: 0.5rem;
+}
+
+/* Positionnement exact des pictos originaux (Directly from legacy styles.css) */
+.picto-sd {
+  position: absolute;
+  top: 0;
+  right: -20px;
+}
+
+.picto-an {
+  position: absolute;
+  top: 0;
+  right: -20px;
+}
+
+.picto-v {
+  position: absolute;
+  top: 0;
+  right: 5px;
+}
+
+.picto-3d {
+  position: absolute;
+  top: 0;
+  right: -20px;
 }
 
 .section-description {
@@ -49,67 +79,33 @@
   font-weight: 300;
   text-align: center;
   justify-content: center;
-  padding-bottom: 5vh;
-  font-size: 1.3rem;
+  padding-top: 2vh; /* Added space after hr */
+  padding-bottom: 10vh; /* Increased from 5vh to space from photos */
+  font-size: 1.3rem; /* Restored to 1.3rem from legacy */
+}
+
+.section-description p {
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+  font-weight: inherit;
 }
 
 hr {
   border: none;
-  border-top: 2px solid #000000;
+  border-top: 2px solid #000000; /* Restored to 2px from legacy */
   overflow: visible;
   text-align: center;
   width: 40vw;
+  margin: 1.5rem auto; /* Added margin for visual balance */
 }
 
 .section-hr {
-  width: 200px;
+  width: 200px; /* Restored to 200px from legacy */
 }
 
-.header-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-around;
-  align-items: stretch;
-  align-content: center;
-  margin: 1rem 5rem 0rem 5rem;
-}
-
-.header-item {
-  font-family: "M PLUS Rounded 1c", sans-serif;
-  font-weight: 500;
-  font-size: 1.4rem;
-  display: block;
-  flex-grow: 0;
-  flex-shrink: 1;
-  flex-basis: auto;
-  align-self: auto;
-  order: 0;
-}
-
-.header-item p {
-  display: inline-block;
-  position: relative;
-  cursor: pointer;
-  margin: 0;
-}
-
-.header-item p::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  transform: scaleX(0);
-  height: 2px;
-  bottom: 0;
-  left: 0;
-  background-color: #000000;
-  transform-origin: center;
-  transition: transform 0.25s ease-in-out;
-}
-
-.header-item p:hover::after {
-  transform: scaleX(1);
-  transform-origin: center;
+.headercontainer {
+  text-align: center;
 }
 
 .photos {
@@ -124,7 +120,7 @@ hr {
   position: relative;
   transition: 0.4s;
   text-align: center;
-  padding: 0.5vh;
+  padding: 1.5vh; /* Increased from 0.5vh to separate images */
   box-sizing: border-box;
 }
 
@@ -140,7 +136,6 @@ hr {
   opacity: 0.7;
 }
 
-/* Desktop Grid - Original Calculation */
 @media screen and (min-width: 769px) {
   .photos .image-div {
     width: calc(100vw / 3.5);
@@ -148,7 +143,6 @@ hr {
   }
 }
 
-/* Tablet Grid */
 @media screen and (min-width: 481px) and (max-width: 768px) {
   .photos .image-div {
     width: calc(100vw / 3);
@@ -156,7 +150,6 @@ hr {
   }
 }
 
-/* Mobile Grid */
 @media screen and (min-width: 321px) and (max-width: 480px) {
   .photos .image-div {
     width: calc(100vw / 2);
@@ -164,27 +157,68 @@ hr {
   }
 }
 
-/* Small Mobile */
-@media screen and (max-width: 320px) {
-  .photos .image-div {
-    width: 100vw;
-    height: 75vh;
-  }
+/* --- HOME SECTION & ARROW ANIMATION --- */
+.home {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
-.contact {
-  font-family: "M PLUS Rounded 1c", sans-serif;
-  font-weight: 300;
+.home-image {
+  object-fit: cover;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+}
+
+.home-logo {
+  display: block;
+  margin: 0px auto;
+  position: relative;
+}
+
+.home-text {
   text-align: center;
   justify-content: center;
-  align-items: center;
-  background: #5e5e5e;
-  color: white;
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding-top: 25vh;
 }
 
-.contact-section {
-  margin-left: 5%;
-  margin-right: 5%;
-  vertical-align: top;
-  display: inline-block;
+.arrow-content {
+  left: 50vw;
+  position: absolute;
+  top: 90vh;
+  transform: translate(-50%, -50%);
+}
+
+#more-arrows {
+  height: 65px;
+  width: 75px;
+}
+
+#more-arrows polygon {
+  fill: #FFF;
+  transition: all .6s ease-out;
+}
+
+.arrow-middle {
+  opacity: .75;
+}
+
+.arrow-top {
+  opacity: .5;
+}
+
+#more-arrows:hover polygon {
+  fill: #FFF;
+  transition: all .5s ease-out;
+}
+
+#more-arrows:hover .arrow-top {
+  transform: translateY(18px);
 }

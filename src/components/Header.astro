@@ -1,56 +1,90 @@
 ---
 ---
-<header class="headercontainer pt-8">
-  <a href="/">
-    <h1 class="text-black text-6xl font-black uppercase tracking-tighter mb-4">
-      NEON
-    </h1>
-  </a>
-  
-  <div class="header-container">
-    <div class="header-item">
-      <a href="#STAGE DESIGN">
-        <p>STAGE DESIGN</p>
-      </a>
-    </div>
-    <div class="vl"></div>
-    <div class="header-item">
-      <a href="#ON TOUR">
-        <p>ON TOUR</p>
-      </a>
-    </div>
-    <div class="vl"></div>
-    <div class="header-item">
-      <a href="#ARTS NUMERIQUES">
-        <p>ARTS NUMERIQUES</p>
-      </a>
-    </div>
-    <div class="vl"></div>
-    <div class="header-item">
-      <a href="#CONCEPTION 3D">
-        <p>CONCEPTION 3D</p>
-      </a>
-    </div>
+<div id="description" class="header-container hidden lg:flex py-12"> <!-- Added padding to space out the menu -->
+  <div class="header-item">
+    <a href="#STAGE DESIGN"><p>STAGE DESIGN</p></a>
   </div>
-
-  <div class="description max-w-4xl mx-auto px-4 mt-8">
-    <p>
-      NEON est un collectif Français basé à Lyon composé d'artistes du numérique, de scénographes, d'électroniciens et de développeurs. Né d'une envie d'expérimentation artistique, ce projet evolue aujourd'hui entre scénographie et arts numériques.
-    </p>
+  <div class="vl"></div>
+  <div class="header-item">
+    <a href="#ARTS NUMERIQUES"><p>ARTS NUMERIQUES</p></a>
   </div>
-</header>
+  <div class="vl"></div>
+  <div class="header-item">
+    <a href="#ON TOUR"><p>ON TOUR</p></a>
+  </div>
+  <div class="vl"></div>
+  <div class="header-item">
+    <a href="#VIDEOS"><p>VIDEOS</p></a>
+  </div>
+  <div class="vl"></div>
+  <div class="header-item">
+    <a href="#CONCEPTION 3D"><p>CONCEPTION 3D</p></a>
+  </div>
+</div>
 
 <style>
-  /* Local adjustments to match original precise behavior */
-  .vl {
-    border-left: 1px solid black;
-    height: 1.5rem;
-    margin-top: 1.5rem;
+  .header-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: stretch;
+    align-content: center;
+    margin: 1rem 5rem 0rem 5rem;
   }
-  
+
+  .header-item {
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    font-weight: 500;
+    font-size: 1.4rem;
+    display: block;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: auto;
+    order: 0;
+  }
+
   .header-item a {
     text-decoration: none;
     color: black;
     font-style: normal;
+  }
+
+  .header-item p {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    margin: 0;
+  }
+
+  .header-item p::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #000000;
+    transform-origin: center;
+    transition: transform 0.25s ease-in-out;
+  }
+
+  .header-item p:hover::after {
+    transform: scaleX(1);
+    transform-origin: center;
+  }
+
+  .vl {
+    border-left: 1px solid black;
+    height: 1.5rem;
+    margin-top: 0.5rem; /* Adjusted from 1.5rem to center better with larger text */
+  }
+
+  @media screen and (max-width: 1000px) {
+    .header-container {
+      display: none;
+    }
   }
 </style>
