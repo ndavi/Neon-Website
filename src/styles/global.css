@@ -15,6 +15,7 @@
     margin: 0;
     padding: 0;
     font-family: "M PLUS Rounded 1c", sans-serif;
+    scroll-behavior: smooth;
   }
 
   a { 

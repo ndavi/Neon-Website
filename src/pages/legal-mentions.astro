@@ -1,0 +1,76 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="Mentions Légales">
+  <div id="app-root" class="app min-h-screen bg-[#dbdbdb] flex flex-col">
+    <div class="pt-8 pb-4 text-center">
+      <a href="/" class="inline-block">
+        <Image src="/img/neonAssets/neon-noir-baseline.png" alt="logo-neon" width={400} height={179} class="mx-auto h-auto" style="width: 30vw; max-width: 400px;" loading="eager" />
+      </a>
+    </div>
+    
+    <Header />
+
+    <main class="flex-grow py-16 px-4 max-w-4xl mx-auto m-plus font-light leading-relaxed text-black">
+      <h1 class="text-4xl font-bold mb-12 text-center">MENTIONS LÉGALES</h1>
+
+      <div class="space-y-8">
+        <section>
+          <h2 class="text-xl font-bold mb-2">1. ÉDITEUR DU SITE</h2>
+          <p>
+            Le site <strong>neon-live.fr</strong> est édité par l'association <strong>NEON LIVE</strong>.
+            <br />Siège social : 4 rue Alexis Perroncel, 69100 Villeurbanne, France.
+            <br />Email : contact@neon-live.fr
+            <br />Téléphone : 06.32.63.23.30 / +33 6 01 45 16 44
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-bold mb-2">2. HÉBERGEUR</h2>
+          <p>
+            Le site est hébergé par la société <strong>OVH</strong>.
+            <br />Siège social : 2 rue Kellermann - 59100 Roubaix - France.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-bold mb-2">3. PROPRIÉTÉ INTELLECTUELLE</h2>
+          <p>
+            L'ensemble des contenus présents sur ce site (textes, images, vidéos, logos, pictos) est la propriété exclusive de NEON LIVE, sauf mention contraire. 
+            Toute reproduction, représentation, modification, publication, adaptation de tout ou partie des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite, sauf autorisation écrite préalable de NEON LIVE.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-bold mb-2">4. DONNÉES PERSONNELLES</h2>
+          <p>
+            D'une façon générale, vous pouvez visiter notre site sur Internet sans avoir à décliner votre identité et à fournir des informations personnelles vous concernant.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-bold mb-2">5. LOI APPLICABLE</h2>
+          <p>
+            Conformément à l'article n°6 de la Loi n°2004-575 du 21 Juin 2004 pour la confiance dans l'économie numérique (LCEN).
+          </p>
+        </section>
+      </div>
+
+      <div class="mt-16 text-center italic">
+        <a href="/" class="hover:underline">Retour à l'accueil</a>
+      </div>
+    </main>
+
+    <Footer />
+  </div>
+</BaseLayout>
+
+<style>
+  .m-plus {
+    font-family: "M PLUS Rounded 1c", sans-serif;
+  }
+</style>

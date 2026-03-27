@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+
 interface Props {
   title: string;
   description: string;
@@ -20,14 +22,16 @@ const { title, description, coverImage, srcSmall, credit, lienCredit, alt } = As
   data-lien-credit={lienCredit}
   data-alt={alt}
 >
-  <img 
+  <Image 
     src={srcSmall} 
     alt={alt} 
+    width={400}
+    height={225}
     loading="lazy"
     class="mx-auto"
   />
   <svg 
-    version="1.1" 
+...
     id="Layer_1" 
     x="0px" 
     y="0px" 

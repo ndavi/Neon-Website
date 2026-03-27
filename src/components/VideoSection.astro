@@ -13,7 +13,7 @@ const videos = [
   { url: "https://www.youtube.com/embed/TKWSi-PNjHU", alt: "video la box" }
 ];
 ---
-<section id="VIDEOS" class="video py-10">
+<section id="videos" class="video py-10">
   <SectionHeader title="VIDEOS" pictoClass="picto-v" description="Capsules vidéos et aftermovies." />
 
   <div class="video-grid flex flex-wrap justify-center gap-4 px-4 max-w-[1400px] mx-auto">
@@ -24,6 +24,7 @@ const videos = [
           height="100%" 
           src={vid.url} 
           title={vid.alt} 
+          loading="lazy"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
           allowfullscreen
           class="p-2 border-0"
