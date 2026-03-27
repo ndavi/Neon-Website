@@ -9,7 +9,10 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "astro check",
+    "test": "echo \"No unit tests specified\" && exit 0",
+    "e2e:headless": "echo \"No E2E tests specified\" && exit 0"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.8",
