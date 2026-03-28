@@ -1,10 +1,27 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 ---
 <section class="home">
-  <Image src="/img/neon-main-2.jpeg" alt="neon-tapage" width={1920} height={1078} class="home-image" loading="eager" />
+  <Picture 
+    src="/img/neon-main-2.jpeg" 
+    alt="neon-tapage" 
+    width={1920} 
+    height={1078} 
+    class="home-image" 
+    loading="eager" 
+    formats={['avif', 'webp']}
+  />
   <div class="home-text">
-    <Image src="/img/neonAssets/neon-noir-baseline.png" alt="logo-neon" width={800} height={358} class="home-logo" style="width: 60vw; max-width: 800px;" loading="eager" />
+    <Picture 
+      src="/img/neonAssets/neon-noir-baseline.png" 
+      alt="logo-neon" 
+      width={800} 
+      height={358} 
+      class="home-logo" 
+      style="width: 60vw; max-width: 800px;" 
+      loading="eager" 
+      formats={['avif', 'webp']}
+    />
   </div>
   <div class="arrow-content cursor-pointer" id="home-arrow">
     <svg id="more-arrows" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 75 65" style="enable-background:new 0 0 75 65;" xml:space="preserve">

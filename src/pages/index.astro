@@ -49,36 +49,20 @@ const categories = [
       <div class="w-full">
         {categories.map((cat) => {
           const catProjects = allProjects.filter(p => p.data.category === cat.name);
-          // Special case: Conception 3D should be AFTER VideoSection in the original layout
-          if (cat.id === 'conception3d') return null;
           
           return (
-            <ProjectSection 
-              id={cat.id}
-              name={cat.name}
-              description={cat.description}
-              pictoClass={cat.pictoClass}
-              projects={catProjects}
-            />
+            <>
+              <ProjectSection 
+                id={cat.id}
+                name={cat.name}
+                description={cat.description}
+                pictoClass={cat.pictoClass}
+                projects={catProjects}
+              />
+              {cat.id === 'arts-numeriques' && <VideoSection />}
+            </>
           );
         })}
-
-        <VideoSection />
-
-        {(() => {
-          const cat = categories.find(c => c.id === 'conception3d');
-          if (!cat) return null;
-          const catProjects = allProjects.filter(p => p.data.category === cat.name);
-          return (
-            <ProjectSection 
-              id={cat.id}
-              name={cat.name}
-              description={cat.description}
-              pictoClass={cat.pictoClass}
-              projects={catProjects}
-            />
-          );
-        })()}
       </div>
     </main>
 

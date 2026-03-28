@@ -1,4 +1,5 @@
 ---
+import type { CollectionEntry } from 'astro:content';
 import ProjectCard from './ProjectCard.astro';
 import SectionHeader from './SectionHeader.astro';
 
@@ -7,7 +8,7 @@ interface Props {
   name: string;
   description: string;
   pictoClass: string;
-  projects: any[];
+  projects: CollectionEntry<'projects'>[];
 }
 
 const { id, name, description, pictoClass, projects } = Astro.props;
@@ -76,8 +77,8 @@ const { id, name, description, pictoClass, projects } = Astro.props;
 
   @media screen and (min-width: 321px) and (max-width: 480px) {
     :global(.photos .image-div) {
-      width: calc(100vw / 2);
-      height: calc(100vh / 2);
+      width: 50vw;
+      height: 30vh; /* Reduced from 50vh to be more proportional */
     }
   }
 </style>
