@@ -1,17 +1,13 @@
 ---
 import { Picture } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
 
 interface Props {
-  title: string;
-  description: string;
-  coverImage: string;
-  srcSmall: string;
-  credit: string;
-  lienCredit: string;
-  alt: string;
+  project: CollectionEntry<'projects'>;
 }
 
-const { title, description, coverImage, srcSmall, credit, lienCredit, alt } = Astro.props;
+const { project } = Astro.props;
+const { title, description, coverImage, srcSmall, credit, lienCredit, alt } = project.data;
 ---
 <div 
   class="image-div project-trigger" 
@@ -25,12 +21,20 @@ const { title, description, coverImage, srcSmall, credit, lienCredit, alt } = As
   <Picture 
     src={srcSmall} 
     formats={['avif', 'webp']}
-    alt={alt} 
+    alt={alt || ""} 
     width={400}
     height={225}
+    widths={[400, 800]}
+    sizes="(max-width: 480px) 50vw, (max-width: 768px) 33vw, 400px"
     loading="lazy"
     class="mx-auto"
   />
+  <!-- Visually hidden content for SEO/AI indexing -->
+  <div class="sr-only">
+    <h3>{title}</h3>
+    <p>{description}</p>
+    {credit && <p>Crédit: {credit}</p>}
+  </div>
   <svg 
 ...
     id="Layer_1" 

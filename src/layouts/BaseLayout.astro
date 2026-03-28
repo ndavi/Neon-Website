@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import SEO from '../components/SEO.astro';
 
 interface Props {
 	title: string;
@@ -16,8 +17,8 @@ const { title, description = "NEON - Arts Numériques et Scénographie" } = Astr
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title} | NEON</title>
-		<meta name="description" content={description} />
+		
+		<SEO title={title} description={description} />
 		
 		<!-- Preload and Load Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -33,8 +34,6 @@ const { title, description = "NEON - Arts Numériques et Scénographie" } = Astr
 
 			// Register GSAP plugins
 			gsap.registerPlugin(ScrollTrigger);
-
-			// Lenis removed for native "snappy" feel
 		</script>
 	</body>
 </html>

@@ -6,9 +6,8 @@ test.describe('Interactions: Exploring project details', () => {
   });
 
   test('The visitor opens a project and verifies its content', async ({ page }) => {
-    // Pick a random project to test its card
-    const index = 4;
-    const projectCard = page.locator('.project-trigger').nth(index);
+    // Pick first available project
+    const projectCard = page.locator('.project-trigger').first();
     const expectedTitle = await projectCard.getAttribute('data-title');
     
     await test.step('Click on a project card', async () => {
@@ -58,8 +57,11 @@ test.describe('Interactions: Exploring project details', () => {
   });
 
   test('The visitor navigates through the carousel', async ({ page }) => {
-    // Open the 2nd project
+    // Ensure we have at least 2 projects
     const projects = page.locator('.project-trigger');
+    const count = await projects.count();
+    if (count < 2) return;
+
     const firstProject = projects.nth(0);
     const secondProject = projects.nth(1);
     

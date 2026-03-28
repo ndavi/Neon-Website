@@ -3,15 +3,15 @@ import type { CollectionEntry } from 'astro:content';
 import ProjectCard from './ProjectCard.astro';
 import SectionHeader from './SectionHeader.astro';
 
+import type { Category } from '../config/site';
+
 interface Props {
-  id: string;
-  name: string;
-  description: string;
-  pictoClass: string;
+  category: Category;
   projects: CollectionEntry<'projects'>[];
 }
 
-const { id, name, description, pictoClass, projects } = Astro.props;
+const { category, projects } = Astro.props;
+const { id, name, description, pictoClass } = category;
 ---
 
 <section id={id} class={id.toLowerCase().replace(" ", "-")}>
@@ -19,15 +19,7 @@ const { id, name, description, pictoClass, projects } = Astro.props;
   
   <div class="photos">
     {projects.map((project) => (
-      <ProjectCard 
-        title={project.data.title}
-        description={project.data.description || ""}
-        coverImage={project.data.coverImage}
-        srcSmall={project.data.srcSmall}
-        credit={project.data.credit || ""}
-        lienCredit={project.data.lienCredit || ""}
-        alt={project.data.alt || ""}
-      />
+      <ProjectCard project={project} />
     ))}
   </div>
 </section>

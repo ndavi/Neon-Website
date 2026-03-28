@@ -15,6 +15,11 @@ test.describe('Discovery: First Impression', () => {
       await expect(logo).toBeVisible();
     });
 
+    await test.step('Verify SEO H1 exists', async () => {
+      const h1 = page.locator('h1.sr-only');
+      await expect(h1).toHaveText(/NEON - Stage Design/);
+    });
+
     await test.step('Ensure the landing background image is loaded', async () => {
       const bgImage = page.locator('.home-image');
       await expect(bgImage).toBeVisible();

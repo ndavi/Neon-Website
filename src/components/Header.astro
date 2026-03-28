@@ -1,25 +1,15 @@
 ---
+import { NAV_LINKS } from '../config/site';
 ---
-<div id="description" class="header-container hidden lg:flex py-12"> <!-- Added padding to space out the menu -->
-  <div class="header-item">
-    <a href="/#stage-design"><p>STAGE DESIGN</p></a>
-  </div>
-  <div class="vl"></div>
-  <div class="header-item">
-    <a href="/#arts-numeriques"><p>ARTS NUMERIQUES</p></a>
-  </div>
-  <div class="vl"></div>
-  <div class="header-item">
-    <a href="/#on-tour"><p>ON TOUR</p></a>
-  </div>
-  <div class="vl"></div>
-  <div class="header-item">
-    <a href="/#videos"><p>VIDEOS</p></a>
-  </div>
-  <div class="vl"></div>
-  <div class="header-item">
-    <a href="/#conception-3d"><p>CONCEPTION 3D</p></a>
-  </div>
+<div id="description" class="header-container hidden lg:flex py-12">
+  {NAV_LINKS.map((link, index) => (
+    <>
+      <div class="header-item">
+        <a href={link.href}><p>{link.name}</p></a>
+      </div>
+      {index < NAV_LINKS.length - 1 && <div class="vl"></div>}
+    </>
+  ))}
 </div>
 
 <style>

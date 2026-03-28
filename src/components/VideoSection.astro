@@ -1,23 +1,12 @@
 ---
 import SectionHeader from './SectionHeader.astro';
-
-const videos = [
-  { url: "https://www.youtube.com/embed/U-vAoyMSEMA", alt: "video la box" },
-  { url: "https://www.youtube.com/embed/ZVFyFldJ_cg", alt: "video la box" },
-  { url: "https://www.youtube.com/embed/jRSDdidMYIg", alt: "video encore 10 ans" },
-  { url: "https://www.youtube.com/embed/ozKajoF5cCs", alt: "video encore 10 ans" },
-  { url: "https://www.youtube.com/embed/eMwfGLwFUdg", alt: "video la box" },
-  { url: "https://www.youtube.com/embed/no7WoxHUdUc", alt: "video la box" },
-  { url: "https://www.youtube.com/embed/PXtcdyT_gHo", alt: "video la box" },
-  { url: "https://www.youtube.com/embed/qgDZD6eusyo", alt: "video la box" },
-  { url: "https://www.youtube.com/embed/TKWSi-PNjHU", alt: "video la box" }
-];
+import { VIDEOS } from '../config/site';
 ---
 <section id="videos" class="video py-10">
   <SectionHeader title="VIDEOS" pictoClass="picto-v" description="Capsules vidéos et aftermovies." />
 
   <div class="video-grid flex flex-wrap justify-center gap-4 px-4 max-w-[1400px] mx-auto">
-    {videos.map((vid) => (
+    {VIDEOS.map((vid) => (
       <div class="player-wrapper w-full md:w-[45%] lg:w-[30%] aspect-video">
         <iframe 
           width="100%" 

@@ -6,17 +6,18 @@ interface Props {
   pictoClass?: string;
   description?: string;
   dark?: boolean;
+  icon?: string;
 }
 
-const { title, pictoClass, description, dark = false } = Astro.props;
+const { title, pictoClass, description, dark = false, icon = "/img/neonAssets/picto1.png" } = Astro.props;
 ---
 
 <div class="headercontainer">
   <div class="section-title">
-    <h2 class={dark ? "text-dark" : ""}>{title}</h2>
+    <h2>{title}</h2>
     {pictoClass && (
       <div class={pictoClass}>
-        <Image src="/img/neonAssets/picto1.png" width="24" height="20" alt="" />
+        <Image src={icon} width={24} height={20} alt="" />
       </div>
     )}
     <hr class={`section-hr ${dark ? "hr-dark" : ""}`} />

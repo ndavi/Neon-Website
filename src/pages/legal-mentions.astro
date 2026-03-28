@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { SITE_NAME } from '../config/site';
 ---
 
 <BaseLayout title="Mentions Légales">
@@ -22,7 +23,7 @@ import Footer from '../components/Footer.astro';
         <section>
           <h2 class="text-xl font-bold mb-2">1. ÉDITEUR DU SITE</h2>
           <p>
-            Le site <strong>neon-live.fr</strong> est édité par l'association <strong>NEON LIVE</strong>.
+            Le site <strong>neon-live.fr</strong> est édité par l'association <strong>{SITE_NAME} LIVE</strong>.
             <br />Siège social : 4 rue Alexis Perroncel, 69100 Villeurbanne, France.
             <br />Email : contact@neon-live.fr
             <br />Téléphone : 06.32.63.23.30 / +33 6 01 45 16 44
@@ -40,8 +41,8 @@ import Footer from '../components/Footer.astro';
         <section>
           <h2 class="text-xl font-bold mb-2">3. PROPRIÉTÉ INTELLECTUELLE</h2>
           <p>
-            L'ensemble des contenus présents sur ce site (textes, images, vidéos, logos, pictos) est la propriété exclusive de NEON LIVE, sauf mention contraire. 
-            Toute reproduction, représentation, modification, publication, adaptation de tout ou partie des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite, sauf autorisation écrite préalable de NEON LIVE.
+            L'ensemble des contenus présents sur ce site (textes, images, vidéos, logos, pictos) est la propriété exclusive de {SITE_NAME} LIVE, sauf mention contraire. 
+            Toute reproduction, représentation, modification, publication, adaptation de tout ou partie des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite, sauf autorisation écrite préalable de {SITE_NAME} LIVE.
           </p>
         </section>
 

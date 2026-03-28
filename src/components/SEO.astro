@@ -1,0 +1,61 @@
+---
+import { SITE_NAME } from '../config/site';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://neon-live.fr');
+const ogImage = new URL('/img/neon-main.jpeg', Astro.url.origin);
+
+const fullTitle = `${title} | ${SITE_NAME}`;
+
+// Structured Data for AI/Google
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": SITE_NAME,
+  "description": "Collectif d'artistes numériques et scénographes basés à Lyon.",
+  "url": Astro.url.origin,
+  "logo": `${Astro.url.origin}/img/neonAssets/neon-noir-baseline.png`,
+  "sameAs": [
+    "https://www.instagram.com/neonlivefr/",
+    "https://www.facebook.com/NeonLiveFR"
+  ],
+  "location": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Lyon",
+      "addressCountry": "FR"
+    }
+  }
+};
+---
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Primary Meta Tags -->
+<title>{fullTitle}</title>
+<meta name="title" content={fullTitle} />
+<meta name="description" content={description} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImage} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:title" content={fullTitle} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={ogImage} />
+
+<!-- Structured Data -->
+<script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
