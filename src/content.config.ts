@@ -1,6 +1,6 @@
 import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
-import { file } from 'astro/loaders';
+import { glob } from 'astro/loaders';
 
 const projectSchema = z.object({
   id: z.string(),
@@ -12,31 +12,24 @@ const projectSchema = z.object({
   credit: z.string().optional(),
   lienCredit: z.string().optional(),
   alt: z.string().optional(),
+  order: z.number().optional(),
 });
 
-const stageDesign = defineCollection({
-  loader: file("src/content/projects/stage-design.json"),
-  schema: projectSchema,
-});
-
-const onTour = defineCollection({
-  loader: file("src/content/projects/on-tour.json"),
-  schema: projectSchema,
-});
-
-const artsNumeriques = defineCollection({
-  loader: file("src/content/projects/arts-numeriques.json"),
-  schema: projectSchema,
-});
-
-const conception3d = defineCollection({
-  loader: file("src/content/projects/conception-3d.json"),
-  schema: projectSchema,
-});
-
-export const collections = { 
-  'stage-design': stageDesign,
-  'on-tour': onTour,
-  'arts-numeriques': artsNumeriques,
-  'conception-3d': conception3d
+export const collections = {
+  'stage-design': defineCollection({
+    loader: glob({ pattern: "*.json", base: "src/content/projects/stage-design" }),
+    schema: projectSchema,
+  }),
+  'on-tour': defineCollection({
+    loader: glob({ pattern: "*.json", base: "src/content/projects/on-tour" }),
+    schema: projectSchema,
+  }),
+  'arts-numeriques': defineCollection({
+    loader: glob({ pattern: "*.json", base: "src/content/projects/arts-numeriques" }),
+    schema: projectSchema,
+  }),
+  'conception-3d': defineCollection({
+    loader: glob({ pattern: "*.json", base: "src/content/projects/conception-3d" }),
+    schema: projectSchema,
+  }),
 };

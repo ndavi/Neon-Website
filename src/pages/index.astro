@@ -10,29 +10,37 @@ import Home from '../components/Home.astro';
 import ProjectDialog from '../components/ProjectDialog.astro';
 import { CATEGORIES, SITE_DESCRIPTION } from '../config/site';
 
-import stageDesignData from '../content/projects/stage-design.json';
-import onTourData from '../content/projects/on-tour.json';
-import artsNumeriquesData from '../content/projects/arts-numeriques.json';
-import conception3dData from '../content/projects/conception-3d.json';
+// Helper to sort collections
+const sortProjects = (collection: any[]) => {
+  return [...collection].sort((a, b) => {
+    // 1. Sort by order (if available)
+    if (a.data.order !== undefined && b.data.order !== undefined) {
+      return a.data.order - b.data.order;
+    }
+    if (a.data.order !== undefined) return -1;
+    if (b.data.order !== undefined) return 1;
 
-const collectionsData = {
-  'stage-design': { collection: await getCollection('stage-design'), json: stageDesignData },
-  'on-tour': { collection: await getCollection('on-tour'), json: onTourData },
-  'arts-numeriques': { collection: await getCollection('arts-numeriques'), json: artsNumeriquesData },
-  'conception-3d': { collection: await getCollection('conception-3d'), json: conception3dData }
+    // 2. Sort by date (descending)
+    const dateA = new Date(a.data.date).getTime();
+    const dateB = new Date(b.data.date).getTime();
+    if (dateB !== dateA) return dateB - dateA;
+
+    // 3. Fallback to id
+    return a.id.localeCompare(b.id);
+  });
 };
 
-// Helper to preserve JSON order
-const sortByJson = (collection: any[], jsonData: any[]) => {
-  const idToOrder = new Map(jsonData.map((item, index) => [item.id, index]));
-  return [...collection].sort((a, b) => (idToOrder.get(a.id) ?? 0) - (idToOrder.get(b.id) ?? 0));
-};
+const stageDesign = await getCollection('stage-design');
+const onTour = await getCollection('on-tour');
+const artsNumeriques = await getCollection('arts-numeriques');
+const conception3d = await getCollection('conception-3d');
 
-const sortedCollections = Object.fromEntries(
-  Object.entries(collectionsData).map(([id, { collection, json }]) => [
-    id, sortByJson(collection, json)
-  ])
-);
+const sortedCollections = {
+  'stage-design': sortProjects(stageDesign),
+  'on-tour': sortProjects(onTour),
+  'arts-numeriques': sortProjects(artsNumeriques),
+  'conception-3d': sortProjects(conception3d)
+};
 ---
 
 <BaseLayout title="Stage Design & Arts Numériques" description={SITE_DESCRIPTION}>
@@ -47,7 +55,7 @@ const sortedCollections = Object.fromEntries(
           <>
             <ProjectSection 
               category={cat}
-              projects={sortedCollections[cat.id] || []}
+              projects={sortedCollections[cat.id as keyof typeof sortedCollections] || []}
             />
             {cat.id === 'arts-numeriques' && <VideoSection />}
           </>
