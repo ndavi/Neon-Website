@@ -11,8 +11,9 @@
     "preview": "astro preview",
     "astro": "astro",
     "lint": "astro check",
-    "test": "echo \"No unit tests specified\" && exit 0",
-    "e2e:headless": "echo \"No E2E tests specified\" && exit 0"
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "e2e:headless": "playwright test"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.8",
@@ -22,5 +23,8 @@
     "lenis": "^1.3.20",
     "tailwindcss": "^4.2.2",
     "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2"
   }
 }
