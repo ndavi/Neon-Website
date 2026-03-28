@@ -22,7 +22,9 @@ const allProjects = await getCollection('projects');
     <main>
       <div class="w-full">
         {CATEGORIES.map((cat) => {
-          const catProjects = allProjects.filter(p => p.data.category === cat.name);
+          const catProjects = allProjects
+            .filter(p => p.data.category === cat.name)
+            .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
           
           return (
             <>
