@@ -2,7 +2,6 @@
 title: "Techno Story 2022"
 description: "Scénographie led et lumière à Vitry le françois avec AlkaProd et Kontakt Prod"
 coverImage: "/img/stageDesign/neon-TS-vitry-1.jpeg"
-srcSmall: "/img/stageDesign/small-neon-TS-vitry-1.jpeg"
 tags: ["neon", "stripled", "techno", "story", "alkaprod", "vitry", "scénographie", "video", "lumière", "madmapper"]
 date: "2022-01-01"
 category: "STAGE DESIGN"

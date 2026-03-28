@@ -2,7 +2,6 @@
 title: "Tetra Hydro K"
 description: "Conception scénographie et création lumière"
 coverImage: "/img/tour/thk-1.jpeg"
-srcSmall: "/img/tour/small-thk-1.jpeg"
 tags: ["neon", "thk", "tetra", "hydro", "k", "aftrwrk"]
 date: "2024-01-01"
 category: "ON TOUR"

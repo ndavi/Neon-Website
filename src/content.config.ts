@@ -8,7 +8,6 @@ const projects = defineCollection({
     title: z.string(),
     description: z.string().optional(),
     coverImage: z.string(),
-    srcSmall: z.string(),
     tags: z.array(z.string()),
     date: z.string(),
     category: z.enum(['STAGE DESIGN', 'ON TOUR', 'ARTS NUMERIQUES', 'CONCEPTION 3D']),

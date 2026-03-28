@@ -2,7 +2,6 @@
 title: "Inauguration du LabLab"
 description: "Spectacle de danse et virtual production en collaboration avec Théoriz"
 coverImage: "/img/artsNumeriques/neon-inauguration-lablab-2.jpeg"
-srcSmall: "/img/artsNumeriques/small-neon-inauguration-lablab-2.jpeg"
 tags: ["neon", "stripled", "innauguration", "lablab", "scénographie", "unreal", "engine", "génératif", "niagara", "mystic", "desert", "théoriz"]
 date: "2024-01-01"
 category: "ARTS NUMERIQUES"

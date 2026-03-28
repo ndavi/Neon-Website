@@ -2,7 +2,6 @@
 title: "Conception 3D"
 description: ""
 coverImage: "/img/conception3d/neon-meisenthal-render-2.jpeg"
-srcSmall: "/img/conception3d/small-neon-meisenthal-render-2.jpeg"
 tags: ["neon", "conception", "3d", "capture", "visualizer", "lighting", "plot", "plan", "de", "feu", "lumière", "rendu", "3D"]
 date: "2024-01-01"
 category: "CONCEPTION 3D"

@@ -2,7 +2,6 @@
 title: "ENCORE - KI/KI - Décembre 2023"
 description: "Scénographie led & lumière au Transbordeur pour ENCORE"
 coverImage: "/img/stageDesign/neon-encore-monolith-3.jpeg"
-srcSmall: "/img/stageDesign/small-neon-encore-monolith-3.jpeg"
 tags: ["neon", "light", "design", "lyon", "scénographie", "lumière", "encore", "ki/ki", "monolith", "transbordeur"]
 date: "2023-12-01"
 category: "STAGE DESIGN"

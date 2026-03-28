@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { title, description, coverImage, srcSmall, credit, lienCredit, alt } = project.data;
+const { title, description, coverImage, credit, lienCredit, alt } = project.data;
 ---
 <div 
   class="image-div project-trigger" 
@@ -19,7 +19,7 @@ const { title, description, coverImage, srcSmall, credit, lienCredit, alt } = pr
   data-alt={alt}
 >
   <Picture 
-    src={srcSmall} 
+    src={coverImage} 
     formats={['avif', 'webp']}
     alt={alt || ""} 
     width={400}
