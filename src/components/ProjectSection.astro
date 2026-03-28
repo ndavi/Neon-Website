@@ -7,7 +7,7 @@ import type { Category } from '../config/site';
 
 interface Props {
   category: Category;
-  projects: CollectionEntry<'projects'>[];
+  projects: (CollectionEntry<'stage-design'> | CollectionEntry<'on-tour'> | CollectionEntry<'arts-numeriques'> | CollectionEntry<'conception-3d'>)[];
 }
 
 const { category, projects } = Astro.props;

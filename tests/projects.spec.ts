@@ -78,7 +78,6 @@ test.describe('Interactions: Exploring project details', () => {
       return;
     }
 
-    const firstProject = projects.nth(index1);
     const secondProject = projects.nth(index2);
     const title2 = await secondProject.getAttribute('data-title');
     
