@@ -3,13 +3,16 @@ import { test, expect } from '@playwright/test';
 test.describe('Image Loader and Interaction', () => {
   test.use({ offline: false }); // Ensure we're not offline
 
-  test('Project card should show a loader and be unclickable until image is loaded', async ({ page, context }) => {
+  test('Project card should show a loader and be unclickable until image is loaded', async ({
+    page,
+    context,
+  }) => {
     // Disable cache to force image loading
     await context.addCookies([]);
-    
+
     // Intercept BEFORE page.goto
     await page.route('**/*.{png,jpg,jpeg,webp,avif}', async (route) => {
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 2000));
       await route.continue();
     });
 
@@ -36,16 +39,18 @@ test.describe('Image Loader and Interaction', () => {
     await expect(dialog).toBeVisible();
   });
 
-  test('Project dialog should show a loader and block navigation until image is loaded', async ({ page }) => {
+  test('Project dialog should show a loader and block navigation until image is loaded', async ({
+    page,
+  }) => {
     // Intercept images and disable cache
     await page.route('**/*.{png,jpg,jpeg,webp,avif}*', async (route) => {
       const headers = {
         ...route.request().headers(),
         'Cache-Control': 'no-cache',
-        'Pragma': 'no-cache',
-        'Expires': '0',
+        Pragma: 'no-cache',
+        Expires: '0',
       };
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       await route.continue({ headers });
     });
 
@@ -53,8 +58,10 @@ test.describe('Image Loader and Interaction', () => {
 
     // Wait for the card loader to disappear first (to be able to click)
     const firstProject = page.locator('.project-trigger').first();
-    await expect(firstProject.locator('.loader')).not.toBeVisible({ timeout: 10000 });
-    
+    await expect(firstProject.locator('.loader')).not.toBeVisible({
+      timeout: 10000,
+    });
+
     // Force a fresh request for the dialog image to ensure it gets intercepted and delayed
     const originalImage = await firstProject.getAttribute('data-image');
     await firstProject.evaluate((el, url) => {

@@ -9,36 +9,46 @@ interface Props {
   icon?: string;
 }
 
-const { title, pictoClass, description, dark = false, icon = "/img/neonAssets/picto1.png" } = Astro.props;
+const {
+  title,
+  pictoClass,
+  description,
+  dark = false,
+  icon = '/img/neonAssets/picto1.png',
+} = Astro.props;
 ---
 
 <div class="headercontainer">
   <div class="section-title">
     <h2>{title}</h2>
-    {pictoClass && (
-      <div class={pictoClass}>
-        <Image src={icon} width={24} height={20} alt="" />
-      </div>
-    )}
-    <hr class={`section-hr ${dark ? "hr-dark" : ""}`} />
+    {
+      pictoClass && (
+        <div class={pictoClass}>
+          <Image src={icon} width={24} height={20} alt="" />
+        </div>
+      )
+    }
+    <hr class={`section-hr ${dark ? 'hr-dark' : ''}`} />
   </div>
 </div>
-{description && (
-  <div class="section-description">
-    <p class={dark ? "text-dark" : ""}>{description}</p>
-  </div>
-)}
+{
+  description && (
+    <div class="section-description">
+      <p class={dark ? 'text-dark' : ''}>{description}</p>
+    </div>
+  )
+}
 
 <style>
   .section-title {
-    font-family: "M PLUS Rounded 1c", sans-serif;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
     font-weight: 700;
     font-size: 1.5rem;
     text-align: center;
     justify-content: center;
     position: relative;
     padding-top: 2vh;
-    color: #0D0802;
+    color: #0d0802;
     display: inline-block;
   }
 
@@ -60,7 +70,9 @@ const { title, pictoClass, description, dark = false, icon = "/img/neonAssets/pi
     border-top-color: white !important;
   }
 
-  .picto-sd, .picto-an, .picto-3d {
+  .picto-sd,
+  .picto-an,
+  .picto-3d {
     position: absolute;
     top: 0;
     right: -20px;
@@ -73,7 +85,7 @@ const { title, pictoClass, description, dark = false, icon = "/img/neonAssets/pi
   }
 
   .section-description {
-    font-family: "M PLUS Rounded 1c", sans-serif;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
     font-weight: 300;
     text-align: center;
     justify-content: center;

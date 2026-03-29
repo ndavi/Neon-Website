@@ -12,15 +12,20 @@ const navItems = [
   { id: 'videos', name: t('nav.videos') },
 ];
 ---
+
 <div id="description" class="header-container hidden lg:flex py-12">
-  {navItems.map((item, index) => (
-    <>
-      <div class="header-item">
-        <a href={`/${lang}/#${item.id}`}><p>{item.name}</p></a>
-      </div>
-      {index < navItems.length - 1 && <div class="vl"></div>}
-    </>
-  ))}
+  {
+    navItems.map((item, index) => (
+      <>
+        <div class="header-item">
+          <a href={`/${lang}/#${item.id}`}>
+            <p>{item.name}</p>
+          </a>
+        </div>
+        {index < navItems.length - 1 && <div class="vl" />}
+      </>
+    ))
+  }
   <div class="vl"></div>
   <div class="header-item lang-switcher">
     <a href="/fr/" class={`lang-link ${lang === 'fr' ? 'active' : ''}`}>FR</a>
@@ -41,7 +46,7 @@ const navItems = [
   }
 
   .header-item {
-    font-family: "M PLUS Rounded 1c", sans-serif;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
     font-weight: 500;
     font-size: 1.4rem;
     display: block;

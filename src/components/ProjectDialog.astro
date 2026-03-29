@@ -4,26 +4,70 @@ import { getLangFromUrl, useTranslations } from '../i18n/utils';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
+
 <dialog id="project-dialog" class="dialog" data-lang={lang}>
   <!-- Navigation Buttons -->
-  <button id="prev-project" class="nav-button prev" aria-label={t('project.prev')}>
-    <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-  </button>
-  
-  <button id="next-project" class="nav-button next" aria-label={t('project.next')}>
-    <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+  <button
+    id="prev-project"
+    class="nav-button prev"
+    aria-label={t('project.prev')}
+  >
+    <svg
+      viewBox="0 0 24 24"
+      width="40"
+      height="40"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      ><polyline points="15 18 9 12 15 6"></polyline></svg
+    >
   </button>
 
-  <div id="dialog-content" class="flex flex-col items-center w-full outline-none">
-    <div class="w-full flex items-center justify-center min-h-[40vh] lg:min-h-[60vh] relative">
+  <button
+    id="next-project"
+    class="nav-button next"
+    aria-label={t('project.next')}
+  >
+    <svg
+      viewBox="0 0 24 24"
+      width="40"
+      height="40"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg
+    >
+  </button>
+
+  <div
+    id="dialog-content"
+    class="flex flex-col items-center w-full outline-none"
+  >
+    <div
+      class="w-full flex items-center justify-center min-h-[40vh] lg:min-h-[60vh] relative"
+    >
       <div id="modal-loader" class="loader"></div>
-      <img id="modal-image" src="" alt="" class="max-h-[75vh] object-contain w-[95%] lg:w-[85%] transition-opacity duration-300 ease-in-out opacity-0" />
+      <img
+        id="modal-image"
+        src=""
+        alt=""
+        class="max-h-[75vh] object-contain w-[95%] lg:w-[85%] transition-opacity duration-300 ease-in-out opacity-0"
+      />
     </div>
     <div class="text mt-4 max-w-4xl px-4 pointer-events-auto">
       <h2 id="modal-title" class="title"></h2>
       <div id="modal-description" class="description mb-4"></div>
       <div class="credit">
-        {t('project.credit')} <a id="modal-credit-link" href="" target="_blank" rel="noreferrer" aria-label="Lien vers le crédit photo"></a>
+        {t('project.credit')}
+        <a
+          id="modal-credit-link"
+          href=""
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Lien vers le crédit photo"></a>
       </div>
     </div>
   </div>
@@ -45,14 +89,24 @@ const t = useTranslations(lang);
     private lang: string;
 
     constructor() {
-      this.dialog = document.getElementById('project-dialog') as HTMLDialogElement;
-      this.modalImg = document.getElementById('modal-image') as HTMLImageElement;
+      this.dialog = document.getElementById(
+        'project-dialog'
+      ) as HTMLDialogElement;
+      this.modalImg = document.getElementById(
+        'modal-image'
+      ) as HTMLImageElement;
       this.modalLoader = document.getElementById('modal-loader')!;
       this.modalTitle = document.getElementById('modal-title')!;
       this.modalDesc = document.getElementById('modal-description')!;
-      this.modalCreditLink = document.getElementById('modal-credit-link') as HTMLAnchorElement;
-      this.prevBtn = document.getElementById('prev-project') as HTMLButtonElement;
-      this.nextBtn = document.getElementById('next-project') as HTMLButtonElement;
+      this.modalCreditLink = document.getElementById(
+        'modal-credit-link'
+      ) as HTMLAnchorElement;
+      this.prevBtn = document.getElementById(
+        'prev-project'
+      ) as HTMLButtonElement;
+      this.nextBtn = document.getElementById(
+        'next-project'
+      ) as HTMLButtonElement;
       this.lang = this.dialog.dataset.lang || 'fr';
 
       this.init();
@@ -65,7 +119,9 @@ const t = useTranslations(lang);
 
     private setupGlobalListeners() {
       document.addEventListener('click', (e) => {
-        const trigger = (e.target as HTMLElement).closest('.project-trigger') as HTMLElement;
+        const trigger = (e.target as HTMLElement).closest(
+          '.project-trigger'
+        ) as HTMLElement;
         if (trigger) {
           this.refreshTriggers();
           this.open(this.triggers.indexOf(trigger));
@@ -107,7 +163,7 @@ const t = useTranslations(lang);
     private getLocalized(val: string | undefined): string {
       if (!val) return '';
       if (!val.startsWith('{')) return val;
-      
+
       try {
         const obj = JSON.parse(val);
         return obj[this.lang] || obj['fr'] || '';
@@ -119,10 +175,10 @@ const t = useTranslations(lang);
     private setLoadingState(isLoading: boolean) {
       this.isLoading = isLoading;
       const pointerEvents = isLoading ? 'none' : 'auto';
-      
+
       this.prevBtn.style.pointerEvents = pointerEvents;
       this.nextBtn.style.pointerEvents = pointerEvents;
-      
+
       if (isLoading) {
         this.modalImg.style.opacity = '0';
         this.modalLoader.style.display = 'block';
@@ -134,10 +190,10 @@ const t = useTranslations(lang);
 
     private updateContent(index: number) {
       if (index < 0 || index >= this.triggers.length) return;
-      
+
       this.currentIndex = index;
       const data = this.triggers[this.currentIndex].dataset;
-      
+
       this.setLoadingState(true);
 
       const onDone = () => this.setLoadingState(false);
@@ -162,7 +218,9 @@ const t = useTranslations(lang);
     }
 
     public navigate(direction: number) {
-      const newIndex = (this.currentIndex + direction + this.triggers.length) % this.triggers.length;
+      const newIndex =
+        (this.currentIndex + direction + this.triggers.length) %
+        this.triggers.length;
       this.updateContent(newIndex);
     }
 
@@ -178,7 +236,7 @@ const t = useTranslations(lang);
     background: rgba(0, 0, 0, 0.95);
     backdrop-filter: blur(5px);
   }
-  
+
   .dialog {
     background: none;
     border: none;
@@ -196,7 +254,7 @@ const t = useTranslations(lang);
     z-index: 100;
     overflow: hidden;
   }
-  
+
   .dialog[open] {
     display: flex;
   }
@@ -231,14 +289,18 @@ const t = useTranslations(lang);
     scale: 1.1;
   }
 
-  .nav-button.prev { left: 20px; }
-  .nav-button.next { right: 20px; }
+  .nav-button.prev {
+    left: 20px;
+  }
+  .nav-button.next {
+    right: 20px;
+  }
 
   .loader {
     display: none;
     width: 50px;
     height: 50px;
-    border: 3px solid rgba(255,255,255,.1);
+    border: 3px solid rgba(255, 255, 255, 0.1);
     border-radius: 50%;
     border-top-color: #fff;
     animation: spin 1s linear infinite;
@@ -251,7 +313,9 @@ const t = useTranslations(lang);
   }
 
   @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   @media (max-width: 768px) {
@@ -260,8 +324,12 @@ const t = useTranslations(lang);
       height: 45px;
       background: rgba(0, 0, 0, 0.5);
     }
-    .nav-button.prev { left: 10px; }
-    .nav-button.next { right: 10px; }
+    .nav-button.prev {
+      left: 10px;
+    }
+    .nav-button.next {
+      right: 10px;
+    }
   }
 
   .dialog .title {

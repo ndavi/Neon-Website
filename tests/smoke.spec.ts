@@ -5,7 +5,9 @@ test.describe('Discovery: First Impression', () => {
     await page.goto('/fr/');
   });
 
-  test('The visitor should see the brand identity immediately', async ({ page }) => {
+  test('The visitor should see the brand identity immediately', async ({
+    page,
+  }) => {
     await test.step('Check the page title and metadata', async () => {
       await expect(page).toHaveTitle(/NEON/);
     });
@@ -23,7 +25,9 @@ test.describe('Discovery: First Impression', () => {
     await test.step('Ensure the landing background image is loaded', async () => {
       const bgImage = page.locator('.home-image');
       await expect(bgImage).toBeVisible();
-      const isLoaded = await bgImage.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0);
+      const isLoaded = await bgImage.evaluate(
+        (img: HTMLImageElement) => img.complete && img.naturalWidth > 0
+      );
       expect(isLoaded).toBeTruthy();
     });
   });

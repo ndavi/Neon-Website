@@ -3,76 +3,90 @@ import '../styles/global.css';
 import SEO from '../components/SEO.astro';
 
 interface Props {
-	title: string;
-	description?: string;
-	lang?: string;
+  title: string;
+  description?: string;
+  lang?: string;
 }
 
-const { title, description = "NEON - Arts Numériques et Scénographie", lang = "fr" } = Astro.props;
+const {
+  title,
+  description = 'NEON - Arts Numériques et Scénographie',
+  lang = 'fr',
+} = Astro.props;
 ---
 
 <!doctype html>
 <html lang={lang}>
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		
-		<SEO title={title} description={description} lang={lang} />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
 
-		{import.meta.env.PROD && (
-			<script
-				is:inline
-				defer
-				src="https://cloud.umami.is/script.js"
-				data-website-id="e4ca5224-430c-4462-befd-fd01f7768b59"
-				data-domains="neon-live.fr"
-				></script>
-		)}
+    <SEO title={title} description={description} lang={lang} />
 
-		<!-- Preload and Load Fonts -->
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Raleway:wght@100..900&display=swap" rel="stylesheet">
-	</head>
-	<body class="selection:bg-neon-cyan/30 selection:text-white overflow-x-hidden">
-		<slot />
-		
-		<script>
-			import { gsap } from 'gsap';
-			import { ScrollTrigger } from 'gsap/ScrollTrigger';
+    {
+      import.meta.env.PROD && (
+        <script
+          is:inline
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="e4ca5224-430c-4462-befd-fd01f7768b59"
+          data-domains="neon-live.fr"
+        />
+      )
+    }
 
-			// Register GSAP plugins
-			gsap.registerPlugin(ScrollTrigger);
+    <!-- Preload and Load Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Raleway:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class="selection:bg-neon-cyan/30 selection:text-white overflow-x-hidden"
+  >
+    <slot />
 
-			const SCROLL_STORAGE_KEY = 'neon_scroll_pos';
+    <script>
+      import { gsap } from 'gsap';
+      import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-			function restoreScroll() {
-				const savedScroll = sessionStorage.getItem(SCROLL_STORAGE_KEY);
-				if (!savedScroll) return;
+      // Register GSAP plugins
+      gsap.registerPlugin(ScrollTrigger);
 
-				requestAnimationFrame(() => {
-					document.documentElement.style.scrollBehavior = 'auto';
-					window.scrollTo(0, parseInt(savedScroll, 10));
-					document.documentElement.style.scrollBehavior = '';
-					sessionStorage.removeItem(SCROLL_STORAGE_KEY);
-				});
-			}
+      const SCROLL_STORAGE_KEY = 'neon_scroll_pos';
 
-			function handleLanguageSwitch(e: MouseEvent) {
-				const link = (e.target as HTMLElement).closest('a');
-				if (link) {
-					const href = link.getAttribute('href');
-					if (href === '/fr/' || href === '/en/') {
-						sessionStorage.setItem(SCROLL_STORAGE_KEY, window.scrollY.toString());
-					}
-				}
-			}
+      function restoreScroll() {
+        const savedScroll = sessionStorage.getItem(SCROLL_STORAGE_KEY);
+        if (!savedScroll) return;
 
-			// Initialize
-			restoreScroll();
-			document.addEventListener('click', handleLanguageSwitch);
-		</script>
-	</body>
+        requestAnimationFrame(() => {
+          document.documentElement.style.scrollBehavior = 'auto';
+          window.scrollTo(0, parseInt(savedScroll, 10));
+          document.documentElement.style.scrollBehavior = '';
+          sessionStorage.removeItem(SCROLL_STORAGE_KEY);
+        });
+      }
+
+      function handleLanguageSwitch(e: MouseEvent) {
+        const link = (e.target as HTMLElement).closest('a');
+        if (link) {
+          const href = link.getAttribute('href');
+          if (href === '/fr/' || href === '/en/') {
+            sessionStorage.setItem(
+              SCROLL_STORAGE_KEY,
+              window.scrollY.toString()
+            );
+          }
+        }
+      }
+
+      // Initialize
+      restoreScroll();
+      document.addEventListener('click', handleLanguageSwitch);
+    </script>
+  </body>
 </html>

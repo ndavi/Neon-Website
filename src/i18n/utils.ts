@@ -6,16 +6,27 @@ export function getLangFromUrl(url: URL) {
   return defaultLang;
 }
 
+export type TranslationKey = keyof (typeof ui)[typeof defaultLang];
+
 export function useTranslations(lang: keyof typeof ui) {
-  return function t(key: keyof typeof ui[typeof defaultLang]) {
+  return function t(key: TranslationKey) {
     return ui[lang][key] || ui[defaultLang][key];
-  }
+  };
+}
+
+interface SortableProject {
+  id: string;
+  data: {
+    order?: number;
+    date: string | Date;
+    [key: string]: unknown;
+  };
 }
 
 /**
  * Shared sorting logic for project collections
  */
-export function sortProjects(projects: any[]) {
+export function sortProjects<T extends SortableProject>(projects: T[]): T[] {
   return [...projects].sort((a, b) => {
     // 1. Sort by order (if available)
     if (a.data.order !== undefined && b.data.order !== undefined) {

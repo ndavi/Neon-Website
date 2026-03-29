@@ -9,10 +9,17 @@ interface Props {
   lang?: string;
 }
 
-const { title, description, lang = defaultLang as keyof typeof languages } = Astro.props;
+const {
+  title,
+  description,
+  lang = defaultLang as keyof typeof languages,
+} = Astro.props;
 const t = useTranslations(lang as keyof typeof languages);
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://neon-live.fr');
+const canonicalURL = new URL(
+  Astro.url.pathname,
+  Astro.site || 'https://neon-live.fr'
+);
 const ogImage = new URL('/img/neon-main.jpeg', Astro.url.origin);
 
 const fullTitle = `${title} | ${SITE_NAME}`;
@@ -26,30 +33,30 @@ const alternateLinks = Object.keys(languages).map((l) => {
   const alternatePath = pathParts.join('/');
   return {
     lang: l,
-    url: new URL(alternatePath, Astro.url.origin)
+    url: new URL(alternatePath, Astro.url.origin),
   };
 });
 
 // Structured Data for AI/Google
 const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": SITE_NAME,
-  "description": t('intro.p1'),
-  "url": Astro.url.origin,
-  "logo": `${Astro.url.origin}/img/neonAssets/neon-noir-baseline.png`,
-  "sameAs": [
-    "https://www.instagram.com/neonlivefr/",
-    "https://www.facebook.com/NeonLiveFR"
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE_NAME,
+  description: t('intro.p1'),
+  url: Astro.url.origin,
+  logo: `${Astro.url.origin}/img/neonAssets/neon-noir-baseline.png`,
+  sameAs: [
+    'https://www.instagram.com/neonlivefr/',
+    'https://www.facebook.com/NeonLiveFR',
   ],
-  "location": {
-    "@type": "Place",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Lyon",
-      "addressCountry": "FR"
-    }
-  }
+  location: {
+    '@type': 'Place',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Lyon',
+      addressCountry: 'FR',
+    },
+  },
 };
 ---
 
@@ -57,10 +64,17 @@ const jsonLd = {
 <link rel="canonical" href={canonicalURL} />
 
 <!-- Alternate Language Links -->
-{alternateLinks.map(({ lang, url }) => (
-  <link rel="alternate" hreflang={lang} href={url} />
-))}
-<link rel="alternate" hreflang="x-default" href={alternateLinks.find(l => l.lang === defaultLang)?.url || alternateLinks[0].url} />
+{
+  alternateLinks.map(({ lang, url }) => (
+    <link rel="alternate" hreflang={lang} href={url} />
+  ))
+}
+<link
+  rel="alternate"
+  hreflang="x-default"
+  href={alternateLinks.find((l) => l.lang === defaultLang)?.url ||
+    alternateLinks[0].url}
+/>
 
 <!-- Primary Meta Tags -->
 <title>{fullTitle}</title>
@@ -82,4 +96,8 @@ const jsonLd = {
 <meta property="twitter:image" content={ogImage} />
 
 <!-- Structured Data -->
-<script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+<script
+  type="application/ld+json"
+  is:inline
+  set:html={JSON.stringify(jsonLd)}
+/>

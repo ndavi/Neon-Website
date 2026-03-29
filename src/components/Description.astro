@@ -4,6 +4,7 @@ import { getLangFromUrl, useTranslations } from '../i18n/utils';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
+
 <div id="intro-text" class="intro-description mx-auto px-4 pb-16">
   <p>
     {t('intro.p1')}
@@ -13,7 +14,7 @@ const t = useTranslations(lang);
 
 <style>
   .intro-description {
-    font-family: "M PLUS Rounded 1c", sans-serif;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
     font-weight: 300;
     text-align: center;
     justify-content: center;

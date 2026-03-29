@@ -1,5 +1,5 @@
-export const SITE_NAME = "NEON";
-export const SITE_DESCRIPTION = "NEON - Arts Numériques et Scénographie";
+export const SITE_NAME = 'NEON';
+export const SITE_DESCRIPTION = 'NEON - Arts Numériques et Scénographie';
 
 export interface Category {
   id: string;
@@ -12,32 +12,38 @@ export interface Video {
 }
 
 export const CATEGORIES: Category[] = [
-  { 
+  {
     id: 'stage-design',
-    pictoClass: 'picto-sd'
+    pictoClass: 'picto-sd',
   },
-  { 
+  {
     id: 'on-tour',
-    pictoClass: 'picto-sd'
+    pictoClass: 'picto-sd',
   },
-  { 
+  {
     id: 'arts-numeriques',
-    pictoClass: 'picto-an'
+    pictoClass: 'picto-an',
   },
   {
     id: 'conception-3d',
-    pictoClass: 'picto-3d'
-  }
+    pictoClass: 'picto-3d',
+  },
 ];
 
 export const VIDEOS: Video[] = [
-  { url: "https://www.youtube.com/embed/U-vAoyMSEMA", alt: "video la box" },
-  { url: "https://www.youtube.com/embed/ZVFyFldJ_cg", alt: "video la box" },
-  { url: "https://www.youtube.com/embed/jRSDdidMYIg", alt: "video encore 10 ans" },
-  { url: "https://www.youtube.com/embed/ozKajoF5cCs", alt: "video encore 10 ans" },
-  { url: "https://www.youtube.com/embed/eMwfGLwFUdg", alt: "video la box" },
-  { url: "https://www.youtube.com/embed/no7WoxHUdUc", alt: "video la box" },
-  { url: "https://www.youtube.com/embed/PXtcdyT_gHo", alt: "video la box" },
-  { url: "https://www.youtube.com/embed/qgDZD6eusyo", alt: "video la box" },
-  { url: "https://www.youtube.com/embed/TKWSi-PNjHU", alt: "video la box" }
+  { url: 'https://www.youtube.com/embed/U-vAoyMSEMA', alt: 'video la box' },
+  { url: 'https://www.youtube.com/embed/ZVFyFldJ_cg', alt: 'video la box' },
+  {
+    url: 'https://www.youtube.com/embed/jRSDdidMYIg',
+    alt: 'video encore 10 ans',
+  },
+  {
+    url: 'https://www.youtube.com/embed/ozKajoF5cCs',
+    alt: 'video encore 10 ans',
+  },
+  { url: 'https://www.youtube.com/embed/eMwfGLwFUdg', alt: 'video la box' },
+  { url: 'https://www.youtube.com/embed/no7WoxHUdUc', alt: 'video la box' },
+  { url: 'https://www.youtube.com/embed/PXtcdyT_gHo', alt: 'video la box' },
+  { url: 'https://www.youtube.com/embed/qgDZD6eusyo', alt: 'video la box' },
+  { url: 'https://www.youtube.com/embed/TKWSi-PNjHU', alt: 'video la box' },
 ];

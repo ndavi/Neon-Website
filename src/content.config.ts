@@ -13,7 +13,12 @@ const projectSchema = z.object({
   description: localizedString.optional(),
   coverImage: z.string(),
   date: z.string(),
-  category: z.enum(['STAGE DESIGN', 'ON TOUR', 'ARTS NUMERIQUES', 'CONCEPTION 3D']),
+  category: z.enum([
+    'STAGE DESIGN',
+    'ON TOUR',
+    'ARTS NUMERIQUES',
+    'CONCEPTION 3D',
+  ]),
   credit: z.string().optional(),
   lienCredit: z.string().optional(),
   alt: localizedString.optional(),
@@ -22,19 +27,28 @@ const projectSchema = z.object({
 
 export const collections = {
   'stage-design': defineCollection({
-    loader: glob({ pattern: "*.json", base: "src/content/projects/stage-design" }),
+    loader: glob({
+      pattern: '*.json',
+      base: 'src/content/projects/stage-design',
+    }),
     schema: projectSchema,
   }),
   'on-tour': defineCollection({
-    loader: glob({ pattern: "*.json", base: "src/content/projects/on-tour" }),
+    loader: glob({ pattern: '*.json', base: 'src/content/projects/on-tour' }),
     schema: projectSchema,
   }),
   'arts-numeriques': defineCollection({
-    loader: glob({ pattern: "*.json", base: "src/content/projects/arts-numeriques" }),
+    loader: glob({
+      pattern: '*.json',
+      base: 'src/content/projects/arts-numeriques',
+    }),
     schema: projectSchema,
   }),
   'conception-3d': defineCollection({
-    loader: glob({ pattern: "*.json", base: "src/content/projects/conception-3d" }),
+    loader: glob({
+      pattern: '*.json',
+      base: 'src/content/projects/conception-3d',
+    }),
     schema: projectSchema,
   }),
 };

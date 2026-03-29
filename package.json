@@ -10,7 +10,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lint": "astro check",
+    "lint": "astro check && eslint . && prettier --check .",
+    "lint:fix": "eslint . --fix && prettier --write .",
+    "format": "prettier --write .",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
     "e2e:headless": "playwright test"
@@ -26,6 +28,15 @@
   "devDependencies": {
     "@playwright/test": "^1.58.2",
     "@types/node": "^25.5.0",
-    "glob": "^13.0.6"
+    "astro-eslint-parser": "^1.4.0",
+    "eslint": "^10.1.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-astro": "^1.6.0",
+    "eslint-plugin-prettier": "^5.5.5",
+    "glob": "^13.0.6",
+    "globals": "^17.4.0",
+    "prettier": "^3.8.1",
+    "prettier-plugin-astro": "^0.14.1",
+    "typescript-eslint": "^8.57.2"
   }
 }

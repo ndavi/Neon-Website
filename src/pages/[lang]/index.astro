@@ -13,10 +13,7 @@ import { ui } from '../../i18n/ui';
 import { useTranslations, sortProjects } from '../../i18n/utils';
 
 export function getStaticPaths() {
-  return [
-    { params: { lang: 'fr' } },
-    { params: { lang: 'en' } },
-  ];
+  return [{ params: { lang: 'fr' } }, { params: { lang: 'en' } }];
 }
 
 const { lang } = Astro.params;
@@ -31,27 +28,36 @@ const sortedCollections = {
   'stage-design': sortProjects(stageDesign),
   'on-tour': sortProjects(onTour),
   'arts-numeriques': sortProjects(artsNumeriques),
-  'conception-3d': sortProjects(conception3d)
+  'conception-3d': sortProjects(conception3d),
 };
 ---
 
-<BaseLayout title={t('seo.title')} description={t('seo.description')} lang={lang}>
-	<div id="app-root" class="app min-h-screen bg-[#dbdbdb]">
+<BaseLayout
+  title={t('seo.title')}
+  description={t('seo.description')}
+  lang={lang}
+>
+  <div id="app-root" class="app min-h-screen bg-[#dbdbdb]">
     <Home />
     <Header />
     <Description />
-    
+
     <main>
       <div class="w-full">
-        {CATEGORIES.map((cat) => (
-          <>
-            <ProjectSection 
-              category={cat}
-              projects={sortedCollections[cat.id as keyof typeof sortedCollections] || []}
-            />
-            {cat.id === 'arts-numeriques' && <VideoSection />}
-          </>
-        ))}
+        {
+          CATEGORIES.map((cat) => (
+            <>
+              <ProjectSection
+                category={cat}
+                projects={
+                  sortedCollections[cat.id as keyof typeof sortedCollections] ||
+                  []
+                }
+              />
+              {cat.id === 'arts-numeriques' && <VideoSection />}
+            </>
+          ))
+        }
       </div>
     </main>
 

@@ -6,11 +6,18 @@ export default {
       colors: {
         'neon-cyan': '#00f3ff',
         'neon-magenta': '#ff00ff',
-        'black': '#000000',
-        'white': '#ffffff',
+        black: '#000000',
+        white: '#ffffff',
       },
       fontFamily: {
-        sans: ['"Inter Variable"', '"Inter"', 'Outfit', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        sans: [
+          '"Inter Variable"',
+          '"Inter"',
+          'Outfit',
+          'ui-sans-serif',
+          'system-ui',
+          'sans-serif',
+        ],
       },
     },
   },
