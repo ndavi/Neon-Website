@@ -2,16 +2,21 @@ import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
 
+const localizedString = z.object({
+  fr: z.string(),
+  en: z.string(),
+});
+
 const projectSchema = z.object({
   id: z.string(),
-  title: z.string(),
-  description: z.string().optional(),
+  title: localizedString,
+  description: localizedString.optional(),
   coverImage: z.string(),
   date: z.string(),
   category: z.enum(['STAGE DESIGN', 'ON TOUR', 'ARTS NUMERIQUES', 'CONCEPTION 3D']),
   credit: z.string().optional(),
   lienCredit: z.string().optional(),
-  alt: z.string().optional(),
+  alt: localizedString.optional(),
   order: z.number().optional(),
 });
 
