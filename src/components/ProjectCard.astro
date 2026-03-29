@@ -1,7 +1,7 @@
 ---
 import { Picture } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
-import { getLangFromUrl } from '../i18n/utils';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
 interface Props {
   project: CollectionEntry<'stage-design'> | CollectionEntry<'on-tour'> | CollectionEntry<'arts-numeriques'> | CollectionEntry<'conception-3d'>;
@@ -9,11 +9,12 @@ interface Props {
 
 const { project } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 const { title, description, coverImage, credit, lienCredit, alt } = project.data;
 
-const tTitle = typeof title === 'string' ? title : title[lang];
-const tDescription = description ? (typeof description === 'string' ? description : description[lang]) : '';
-const tAlt = alt ? (typeof alt === 'string' ? alt : alt[lang]) : '';
+const tTitle = title[lang];
+const tDescription = description ? description[lang] : '';
+const tAlt = alt ? alt[lang] : '';
 ---
 <div 
   class="image-div project-trigger is-loading" 
@@ -40,7 +41,7 @@ const tAlt = alt ? (typeof alt === 'string' ? alt : alt[lang]) : '';
   <div class="sr-only">
     <h3>{tTitle}</h3>
     <p>{tDescription}</p>
-    {credit && <p>Crédit: {credit}</p>}
+    {credit && <p>{t('project.credit')} {credit}</p>}
   </div>
   <svg 
     version="1.1" 

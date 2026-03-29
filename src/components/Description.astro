@@ -1,9 +1,13 @@
 ---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 <div id="intro-text" class="intro-description mx-auto px-4 pb-16">
   <p>
-    NEON est un collectif Français basé à Lyon composé d'artistes du numérique, de scénographes, d'électroniciens et de développeurs.
-    <br />Né d'une envie d'expérimentation artistique, ce projet évolue aujourd'hui entre scénographie et arts numériques.
+    {t('intro.p1')}
+    <br />{t('intro.p2')}
   </p>
 </div>
 

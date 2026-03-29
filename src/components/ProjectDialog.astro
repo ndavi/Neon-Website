@@ -1,25 +1,29 @@
 ---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
-<dialog id="project-dialog" class="dialog">
+<dialog id="project-dialog" class="dialog" data-lang={lang}>
   <!-- Navigation Buttons -->
-  <button id="prev-project" class="nav-button prev" aria-label="Projet précédent">
+  <button id="prev-project" class="nav-button prev" aria-label={t('project.prev')}>
     <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
   </button>
   
-  <button id="next-project" class="nav-button next" aria-label="Projet suivant">
+  <button id="next-project" class="nav-button next" aria-label={t('project.next')}>
     <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
   </button>
 
   <div id="dialog-content" class="flex flex-col items-center w-full outline-none">
     <div class="w-full flex items-center justify-center min-h-[40vh] lg:min-h-[60vh] relative">
       <div id="modal-loader" class="loader"></div>
-      <img id="modal-image" src="" alt="Détail du projet" class="max-h-[75vh] object-contain w-[95%] lg:w-[85%] transition-opacity duration-300 ease-in-out opacity-0" />
+      <img id="modal-image" src="" alt="" class="max-h-[75vh] object-contain w-[95%] lg:w-[85%] transition-opacity duration-300 ease-in-out opacity-0" />
     </div>
     <div class="text mt-4 max-w-4xl px-4 pointer-events-auto">
-      <h2 id="modal-title" class="title">Détails du projet</h2>
+      <h2 id="modal-title" class="title"></h2>
       <div id="modal-description" class="description mb-4"></div>
       <div class="credit">
-        Crédit photo : <a id="modal-credit-link" href="" target="_blank" rel="noreferrer" aria-label="Lien vers le crédit photo"></a>
+        {t('project.credit')} <a id="modal-credit-link" href="" target="_blank" rel="noreferrer" aria-label="Lien vers le crédit photo"></a>
       </div>
     </div>
   </div>
@@ -38,6 +42,7 @@
     private currentIndex: number = -1;
     private triggers: HTMLElement[] = [];
     private isLoading: boolean = false;
+    private lang: string;
 
     constructor() {
       this.dialog = document.getElementById('project-dialog') as HTMLDialogElement;
@@ -48,6 +53,7 @@
       this.modalCreditLink = document.getElementById('modal-credit-link') as HTMLAnchorElement;
       this.prevBtn = document.getElementById('prev-project') as HTMLButtonElement;
       this.nextBtn = document.getElementById('next-project') as HTMLButtonElement;
+      this.lang = this.dialog.dataset.lang || 'fr';
 
       this.init();
     }
@@ -94,6 +100,19 @@
       this.triggers = Array.from(document.querySelectorAll('.project-trigger'));
     }
 
+    private getLocalized(val: string | undefined): string {
+      if (!val) return '';
+      try {
+        if (val.startsWith('{')) {
+          const obj = JSON.parse(val);
+          return obj[this.lang] || obj['fr'] || '';
+        }
+        return val;
+      } catch (e) {
+        return val;
+      }
+    }
+
     private updateContent(index: number) {
       if (index < 0 || index >= this.triggers.length) return;
       
@@ -123,10 +142,13 @@
         onDone();
       }
 
-      this.modalImg.alt = data.alt || data.title || 'Détail du projet';
-      
-      this.modalTitle.textContent = data.title || '';
-      this.modalDesc.textContent = data.description || '';
+      const title = this.getLocalized(data.title);
+      const description = this.getLocalized(data.description);
+      const alt = this.getLocalized(data.alt);
+
+      this.modalImg.alt = alt || title || '';
+      this.modalTitle.textContent = title;
+      this.modalDesc.textContent = description;
       this.modalCreditLink.href = data.lienCredit || '';
       this.modalCreditLink.textContent = data.credit || '';
     }

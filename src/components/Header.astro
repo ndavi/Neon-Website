@@ -1,15 +1,32 @@
 ---
-import { NAV_LINKS } from '../config/site';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const navItems = [
+  { id: 'stage-design', name: t('nav.stage-design') },
+  { id: 'on-tour', name: t('nav.on-tour') },
+  { id: 'arts-numeriques', name: t('nav.arts-numeriques') },
+  { id: 'conception-3d', name: t('nav.conception-3d') },
+  { id: 'videos', name: t('nav.videos') },
+];
 ---
 <div id="description" class="header-container hidden lg:flex py-12">
-  {NAV_LINKS.map((link, index) => (
+  {navItems.map((item, index) => (
     <>
       <div class="header-item">
-        <a href={link.href}><p>{link.name}</p></a>
+        <a href={`/${lang}/#${item.id}`}><p>{item.name}</p></a>
       </div>
-      {index < NAV_LINKS.length - 1 && <div class="vl"></div>}
+      {index < navItems.length - 1 && <div class="vl"></div>}
     </>
   ))}
+  <div class="vl"></div>
+  <div class="header-item lang-switcher">
+    <a href="/fr/" class={lang === 'fr' ? 'active' : ''}>FR</a>
+    <span>|</span>
+    <a href="/en/" class={lang === 'en' ? 'active' : ''}>EN</a>
+  </div>
 </div>
 
 <style>
@@ -18,7 +35,7 @@ import { NAV_LINKS } from '../config/site';
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-around;
-    align-items: stretch;
+    align-items: center;
     align-content: center;
     margin: 0rem 5rem 0rem 5rem;
   }
@@ -66,10 +83,30 @@ import { NAV_LINKS } from '../config/site';
     transform-origin: center;
   }
 
+  .lang-switcher {
+    font-size: 1.1rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .lang-switcher a {
+    opacity: 0.4;
+    transition: opacity 0.2s;
+  }
+
+  .lang-switcher a.active {
+    opacity: 1;
+    font-weight: 700;
+  }
+
+  .lang-switcher a:hover {
+    opacity: 1;
+  }
+
   .vl {
     border-left: 1px solid black;
     height: 1.5rem;
-    margin-top: 0.5rem; /* Adjusted from 1.5rem to center better with larger text */
   }
 
   @media screen and (max-width: 1000px) {

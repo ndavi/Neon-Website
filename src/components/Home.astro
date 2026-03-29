@@ -1,6 +1,10 @@
 ---
 import { Picture } from 'astro:assets';
 import { SITE_NAME } from '../config/site';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 <section class="home">
   <Picture 
@@ -13,7 +17,7 @@ import { SITE_NAME } from '../config/site';
     formats={['avif', 'webp']}
   />
   <div class="home-text">
-    <h1 class="sr-only">{SITE_NAME} - Stage Design & Arts Numériques à Lyon</h1>
+    <h1 class="sr-only">{t('home.sr-only')}</h1>
     <Picture 
       src="/img/neonAssets/neon-noir-baseline.png" 
       alt="logo-neon" 

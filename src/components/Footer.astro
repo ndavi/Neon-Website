@@ -1,6 +1,10 @@
 ---
 import SectionHeader from './SectionHeader.astro';
 import { SITE_NAME } from '../config/site';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 <div class="contact py-10 px-4">
   <SectionHeader title="CONTACT" dark={true} />
@@ -40,8 +44,8 @@ import { SITE_NAME } from '../config/site';
       </a>
     </div>
     
-    <a href="/legal-mentions" class="hover:italic m-plus font-light text-white">
-      <p>Mentions légales</p>
+    <a href={`/${lang}/legal-mentions`} class="hover:italic m-plus font-light text-white">
+      <p>{t('footer.legal')}</p>
     </a>
   </div>
 
