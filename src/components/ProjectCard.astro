@@ -10,7 +10,7 @@ const { project } = Astro.props;
 const { title, description, coverImage, credit, lienCredit, alt } = project.data;
 ---
 <div 
-  class="image-div project-trigger" 
+  class="image-div project-trigger is-loading" 
   data-title={title}
   data-description={description}
   data-image={coverImage}
@@ -18,6 +18,7 @@ const { title, description, coverImage, credit, lienCredit, alt } = project.data
   data-lien-credit={lienCredit}
   data-alt={alt}
 >
+  <div class="loader"></div>
   <Picture 
     src={coverImage} 
     formats={['avif', 'webp']}
@@ -36,7 +37,7 @@ const { title, description, coverImage, credit, lienCredit, alt } = project.data
     {credit && <p>Crédit: {credit}</p>}
   </div>
   <svg 
-...
+    version="1.1" 
     id="Layer_1" 
     x="0px" 
     y="0px" 
@@ -50,9 +51,60 @@ const { title, description, coverImage, credit, lienCredit, alt } = project.data
   </svg>
 </div>
 
+<script>
+  function initProjectLoaders() {
+    const triggers = document.querySelectorAll('.project-trigger');
+    triggers.forEach(trigger => {
+      const img = trigger.querySelector('img');
+      if (img) {
+        const removeLoading = () => trigger.classList.remove('is-loading');
+        
+        if (img.complete) {
+          removeLoading();
+        } else {
+          img.addEventListener('load', removeLoading, { once: true });
+          img.addEventListener('error', removeLoading, { once: true });
+        }
+      }
+    });
+  }
+  initProjectLoaders();
+  document.addEventListener('astro:after-swap', initProjectLoaders);
+</script>
+
 <style>
   .image-div {
     position: relative;
+  }
+  .image-div.is-loading {
+    pointer-events: none;
+  }
+  .image-div.is-loading img {
+    opacity: 0;
+  }
+  .image-div img {
+    transition: opacity 0.3s ease-in-out;
+  }
+  .loader {
+    display: none;
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -20px;
+    margin-left: -20px;
+    z-index: 10;
+  }
+  .is-loading .loader {
+    display: block;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
   }
   .project-plus-icon {
     opacity: 0;
@@ -63,11 +115,10 @@ const { title, description, coverImage, credit, lienCredit, alt } = project.data
     transform: translate(-50%, -50%);
     transition: opacity 0.2s ease-in-out;
     pointer-events: none;
-    /* Contrainte de taille pour éviter l'effet "énorme" sur mobile/petits écrans */
     max-width: 25%;
     max-height: 25%;
   }
-  .image-div:hover .project-plus-icon {
+  .image-div:not(.is-loading):hover .project-plus-icon {
     opacity: 0.7;
   }
 </style>
