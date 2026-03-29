@@ -6,7 +6,35 @@ updates:
       interval: 'weekly'
     open-pull-requests-limit: 10
     groups:
-      dependencies:
+      astro:
+        patterns:
+          - 'astro'
+          - '@astrojs/*'
+          - 'astro-*'
+      eslint:
+        patterns:
+          - 'eslint'
+          - 'eslint-*'
+          - '@eslint/*'
+          - 'typescript-eslint'
+          - 'globals'
+          - 'astro-eslint-parser'
+      typescript:
+        patterns:
+          - 'typescript'
+          - '@types/*'
+      tailwindcss:
+        patterns:
+          - 'tailwindcss'
+          - '@tailwindcss/*'
+      prettier:
+        patterns:
+          - 'prettier'
+          - 'prettier-*'
+      playwright:
+        patterns:
+          - '@playwright/*'
+      other-dependencies:
         patterns:
           - '*'
 
