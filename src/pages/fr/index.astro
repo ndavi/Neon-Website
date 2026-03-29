@@ -1,0 +1,74 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Description from '../../components/Description.astro';
+import Footer from '../../components/Footer.astro';
+import VideoSection from '../../components/VideoSection.astro';
+import ProjectSection from '../../components/ProjectSection.astro';
+import Home from '../../components/Home.astro';
+import ProjectDialog from '../../components/ProjectDialog.astro';
+import { CATEGORIES } from '../../config/site';
+import { useTranslations } from '../../i18n/utils';
+
+const lang = 'fr';
+const t = useTranslations(lang);
+
+// Helper to sort collections
+const sortProjects = (collection: any[]) => {
+  return [...collection].sort((a, b) => {
+    // 1. Sort by order (if available)
+    if (a.data.order !== undefined && b.data.order !== undefined) {
+      return a.data.order - b.data.order;
+    }
+    if (a.data.order !== undefined) return -1;
+    if (b.data.order !== undefined) return 1;
+
+    // 2. Sort by date (descending)
+    const dateA = new Date(a.data.date).getTime();
+    const dateB = new Date(b.data.date).getTime();
+    if (dateB !== dateA) return dateB - dateA;
+
+    // 3. Fallback to id
+    return a.id.localeCompare(b.id);
+  });
+};
+
+const stageDesign = await getCollection('stage-design');
+const onTour = await getCollection('on-tour');
+const artsNumeriques = await getCollection('arts-numeriques');
+const conception3d = await getCollection('conception-3d');
+
+const sortedCollections = {
+  'stage-design': sortProjects(stageDesign),
+  'on-tour': sortProjects(onTour),
+  'arts-numeriques': sortProjects(artsNumeriques),
+  'conception-3d': sortProjects(conception3d)
+};
+---
+
+<BaseLayout title={t('seo.title')} description={t('seo.description')} lang={lang}>
+	<div id="app-root" class="app min-h-screen bg-[#dbdbdb]">
+    <Home />
+    <Header />
+    <Description />
+    
+    <main>
+      <div class="w-full">
+        {CATEGORIES.map((cat) => (
+          <>
+            <ProjectSection 
+              category={cat}
+              projects={sortedCollections[cat.id as keyof typeof sortedCollections] || []}
+            />
+            {cat.id === 'arts-numeriques' && <VideoSection />}
+          </>
+        ))}
+      </div>
+    </main>
+
+    <Footer />
+  </div>
+
+  <ProjectDialog />
+</BaseLayout>

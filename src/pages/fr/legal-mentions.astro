@@ -1,15 +1,17 @@
 ---
 import { Image } from 'astro:assets';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_NAME } from '../config/site';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_NAME } from '../../config/site';
+
+const lang = 'fr';
 ---
 
-<BaseLayout title="Mentions Légales">
+<BaseLayout title="Mentions Légales" lang={lang}>
   <div id="app-root" class="app min-h-screen bg-[#dbdbdb] flex flex-col">
     <div class="pt-8 pb-4 text-center">
-      <a href="/" class="inline-block">
+      <a href="/fr/" class="inline-block">
         <Image src="/img/neonAssets/neon-noir-baseline.png" alt="logo-neon" width={400} height={179} class="mx-auto h-auto" style="width: 30vw; max-width: 400px;" loading="eager" />
       </a>
     </div>
@@ -49,7 +51,7 @@ import { SITE_NAME } from '../config/site';
         <section>
           <h2 class="text-xl font-bold mb-2">4. DONNÉES PERSONNELLES</h2>
           <p>
-            D'une façon générale, vous pouvez visiter notre site sur Internet sans avoir à décliner votre identité et à fournir des informations personnelles vous concernant.
+            D'une façon générale, vous pouvez visiter notre site sur Internet sans avoir à décliner votre identityé et à fournir des informations personnelles vous concernant.
           </p>
         </section>
 
@@ -62,7 +64,7 @@ import { SITE_NAME } from '../config/site';
       </div>
 
       <div class="mt-16 text-center italic">
-        <a href="/" class="hover:underline">Retour à l'accueil</a>
+        <a href="/fr/" class="hover:underline">Retour à l'accueil</a>
       </div>
     </main>
 

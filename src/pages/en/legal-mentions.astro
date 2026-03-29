@@ -1,0 +1,79 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_NAME } from '../../config/site';
+
+const lang = 'en';
+---
+
+<BaseLayout title="Legal Mentions" lang={lang}>
+  <div id="app-root" class="app min-h-screen bg-[#dbdbdb] flex flex-col">
+    <div class="pt-8 pb-4 text-center">
+      <a href="/en/" class="inline-block">
+        <Image src="/img/neonAssets/neon-noir-baseline.png" alt="logo-neon" width={400} height={179} class="mx-auto h-auto" style="width: 30vw; max-width: 400px;" loading="eager" />
+      </a>
+    </div>
+    
+    <Header />
+
+    <main class="flex-grow py-16 px-4 max-w-4xl mx-auto m-plus font-light leading-relaxed text-black">
+      <h1 class="text-4xl font-bold mb-12 text-center">LEGAL MENTIONS</h1>
+
+      <div class="space-y-8">
+        <section>
+          <h2 class="text-xl font-bold mb-2">1. WEBSITE PUBLISHER</h2>
+          <p>
+            The website <strong>neon-live.fr</strong> is published by the association <strong>{SITE_NAME} LIVE</strong>.
+            <br />Headquarters: 4 rue Alexis Perroncel, 69100 Villeurbanne, France.
+            <br />Email: contact@neon-live.fr
+            <br />Phone: 06.32.63.23.30 / +33 6 01 45 16 44
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-bold mb-2">2. HOST</h2>
+          <p>
+            The website is hosted by the company <strong>OVH</strong>.
+            <br />Headquarters: 2 rue Kellermann - 59100 Roubaix - France.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-bold mb-2">3. INTELLECTUAL PROPERTY</h2>
+          <p>
+            All content present on this site (texts, images, videos, logos, pictos) is the exclusive property of {SITE_NAME} LIVE, unless otherwise stated. 
+            Any reproduction, representation, modification, publication, adaptation of all or part of the elements of the site, whatever the means or process used, is prohibited, except with the prior written authorization of {SITE_NAME} LIVE.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-bold mb-2">4. PERSONAL DATA</h2>
+          <p>
+            In general, you can visit our website on the Internet without having to state your identity and provide personal information about yourself.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-bold mb-2">5. APPLICABLE LAW</h2>
+          <p>
+            In accordance with Article 6 of Law No. 2004-575 of June 21, 2004 for confidence in the digital economy (LCEN).
+          </p>
+        </section>
+      </div>
+
+      <div class="mt-16 text-center italic">
+        <a href="/en/" class="hover:underline">Back to home</a>
+      </div>
+    </main>
+
+    <Footer />
+  </div>
+</BaseLayout>
+
+<style>
+  .m-plus {
+    font-family: "M PLUS Rounded 1c", sans-serif;
+  }
+</style>
