@@ -24,5 +24,8 @@
 - **Navigation** : Liens absolus dans le header pour fonctionner depuis toutes les pages.
 - **IDs** : Standardisation en kebab-case (`#arts-numeriques`, `#conception-3d`).
 
+## Workflows
+- **Linter** : Lancer le linter (`npm run lint`) à la fin de chaque itération pour assurer la qualité du code.
+
 ## Notes Importantes
 - **Mise à jour** : Ce fichier doit être mis à jour après chaque évolution structurelle.
