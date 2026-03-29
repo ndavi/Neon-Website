@@ -13,14 +13,23 @@ const { title, description = "NEON - Arts Numériques et Scénographie", lang = 
 
 <!doctype html>
 <html lang={lang}>
-	<head>
+	<head title="NEON LIVE">
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		
 		<SEO title={title} description={description} lang={lang} />
-		
+
+		{import.meta.env.PROD && (
+			<script
+				defer
+				src="https://cloud.umami.is/script.js"
+				data-website-id="e4ca5224-430c-4462-befd-fd01f7768b59"
+				data-domains="neon-live.fr"
+				></script>
+		)}
+
 		<!-- Preload and Load Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
