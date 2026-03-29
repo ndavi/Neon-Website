@@ -132,8 +132,8 @@
     }
 
     public open(index: number) {
-      this.updateContent(index);
       this.dialog.showModal();
+      this.updateContent(index);
       document.body.style.overflow = 'hidden';
     }
 

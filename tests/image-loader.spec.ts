@@ -37,10 +37,16 @@ test.describe('Image Loader and Interaction', () => {
   });
 
   test('Project dialog should show a loader and block navigation until image is loaded', async ({ page }) => {
-    // Intercept images
-    await page.route('**/*.{png,jpg,jpeg,webp,avif}', async (route) => {
+    // Intercept images and disable cache
+    await page.route('**/*.{png,jpg,jpeg,webp,avif}*', async (route) => {
+      const headers = {
+        ...route.request().headers(),
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+      };
       await new Promise(resolve => setTimeout(resolve, 1000));
-      await route.continue();
+      await route.continue({ headers });
     });
 
     await page.goto('/');
@@ -49,6 +55,12 @@ test.describe('Image Loader and Interaction', () => {
     const firstProject = page.locator('.project-trigger').first();
     await expect(firstProject.locator('.loader')).not.toBeVisible({ timeout: 10000 });
     
+    // Force a fresh request for the dialog image to ensure it gets intercepted and delayed
+    const originalImage = await firstProject.getAttribute('data-image');
+    await firstProject.evaluate((el, url) => {
+      (el as HTMLElement).dataset.image = url + '?t=' + Date.now();
+    }, originalImage);
+
     await firstProject.click();
 
     const dialog = page.locator('#project-dialog');
