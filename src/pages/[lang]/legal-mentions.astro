@@ -1,0 +1,73 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { ui } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'fr' } },
+    { params: { lang: 'en' } },
+  ];
+}
+
+const { lang } = Astro.params;
+const t = useTranslations(lang as keyof typeof ui);
+---
+
+<BaseLayout title={t('legal.title')} lang={lang}>
+  <div id="app-root" class="app min-h-screen bg-[#dbdbdb] flex flex-col">
+    <div class="pt-8 pb-4 text-center">
+      <a href={`/${lang}/`} class="inline-block">
+        <Image src="/img/neonAssets/neon-noir-baseline.png" alt="logo-neon" width={400} height={179} class="mx-auto h-auto" style="width: 30vw; max-width: 400px;" loading="eager" />
+      </a>
+    </div>
+    
+    <Header />
+
+    <main class="flex-grow py-16 px-4 max-w-4xl mx-auto m-plus font-light leading-relaxed text-black">
+      <h1 class="text-4xl font-bold mb-12 text-center" set:html={t('legal.title')} />
+
+      <div class="space-y-8">
+        <section>
+          <h2 class="text-xl font-bold mb-2" set:html={t('legal.section1.title')} />
+          <p set:html={t('legal.section1.content')} />
+        </section>
+
+        <section>
+          <h2 class="text-xl font-bold mb-2" set:html={t('legal.section2.title')} />
+          <p set:html={t('legal.section2.content')} />
+        </section>
+
+        <section>
+          <h2 class="text-xl font-bold mb-2" set:html={t('legal.section3.title')} />
+          <p set:html={t('legal.section3.content')} />
+        </section>
+
+        <section>
+          <h2 class="text-xl font-bold mb-2" set:html={t('legal.section4.title')} />
+          <p set:html={t('legal.section4.content')} />
+        </section>
+
+        <section>
+          <h2 class="text-xl font-bold mb-2" set:html={t('legal.section5.title')} />
+          <p set:html={t('legal.section5.content')} />
+        </section>
+      </div>
+
+      <div class="mt-16 text-center italic">
+        <a href={`/${lang}/`} class="hover:underline">{t('legal.back')}</a>
+      </div>
+    </main>
+
+    <Footer />
+  </div>
+</BaseLayout>
+
+<style>
+  .m-plus {
+    font-family: "M PLUS Rounded 1c", sans-serif;
+  }
+</style>
