@@ -10,7 +10,7 @@ import Home from '../../components/Home.astro';
 import ProjectDialog from '../../components/ProjectDialog.astro';
 import { CATEGORIES } from '../../config/site';
 import { ui } from '../../i18n/ui';
-import { useTranslations } from '../../i18n/utils';
+import { useTranslations, sortProjects } from '../../i18n/utils';
 
 export function getStaticPaths() {
   return [
@@ -21,23 +21,6 @@ export function getStaticPaths() {
 
 const { lang } = Astro.params;
 const t = useTranslations(lang as keyof typeof ui);
-
-// Helper to sort collections
-const sortProjects = (collection: any[]) => {
-  return [...collection].sort((a, b) => {
-    if (a.data.order !== undefined && b.data.order !== undefined) {
-      return a.data.order - b.data.order;
-    }
-    if (a.data.order !== undefined) return -1;
-    if (b.data.order !== undefined) return 1;
-
-    const dateA = new Date(a.data.date).getTime();
-    const dateB = new Date(b.data.date).getTime();
-    if (dateB !== dateA) return dateB - dateA;
-
-    return a.id.localeCompare(b.id);
-  });
-};
 
 const stageDesign = await getCollection('stage-design');
 const onTour = await getCollection('on-tour');

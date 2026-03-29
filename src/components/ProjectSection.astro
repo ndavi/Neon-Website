@@ -5,17 +5,29 @@ import SectionHeader from './SectionHeader.astro';
 
 import type { Category } from '../config/site';
 
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
 interface Props {
   category: Category;
   projects: (CollectionEntry<'stage-design'> | CollectionEntry<'on-tour'> | CollectionEntry<'arts-numeriques'> | CollectionEntry<'conception-3d'>)[];
 }
 
 const { category, projects } = Astro.props;
-const { id, name, description, pictoClass } = category;
+const { id, pictoClass } = category;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Dynamically construct the keys for the category
+const nameKey = `nav.${id}` as any;
+const descKey = `cat.${id}.desc` as any;
+
+const title = t(nameKey);
+const description = t(descKey);
 ---
 
 <section id={id} class={id.toLowerCase().replace(" ", "-")}>
-  <SectionHeader title={name} pictoClass={pictoClass} description={description} />
+  <SectionHeader title={title} pictoClass={pictoClass} description={description} />
   
   <div class="photos">
     {projects.map((project) => (

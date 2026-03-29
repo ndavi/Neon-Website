@@ -1,3 +1,6 @@
+import fr from './locales/fr.json';
+import en from './locales/en.json';
+
 export const languages = {
   fr: 'Français',
   en: 'English',
@@ -6,60 +9,6 @@ export const languages = {
 export const defaultLang = 'fr';
 
 export const ui = {
-  fr: {
-    'nav.stage-design': 'STAGE DESIGN',
-    'nav.on-tour': 'ON TOUR',
-    'nav.arts-numeriques': 'ARTS NUMERIQUES',
-    'nav.conception-3d': 'CONCEPTION 3D',
-    'nav.videos': 'VIDÉOS',
-    'intro.p1': "NEON est un collectif Français basé à Lyon composé d'artistes du numérique, de scénographes, d'électroniciens et de développeurs.",
-    'intro.p2': "Né d'une envie d'expérimentation artistique, ce projet évolue aujourd'hui entre scénographie et arts numériques.",
-    'project.credit': 'Crédit photo :',
-    'project.next': 'Projet suivant',
-    'project.prev': 'Projet précédent',
-    'home.sr-only': 'NEON - Stage Design & Arts Numériques à Lyon',
-    'footer.legal': 'Mentions légales',
-    'seo.title': 'Stage Design & Arts Numériques',
-    'seo.description': 'NEON - Arts Numériques et Scénographie',
-    'legal.title': 'MENTIONS LÉGALES',
-    'legal.section1.title': '1. ÉDITEUR DU SITE',
-    'legal.section1.content': "Le site <strong>neon-live.fr</strong> est édité par l'association <strong>NEON LIVE</strong>.<br />Siège social : 4 rue Alexis Perroncel, 69100 Villeurbanne, France.<br />Email : contact@neon-live.fr<br />Téléphone : 06.32.63.23.30 / +33 6 01 45 16 44",
-    'legal.section2.title': '2. HÉBERGEUR',
-    'legal.section2.content': 'Le site est hébergé par la société <strong>OVH</strong>.<br />Siège social : 2 rue Kellermann - 59100 Roubaix - France.',
-    'legal.section3.title': '3. PROPRIÉTÉ INTELLECTUELLE',
-    'legal.section3.content': "L'ensemble des contenus présents sur ce site (textes, images, vidéos, logos, pictos) est la propriété exclusive de NEON LIVE, sauf mention contraire. Toute reproduction, représentation, modification, publication, adaptation de tout ou partie des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite, sauf autorisation écrite préalable de NEON LIVE.",
-    'legal.section4.title': '4. DONNÉES PERSONNELLES',
-    'legal.section4.content': "D'une façon générale, vous pouvez visiter notre site sur Internet sans avoir à décliner votre identityé et à fournir des informations personnelles vous concernant.",
-    'legal.section5.title': '5. LOI APPLICABLE',
-    'legal.section5.content': 'Conformément à l\'article n°6 de la Loi n°2004-575 du 21 Juin 2004 pour la confiance dans l\'économie numérique (LCEN).',
-    'legal.back': 'Retour à l\'accueil'
-  },
-  en: {
-    'nav.stage-design': 'STAGE DESIGN',
-    'nav.on-tour': 'ON TOUR',
-    'nav.arts-numeriques': 'DIGITAL ARTS',
-    'nav.conception-3d': '3D DESIGN',
-    'nav.videos': 'VIDEOS',
-    'intro.p1': "NEON is a French collective based in Lyon, bringing together digital artists, scenographers, electronics engineers, and developers.",
-    'intro.p2': "Born from a shared passion for artistic experimentation, the project now thrives at the intersection of stage design and digital arts.",
-    'project.credit': 'Photo credit:',
-    'project.next': 'Next project',
-    'project.prev': 'Previous project',
-    'home.sr-only': 'NEON - Stage Design & Digital Arts in Lyon',
-    'footer.legal': 'Legal Mentions',
-    'seo.title': 'Stage Design & Digital Arts',
-    'seo.description': 'NEON - Digital Arts and Scenography Collective',
-    'legal.title': 'LEGAL NOTICES',
-    'legal.section1.title': '1. SITE PUBLISHER',
-    'legal.section1.content': "The website <strong>neon-live.fr</strong> is published by the <strong>NEON LIVE</strong> association.<br />Registered office: 4 rue Alexis Perroncel, 69100 Villeurbanne, France.<br />Email: contact@neon-live.fr<br />Phone: +33 6 32 63 23 30 / +33 6 01 45 16 44",
-    'legal.section2.title': '2. HOSTING',
-    'legal.section2.content': 'The site is hosted by <strong>OVH</strong>.<br />Head office: 2 rue Kellermann - 59100 Roubaix - France.',
-    'legal.section3.title': '3. INTELLECTUAL PROPERTY',
-    'legal.section3.content': "All content on this site (text, images, videos, logos, icons) is the exclusive property of NEON LIVE, unless otherwise stated. Any reproduction, representation, modification, publication, or adaptation of all or part of the site's elements, by any means or process, is strictly prohibited without prior written authorization from NEON LIVE.",
-    'legal.section4.title': '4. PERSONAL DATA',
-    'legal.section4.content': "Generally, you can visit our website without disclosing your identity or providing personal information.",
-    'legal.section5.title': '5. APPLICABLE LAW',
-    'legal.section5.content': 'In accordance with Article 6 of Law No. 2004-575 of June 21, 2004, regarding confidence in the digital economy (LCEN).',
-    'legal.back': 'Back to Home'
-  },
+  fr,
+  en,
 } as const;

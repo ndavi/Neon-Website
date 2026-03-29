@@ -35,6 +35,34 @@ const { title, description = "NEON - Arts Numériques et Scénographie", lang = 
 
 			// Register GSAP plugins
 			gsap.registerPlugin(ScrollTrigger);
+
+			const SCROLL_STORAGE_KEY = 'neon_scroll_pos';
+
+			function restoreScroll() {
+				const savedScroll = sessionStorage.getItem(SCROLL_STORAGE_KEY);
+				if (!savedScroll) return;
+
+				requestAnimationFrame(() => {
+					document.documentElement.style.scrollBehavior = 'auto';
+					window.scrollTo(0, parseInt(savedScroll, 10));
+					document.documentElement.style.scrollBehavior = '';
+					sessionStorage.removeItem(SCROLL_STORAGE_KEY);
+				});
+			}
+
+			function handleLanguageSwitch(e: MouseEvent) {
+				const link = (e.target as HTMLElement).closest('a');
+				if (link) {
+					const href = link.getAttribute('href');
+					if (href === '/fr/' || href === '/en/') {
+						sessionStorage.setItem(SCROLL_STORAGE_KEY, window.scrollY.toString());
+					}
+				}
+			}
+
+			// Initialize
+			restoreScroll();
+			document.addEventListener('click', handleLanguageSwitch);
 		</script>
 	</body>
 </html>

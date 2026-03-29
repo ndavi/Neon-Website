@@ -23,9 +23,9 @@ const navItems = [
   ))}
   <div class="vl"></div>
   <div class="header-item lang-switcher">
-    <a href="/fr/" class={lang === 'fr' ? 'active' : ''}>FR</a>
+    <a href="/fr/" class={`lang-link ${lang === 'fr' ? 'active' : ''}`}>FR</a>
     <span>|</span>
-    <a href="/en/" class={lang === 'en' ? 'active' : ''}>EN</a>
+    <a href="/en/" class={`lang-link ${lang === 'en' ? 'active' : ''}`}>EN</a>
   </div>
 </div>
 
@@ -84,7 +84,6 @@ const navItems = [
   }
 
   .lang-switcher {
-    font-size: 1.1rem;
     display: flex;
     gap: 0.5rem;
     align-items: center;

@@ -59,29 +59,21 @@ const t = useTranslations(lang);
     }
 
     private init() {
+      this.setupGlobalListeners();
+      this.setupNavigationListeners();
+    }
+
+    private setupGlobalListeners() {
       document.addEventListener('click', (e) => {
         const trigger = (e.target as HTMLElement).closest('.project-trigger') as HTMLElement;
         if (trigger) {
           this.refreshTriggers();
-          const index = this.triggers.indexOf(trigger);
-          this.open(index);
+          this.open(this.triggers.indexOf(trigger));
         }
-      });
-
-      this.prevBtn?.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (!this.isLoading) this.navigate(-1);
-      });
-
-      this.nextBtn?.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (!this.isLoading) this.navigate(1);
       });
 
       this.dialog.addEventListener('mousedown', (e) => {
-        if (!(e.target as HTMLElement).closest('.nav-button')) {
-          this.close();
-        }
+        if (!(e.target as HTMLElement).closest('.nav-button')) this.close();
       });
 
       window.addEventListener('keydown', (e) => {
@@ -96,20 +88,47 @@ const t = useTranslations(lang);
       });
     }
 
+    private setupNavigationListeners() {
+      this.prevBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (!this.isLoading) this.navigate(-1);
+      });
+
+      this.nextBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (!this.isLoading) this.navigate(1);
+      });
+    }
+
     private refreshTriggers() {
       this.triggers = Array.from(document.querySelectorAll('.project-trigger'));
     }
 
     private getLocalized(val: string | undefined): string {
       if (!val) return '';
+      if (!val.startsWith('{')) return val;
+      
       try {
-        if (val.startsWith('{')) {
-          const obj = JSON.parse(val);
-          return obj[this.lang] || obj['fr'] || '';
-        }
+        const obj = JSON.parse(val);
+        return obj[this.lang] || obj['fr'] || '';
+      } catch {
         return val;
-      } catch (e) {
-        return val;
+      }
+    }
+
+    private setLoadingState(isLoading: boolean) {
+      this.isLoading = isLoading;
+      const pointerEvents = isLoading ? 'none' : 'auto';
+      
+      this.prevBtn.style.pointerEvents = pointerEvents;
+      this.nextBtn.style.pointerEvents = pointerEvents;
+      
+      if (isLoading) {
+        this.modalImg.style.opacity = '0';
+        this.modalLoader.style.display = 'block';
+      } else {
+        this.modalImg.style.opacity = '1';
+        this.modalLoader.style.display = 'none';
       }
     }
 
@@ -119,36 +138,19 @@ const t = useTranslations(lang);
       this.currentIndex = index;
       const data = this.triggers[this.currentIndex].dataset;
       
-      this.isLoading = true;
-      this.modalImg.style.opacity = '0';
-      this.modalLoader.style.display = 'block';
-      this.prevBtn.style.pointerEvents = 'none';
-      this.nextBtn.style.pointerEvents = 'none';
+      this.setLoadingState(true);
 
-      const onDone = () => {
-        this.isLoading = false;
-        this.modalImg.style.opacity = '1';
-        this.modalLoader.style.display = 'none';
-        this.prevBtn.style.pointerEvents = 'auto';
-        this.nextBtn.style.pointerEvents = 'auto';
-      };
-
+      const onDone = () => this.setLoadingState(false);
       this.modalImg.onload = onDone;
       this.modalImg.onerror = onDone;
 
       this.modalImg.src = data.image || '';
-      
-      if (this.modalImg.complete) {
-        onDone();
-      }
+      if (this.modalImg.complete) onDone();
 
       const title = this.getLocalized(data.title);
-      const description = this.getLocalized(data.description);
-      const alt = this.getLocalized(data.alt);
-
-      this.modalImg.alt = alt || title || '';
+      this.modalImg.alt = this.getLocalized(data.alt) || title;
       this.modalTitle.textContent = title;
-      this.modalDesc.textContent = description;
+      this.modalDesc.textContent = this.getLocalized(data.description);
       this.modalCreditLink.href = data.lienCredit || '';
       this.modalCreditLink.textContent = data.credit || '';
     }
