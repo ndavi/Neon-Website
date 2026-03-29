@@ -1,31 +1,45 @@
-# Projet NEON Portfolio Clone - Pixel Perfect
+# Projet NEON Portfolio - Technical Documentation
 
-## Stack Technique
-- **Framework** : Astro v5+ (SSG)
-- **Langage** : TypeScript
-- **CSS** : Tailwind CSS v4 + Custom CSS
-- **Images** : Composant `<Image />` d'Astro pour l'optimisation (LCP eager loading sur Home)
-- **Données** : 67 projets via Astro Content Collections (Markdown + JSON source).
+## Overview
+This project is a pixel-perfect clone of the NEON portfolio, built as a high-performance static site using Astro. It showcases creative work across four main categories: Stage Design, On Tour, Arts Numériques, and Conception 3D.
 
-## Architecture & Structure
-- **Pages** :
-  - `index.astro` : Page principale (Home, Sections, Vidéos)
-  - `legal-mentions.astro` : Mentions légales
-- **Composants** :
-  - `Home.astro` : Section héro plein écran avec logo et flèche de scroll
-  - `Header.astro` : Menu de navigation avec ancres standardisées (`#stage-design`, etc.)
-  - `ProjectSection.astro` / `ProjectCard.astro` : Grille de projets et vignettes
-  - `ProjectDialog.astro` : Modal de détail des projets (via `<dialog>`)
-  - `VideoSection.astro` : Grille d'iframes YouTube optimisées (lazy-loading)
+## Technical Stack
+- **Framework**: [Astro v6+](https://astro.build/) (Static Site Generation)
+- **Language**: TypeScript
+- **CSS**: [Tailwind CSS v4](https://tailwindcss.com/) with Vite integration
+- **Animations**: [GSAP](https://gsap.com/) for motion and interactions
+- **Data Management**: Astro Content Collections (JSON based)
+- **i18n**: Multi-language support (French/English) with prefix-based routing
+- **Testing**: [Playwright](https://playwright.dev/) for E2E and smoke tests
+- **Images**: Astro's `<Image />` component for automatic optimization
 
-## Optimisations & Accessibilité
-- **Performance** : Lazy-loading des iframes et images sous la ligne de flottaison.
-- **Accessibilité** : Noms accessibles (`aria-label`) sur les icônes sociales et liens vides.
-- **Navigation** : Liens absolus dans le header pour fonctionner depuis toutes les pages.
-- **IDs** : Standardisation en kebab-case (`#arts-numeriques`, `#conception-3d`).
+## Project Structure
+- `src/components/`: Reusable UI components (Home, Header, ProjectCard, ProjectDialog, etc.)
+- `src/content/`: Project data organized by categories in JSON files
+- `src/i18n/`: Localization configuration, logic, and translation files (`fr.json`, `en.json`)
+- `src/layouts/`: `BaseLayout.astro` for consistent page structure and SEO
+- `src/pages/`:
+    - `index.astro`: Redirects to default locale (`/fr/`)
+    - `[lang]/index.astro`: Main localized landing page
+    - `legal-mentions.astro`: Static legal information page
+- `src/styles/`: Global CSS and Tailwind directives
+- `public/`: Static assets (images, icons, etc.)
 
-## Workflows
-- **Linter** : Lancer le linter (`npm run lint`) à la fin de chaque itération pour assurer la qualité du code.
+## Key Commands
+- `npm run dev`: Start the development server
+- `npm run build`: Build the project for production
+- `npm run preview`: Locally preview the production build
+- `npm run lint`: Run Astro check for type safety and code quality
+- `npm run test`: Run E2E tests with Playwright
+- `npm run test:ui`: Open Playwright test runner UI
 
-## Notes Importantes
-- **Mise à jour** : Ce fichier doit être mis à jour après chaque évolution structurelle.
+## Development Conventions
+- **Naming**: Use kebab-case for filenames and CSS IDs.
+- **Styling**: Prefer Tailwind CSS classes; use `global.css` for complex custom animations.
+- **Content**: Projects are defined in `src/content/projects/`. Each project must follow the schema defined in `src/content.config.ts`.
+- **i18n**: All UI text should be managed via `src/i18n/locales/`.
+- **Components**: Use standalone Astro components. Client-side interactivity is handled via standard `<script>` tags within components or GSAP.
+
+## Workflow
+- **Validation**: Run `npm run lint` and `npm run test` before proposing significant changes.
+- **Updates**: Keep this `GEMINI.md` updated as the project evolves.

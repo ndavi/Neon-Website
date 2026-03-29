@@ -13,7 +13,7 @@ const { title, description = "NEON - Arts Numériques et Scénographie", lang = 
 
 <!doctype html>
 <html lang={lang}>
-	<head title="NEON LIVE">
+	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -23,6 +23,7 @@ const { title, description = "NEON - Arts Numériques et Scénographie", lang = 
 
 		{import.meta.env.PROD && (
 			<script
+				is:inline
 				defer
 				src="https://cloud.umami.is/script.js"
 				data-website-id="e4ca5224-430c-4462-befd-fd01f7768b59"
