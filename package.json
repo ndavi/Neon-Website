@@ -15,7 +15,8 @@
     "format": "prettier --write .",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
-    "e2e:headless": "playwright test"
+    "e2e:headless": "playwright test",
+    "prepare": "husky"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.8",
@@ -35,6 +36,7 @@
     "eslint-plugin-prettier": "^5.5.5",
     "glob": "^13.0.6",
     "globals": "^17.4.0",
+    "husky": "^9.1.7",
     "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1",
     "typescript-eslint": "^8.57.2"
