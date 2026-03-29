@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Discovery: First Impression', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/fr/');
   });
 
   test('The visitor should see the brand identity immediately', async ({ page }) => {

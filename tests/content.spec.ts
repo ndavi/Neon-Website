@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Content: Secondary media and legal info', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/fr/');
   });
 
   test('The visitor watches video showcases', async ({ page }) => {
@@ -23,7 +23,7 @@ test.describe('Content: Secondary media and legal info', () => {
   });
 
   test('The visitor accesses legal mentions', async ({ page }) => {
-    const legalLink = page.locator('a[href="/legal-mentions"]');
+    const legalLink = page.locator('a[href="/fr/legal-mentions"]');
     
     await test.step('Navigate to the legal mentions page via footer link', async () => {
       await legalLink.scrollIntoViewIfNeeded();
@@ -32,7 +32,7 @@ test.describe('Content: Secondary media and legal info', () => {
     });
 
     await test.step('Check that the legal page has the right content', async () => {
-      await expect(page).toHaveURL(/\/legal-mentions/);
+      await expect(page).toHaveURL(/\/fr\/legal-mentions/);
       const mainHeading = page.getByRole('heading', { name: /MENTIONS LÉGALES/i }).first();
       await expect(mainHeading).toBeVisible();
     });

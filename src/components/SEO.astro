@@ -1,23 +1,41 @@
 ---
 import { SITE_NAME } from '../config/site';
+import { languages, defaultLang } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
 
 interface Props {
   title: string;
   description: string;
+  lang?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, lang = defaultLang as keyof typeof languages } = Astro.props;
+const t = useTranslations(lang as keyof typeof languages);
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://neon-live.fr');
 const ogImage = new URL('/img/neon-main.jpeg', Astro.url.origin);
 
 const fullTitle = `${title} | ${SITE_NAME}`;
+
+// Calculate alternate links
+const alternateLinks = Object.keys(languages).map((l) => {
+  const pathParts = Astro.url.pathname.split('/');
+  // pathname starts with / so pathParts[0] is ""
+  // pathParts[1] is the current lang prefix
+  pathParts[1] = l;
+  const alternatePath = pathParts.join('/');
+  return {
+    lang: l,
+    url: new URL(alternatePath, Astro.url.origin)
+  };
+});
 
 // Structured Data for AI/Google
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": SITE_NAME,
-  "description": "Collectif d'artistes numériques et scénographes basés à Lyon.",
+  "description": t('intro.p1'),
   "url": Astro.url.origin,
   "logo": `${Astro.url.origin}/img/neonAssets/neon-noir-baseline.png`,
   "sameAs": [
@@ -37,6 +55,12 @@ const jsonLd = {
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
+
+<!-- Alternate Language Links -->
+{alternateLinks.map(({ lang, url }) => (
+  <link rel="alternate" hreflang={lang} href={url} />
+))}
+<link rel="alternate" hreflang="x-default" href={alternateLinks.find(l => l.lang === defaultLang)?.url || alternateLinks[0].url} />
 
 <!-- Primary Meta Tags -->
 <title>{fullTitle}</title>

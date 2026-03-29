@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Exploration: Moving through the portfolio', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/fr/');
   });
 
   test.describe('Home Screen Interaction', () => {
@@ -41,7 +41,7 @@ test.describe('Exploration: Moving through the portfolio', () => {
 
     for (const section of sections) {
       test(`The visitor navigates directly to ${section.name} via the menu`, async ({ page }) => {
-        const link = page.locator(`a[href="/${section.id}"]`).first();
+        const link = page.locator(`a[href="/fr/${section.id}"]`).first();
         await link.click();
         await page.waitForTimeout(1000); // Wait for smooth scroll
         
