@@ -1,11 +1,20 @@
 {
-  "title": "La BOX PPC",
-  "description": "Tournage video 'La BOX' avec le duo d'artiste PPC",
+  "title": {
+    "fr": "La BOX PPC",
+    "en": "La BOX PPC"
+  },
+  "description": {
+    "fr": "Tournage video 'La BOX' avec le duo d'artiste PPC",
+    "en": "Tournage video 'La BOX' avec le duo d'artiste PPC"
+  },
   "coverImage": "/img/artsNumeriques/neon-ppc-1.jpeg",
   "date": "2024-01-01",
   "category": "ARTS NUMERIQUES",
   "credit": "NEON",
   "lienCredit": "https://www.instagram.com/neonlivefr/",
-  "alt": "neon stripled la box ppc lablab scénographie unreal engine génératif niagara AADN",
+  "alt": {
+    "fr": "neon stripled la box ppc lablab scénographie unreal engine génératif niagara AADN",
+    "en": "neon stripled la box ppc lablab scénographie unreal engine génératif niagara AADN"
+  },
   "id": "2024-01-01-la-box-ppc"
 }

@@ -1,11 +1,20 @@
 {
-  "title": "Romane Santarelli",
-  "description": "Création lumière & contenu visuel",
+  "title": {
+    "fr": "Romane Santarelli",
+    "en": "Romane Santarelli"
+  },
+  "description": {
+    "fr": "Création lumière & contenu visuel",
+    "en": "Création lumière & contenu visuel"
+  },
   "coverImage": "/img/tour/romane-6.jpeg",
   "date": "2024-01-01",
   "category": "ON TOUR",
   "credit": "NEON",
   "lienCredit": "https://www.instagram.com/neonlivefr/",
-  "alt": "neon romane santarelli plf",
+  "alt": {
+    "fr": "neon romane santarelli plf",
+    "en": "neon romane santarelli plf"
+  },
   "id": "2024-01-01-romane-santarelli"
 }

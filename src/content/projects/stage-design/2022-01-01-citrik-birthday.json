@@ -1,11 +1,20 @@
 {
-  "title": "Citrik Birthday 2022",
-  "description": "Scénographie pour l'édition 2022 de la Citrik Birthday à la Robia",
+  "title": {
+    "fr": "Citrik Birthday 2022",
+    "en": "Citrik Birthday 2022"
+  },
+  "description": {
+    "fr": "Scénographie pour l'édition 2022 de la Citrik Birthday à la Robia",
+    "en": "Scénographie pour l'édition 2022 de la Citrik Birthday à la Robia"
+  },
   "coverImage": "/img/stageDesign/neon-citrik-3.jpeg",
   "date": "2022-01-01",
   "category": "STAGE DESIGN",
   "credit": "NEON",
   "lienCredit": "https://www.instagram.com/neonlivefr/",
-  "alt": "neon stripled scénographie video lumière citrik birthday 10 ans citron vert drum and bass",
+  "alt": {
+    "fr": "neon stripled scénographie video lumière citrik birthday 10 ans citron vert drum and bass",
+    "en": "neon stripled scénographie video lumière citrik birthday 10 ans citron vert drum and bass"
+  },
   "id": "2022-01-01-citrik-birthday"
 }

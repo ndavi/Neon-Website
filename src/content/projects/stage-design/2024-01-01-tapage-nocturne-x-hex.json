@@ -1,11 +1,20 @@
 {
-  "title": "Tapage Nocturne x HEX",
-  "description": "Show lumière et video générative au Transbordeur pour Tapage Nocturne x HEX",
+  "title": {
+    "fr": "Tapage Nocturne x HEX",
+    "en": "Tapage Nocturne x HEX"
+  },
+  "description": {
+    "fr": "Show lumière et video générative au Transbordeur pour Tapage Nocturne x HEX",
+    "en": "Show lumière et video générative au Transbordeur pour Tapage Nocturne x HEX"
+  },
   "coverImage": "/img/stageDesign/neon-tapage-HEX-1.jpeg",
   "date": "2024-01-01",
   "category": "STAGE DESIGN",
   "credit": "Brice Robert",
   "lienCredit": "https://www.instagram.com/bricerobert_pro/",
-  "alt": "neon stripled tapage nocturne HEX transbordeurs scénographie video lumière unreal engine ue5 particules ",
+  "alt": {
+    "fr": "neon stripled tapage nocturne HEX transbordeurs scénographie video lumière unreal engine ue5 particules ",
+    "en": "neon stripled tapage nocturne HEX transbordeurs scénographie video lumière unreal engine ue5 particules "
+  },
   "id": "2024-01-01-tapage-nocturne-x-hex"
 }

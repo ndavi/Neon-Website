@@ -1,11 +1,20 @@
 {
-  "title": "La BOX l'Art Cene",
-  "description": "Tournage video 'La BOX' avec l'artiste L'Art Cene",
+  "title": {
+    "fr": "La BOX l'Art Cene",
+    "en": "La BOX l'Art Cene"
+  },
+  "description": {
+    "fr": "Tournage video 'La BOX' avec l'artiste L'Art Cene",
+    "en": "Tournage video 'La BOX' avec l'artiste L'Art Cene"
+  },
   "coverImage": "/img/artsNumeriques/neon-lartcene-2.jpeg",
   "date": "2024-01-01",
   "category": "ARTS NUMERIQUES",
   "credit": "NEON",
   "lienCredit": "https://www.instagram.com/neonlivefr/",
-  "alt": "neon stripled l'artcene église saint hippolyte Bonnay scénographie unreal engine madmapper",
+  "alt": {
+    "fr": "neon stripled l'artcene église saint hippolyte Bonnay scénographie unreal engine madmapper",
+    "en": "neon stripled l'artcene église saint hippolyte Bonnay scénographie unreal engine madmapper"
+  },
   "id": "2024-01-01-la-box-lart-cene"
 }

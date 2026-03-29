@@ -1,11 +1,20 @@
 {
-  "title": "ENCORE X Live From Earth - Transbordeur - Novembre 2023",
-  "description": "Scénographie lumière et video au Transbordeur avec Encore & Live From Earth",
+  "title": {
+    "fr": "ENCORE X Live From Earth - Transbordeur - Novembre 2023",
+    "en": "ENCORE X Live From Earth - Transbordeur - Novembre 2023"
+  },
+  "description": {
+    "fr": "Scénographie lumière et video au Transbordeur avec Encore & Live From Earth",
+    "en": "Scénographie lumière et video au Transbordeur avec Encore & Live From Earth"
+  },
   "coverImage": "/img/stageDesign/neon-livefromearth-2023-1.jpg",
   "date": "2023-11-01",
   "category": "STAGE DESIGN",
   "credit": "NEON",
   "lienCredit": "https://www.instagram.com/neonlivefr/",
-  "alt": "neon stripled lyon scénographie video lumière encore video ecran led transbordeur",
+  "alt": {
+    "fr": "neon stripled lyon scénographie video lumière encore video ecran led transbordeur",
+    "en": "neon stripled lyon scénographie video lumière encore video ecran led transbordeur"
+  },
   "id": "2023-11-01-encore-x-live-from-earth-transbordeur"
 }

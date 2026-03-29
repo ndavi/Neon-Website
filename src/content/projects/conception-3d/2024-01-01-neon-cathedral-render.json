@@ -1,11 +1,20 @@
 {
-  "title": "Conception 3D",
-  "description": "",
+  "title": {
+    "fr": "Conception 3D",
+    "en": "Conception 3D"
+  },
+  "description": {
+    "fr": "",
+    "en": ""
+  },
   "coverImage": "/img/conception3d/neon-cathedral-render.jpeg",
   "date": "2024-01-01",
   "category": "CONCEPTION 3D",
   "credit": "NEON",
   "lienCredit": "https://www.instagram.com/neonlivefr/",
-  "alt": "neon conception 3d capture visualizer lighting plot plan de feu lumière rendu 3D",
+  "alt": {
+    "fr": "neon conception 3d capture visualizer lighting plot plan de feu lumière rendu 3D",
+    "en": "neon conception 3d capture visualizer lighting plot plan de feu lumière rendu 3D"
+  },
   "id": "2024-01-01-neon-cathedral-render"
 }
