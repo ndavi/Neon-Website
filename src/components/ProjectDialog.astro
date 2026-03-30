@@ -174,10 +174,6 @@ const t = useTranslations(lang);
 
     private setLoadingState(isLoading: boolean) {
       this.isLoading = isLoading;
-      const pointerEvents = isLoading ? 'none' : 'auto';
-
-      this.prevBtn.style.pointerEvents = pointerEvents;
-      this.nextBtn.style.pointerEvents = pointerEvents;
 
       if (isLoading) {
         this.modalImg.style.opacity = '0';

@@ -77,8 +77,8 @@ test.describe('Image Loader and Interaction', () => {
     // 1. Modal loader should be visible
     await expect(modalLoader).toBeVisible();
 
-    // 2. Navigation buttons should be unclickable
-    await expect(nextBtn).toHaveCSS('pointer-events', 'none');
+    // 2. Navigation buttons should still have pointer-events auto (to capture events and prevent dialog closing)
+    await expect(nextBtn).not.toHaveCSS('pointer-events', 'none');
 
     // 3. Wait for load
     await expect(modalLoader).not.toBeVisible({ timeout: 10000 });
