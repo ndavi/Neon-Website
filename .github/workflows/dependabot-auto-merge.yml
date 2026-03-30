@@ -19,8 +19,10 @@ jobs:
         with:
           github-token: '${{ secrets.GITHUB_TOKEN }}'
 
-      - name: Approve and Enable Auto-Merge for Security Updates
-        if: ${{ steps.metadata.outputs.update-type == 'version-update:semver-patch' || steps.metadata.outputs.dependency-type == 'direct:production' || contains(steps.metadata.outputs.alert-lookup, 'security') }}
+      - name: Approve and Enable Auto-Merge for Safe Updates
+        if: |
+          (steps.metadata.outputs.update-type == 'version-update:semver-patch' || steps.metadata.outputs.update-type == 'version-update:semver-minor') ||
+          contains(steps.metadata.outputs.alert-lookup, 'security')
         run: |
           gh pr review --approve "$PR_URL"
           gh pr merge --auto --merge "$PR_URL"
