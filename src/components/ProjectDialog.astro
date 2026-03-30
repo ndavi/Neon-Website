@@ -280,9 +280,16 @@ const t = useTranslations(lang);
     -webkit-user-drag: none;
   }
 
-  .nav-button:hover {
-    background: rgba(255, 255, 255, 0.3);
-    scale: 1.1;
+  .nav-button:active {
+    background: rgba(255, 255, 255, 0.4);
+    scale: 0.95;
+  }
+
+  @media (hover: hover) {
+    .nav-button:hover {
+      background: rgba(255, 255, 255, 0.3);
+      scale: 1.1;
+    }
   }
 
   .nav-button.prev {
