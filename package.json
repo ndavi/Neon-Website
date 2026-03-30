@@ -19,14 +19,13 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.8",
     "@tailwindcss/vite": "^4.2.2",
     "astro": "^6.1.1",
-    "gsap": "^3.14.2",
     "tailwindcss": "^4.2.2",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.8",
     "@playwright/test": "^1.58.2",
     "@types/node": "^25.5.0",
     "astro-eslint-parser": "^1.4.0",
