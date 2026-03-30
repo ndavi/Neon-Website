@@ -10,12 +10,10 @@ import { VIDEOS } from '../config/site';
     description="Capsules vidéos et aftermovies."
   />
 
-  <div
-    class="video-grid flex flex-wrap justify-center gap-4 px-4 max-w-350 mx-auto"
-  >
+  <div class="video-grid">
     {
       VIDEOS.map((vid) => (
-        <div class="player-wrapper w-full md:w-[45%] lg:w-[30%] aspect-video">
+        <div class="player-wrapper">
           <iframe
             width="100%"
             height="100%"
@@ -24,10 +22,60 @@ import { VIDEOS } from '../config/site';
             loading="lazy"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
-            class="p-2 border-0"
           />
         </div>
       ))
     }
   </div>
 </section>
+
+<style>
+  .video-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .player-wrapper {
+    position: relative;
+    transition: 0.4s;
+    text-align: center;
+    padding: 1.5vh;
+    box-sizing: border-box;
+  }
+
+  iframe {
+    width: 95%;
+    height: 95%;
+    object-fit: cover;
+    border: 0;
+  }
+
+  .player-wrapper:hover {
+    transform: scale(0.98);
+    opacity: 0.7;
+  }
+
+  @media screen and (min-width: 769px) {
+    .player-wrapper {
+      width: calc(100vw / 3.5);
+      height: calc(100vh / 3.5);
+    }
+  }
+
+  @media screen and (min-width: 481px) and (max-width: 768px) {
+    .player-wrapper {
+      width: calc(100vw / 3);
+      height: calc(100vh / 3);
+    }
+  }
+
+  @media screen and (min-width: 321px) and (max-width: 480px) {
+    .player-wrapper {
+      width: 50vw;
+      height: 30vh;
+    }
+  }
+</style>
