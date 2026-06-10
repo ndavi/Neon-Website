@@ -1,0 +1,20 @@
+{
+  "title": {
+    "fr": "Conception 3D",
+    "en": "3D Design"
+  },
+  "description": {
+    "fr": "Rendus 3D pour conception scénographique et lumière",
+    "en": "3D renders for scenography and lighting design"
+  },
+  "coverImage": "/img/conception3d/neon-3d-render-2026-6.jpg",
+  "date": "2026-06-11",
+  "category": "CONCEPTION 3D",
+  "credit": "NEON",
+  "lienCredit": "https://www.instagram.com/neonlivefr/",
+  "alt": {
+    "fr": "neon stripled lyon scénographie lumière conception 3d render",
+    "en": "neon stripled lyon Scenography lighting 3d design render"
+  },
+  "id": "2026-06-11-neon-3d-render-2026-6"
+}
