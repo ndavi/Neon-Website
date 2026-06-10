@@ -15,16 +15,19 @@ interface Props {
 const { project, loading = 'lazy' } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const { title, description, coverImage, credit, lienCredit, alt } = project.data;
+const { title, description, coverImage, credit, lienCredit, alt } =
+  project.data;
 
 const tTitle = title[lang];
 const tDescription = description ? description[lang] : '';
 const tAlt = alt ? alt[lang] : '';
-const tYear = project.data.date ? new Date(project.data.date).getFullYear().toString() : '';
+const tYear = project.data.date
+  ? new Date(project.data.date).getFullYear().toString()
+  : '';
 ---
 
 <button
-  class="project-card project-trigger"
+  class="project-card project-trigger is-loading"
   data-title={tTitle}
   data-description={tDescription}
   data-image={coverImage}
@@ -34,6 +37,7 @@ const tYear = project.data.date ? new Date(project.data.date).getFullYear().toSt
   type="button"
 >
   <div class="card-img-wrap">
+    <div class="loader"></div>
     <Picture
       src={coverImage}
       formats={['avif', 'webp']}
@@ -55,7 +59,13 @@ const tYear = project.data.date ? new Date(project.data.date).getFullYear().toSt
   <div class="sr-only">
     <h4>{tTitle}</h4>
     <p>{tDescription}</p>
-    {credit && <p>{t('project.credit')} {credit}</p>}
+    {
+      credit && (
+        <p>
+          {t('project.credit')} {credit}
+        </p>
+      )
+    }
   </div>
 </button>
 
@@ -79,12 +89,44 @@ const tYear = project.data.date ? new Date(project.data.date).getFullYear().toSt
     border-radius: 3px;
   }
 
+  .loader {
+    display: none;
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -20px;
+    margin-left: -20px;
+    z-index: 10;
+  }
+
+  .is-loading {
+    pointer-events: none;
+  }
+
+  .is-loading .loader {
+    display: block;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
   .card-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.4s;
+    transition:
+      transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+      filter 0.4s;
     filter: saturate(1.02);
   }
 
@@ -114,3 +156,25 @@ const tYear = project.data.date ? new Date(project.data.date).getFullYear().toSt
     flex-shrink: 0;
   }
 </style>
+
+<script>
+  function initProjectLoaders() {
+    const triggers = document.querySelectorAll('.project-trigger');
+    triggers.forEach((trigger) => {
+      const img = trigger.querySelector('img');
+      if (img) {
+        const removeLoading = () => trigger.classList.remove('is-loading');
+
+        if (img.complete) {
+          removeLoading();
+        } else {
+          img.addEventListener('load', removeLoading);
+          img.addEventListener('error', removeLoading);
+        }
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initProjectLoaders);
+  document.addEventListener('astro:after-swap', initProjectLoaders);
+</script>

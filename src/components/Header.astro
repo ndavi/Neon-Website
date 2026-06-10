@@ -5,15 +5,15 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const navItems = [
-  { id: 'stage-design',    label: t('nav.stage-design') },
-  { id: 'on-tour',         label: t('nav.on-tour') },
+  { id: 'stage-design', label: t('nav.stage-design') },
+  { id: 'on-tour', label: t('nav.on-tour') },
   { id: 'arts-numeriques', label: t('nav.arts-numeriques') },
-  { id: 'conception-3d',   label: t('nav.conception-3d') },
-  { id: 'videos',          label: t('nav.videos') },
+  { id: 'conception-3d', label: t('nav.conception-3d') },
+  { id: 'videos', label: t('nav.videos') },
 ];
 ---
 
-<header class="site-header" id="site-header">
+<header class="site-header header-container" id="site-header">
   <a href={`/${lang}/`} class="header-logo" aria-label="NEON — retour accueil">
     <img
       src="/img/neonAssets/neon-white-baseline.png"
@@ -26,9 +26,13 @@ const navItems = [
   </a>
 
   <nav class="header-nav" aria-label="Navigation principale">
-    {navItems.map(item => (
-      <a href={`/${lang}/#${item.id}`} class="nav-link">{item.label}</a>
-    ))}
+    {
+      navItems.map((item) => (
+        <a href={`/${lang}/#${item.id}`} class="nav-link">
+          {item.label}
+        </a>
+      ))
+    }
   </nav>
 
   <div class="header-right">
@@ -87,7 +91,9 @@ const navItems = [
     transition: color 0.25s;
     white-space: nowrap;
   }
-  .nav-link:hover { color: #fff; }
+  .nav-link:hover {
+    color: #fff;
+  }
 
   .header-right {
     display: flex;
@@ -102,7 +108,10 @@ const navItems = [
     gap: 7px;
   }
 
-  .lang-sep { color: rgba(255,255,255,0.18); font-size: 12px; }
+  .lang-sep {
+    color: rgba(255, 255, 255, 0.18);
+    font-size: 12px;
+  }
 
   .lang-link {
     color: #67676e;
@@ -112,10 +121,17 @@ const navItems = [
     transition: color 0.2s;
     padding: 2px 3px;
   }
-  .lang-link:hover { color: #fff; }
-  .lang-link.active { color: #fff; font-weight: 700; }
+  .lang-link:hover {
+    color: #fff;
+  }
+  .lang-link.active {
+    color: #fff;
+    font-weight: 700;
+  }
 
   @media (max-width: 768px) {
-    .header-nav { display: none; }
+    .header-nav {
+      display: none;
+    }
   }
 </style>

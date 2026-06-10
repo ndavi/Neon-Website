@@ -3,7 +3,11 @@ import { Picture } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import ProjectCard from './ProjectCard.astro';
 import type { Category } from '../config/site';
-import { getLangFromUrl, useTranslations, type TranslationKey } from '../i18n/utils';
+import {
+  getLangFromUrl,
+  useTranslations,
+  type TranslationKey,
+} from '../i18n/utils';
 
 interface Props {
   category: Category;
@@ -36,7 +40,9 @@ const rest = projects.slice(1);
 const featuredLang = featured?.data;
 const featuredTitle = featuredLang?.title[lang] ?? '';
 const featuredAlt = featuredLang?.alt?.[lang] ?? featuredTitle;
-const featuredYear = featuredLang?.date ? new Date(featuredLang.date).getFullYear().toString() : '';
+const featuredYear = featuredLang?.date
+  ? new Date(featuredLang.date).getFullYear().toString()
+  : '';
 const featuredDesc = featuredLang?.description?.[lang] ?? '';
 const featuredCredit = featuredLang?.credit ?? '';
 ---
@@ -56,44 +62,49 @@ const featuredCredit = featuredLang?.credit ?? '';
   <!-- RIGHT: featured + rest grid -->
   <div class="section-gallery">
     <!-- Featured image (16:9, full width of gallery column) -->
-    {featured && (
-      <button
-        class="featured-card project-trigger"
-        data-title={featuredTitle}
-        data-description={featuredDesc}
-        data-image={featuredLang?.coverImage}
-        data-credit={featuredCredit}
-        data-alt={featuredAlt}
-        type="button"
-      >
-        <div class="featured-img-wrap">
-          <Picture
-            src={featuredLang!.coverImage}
-            formats={['avif', 'webp']}
-            alt={featuredAlt}
-            width={1200}
-            height={675}
-            widths={[800, 1200]}
-            sizes="(max-width: 768px) 100vw, 80vw"
-            loading="lazy"
-            class="featured-img"
-          />
-        </div>
-        <div class="featured-caption">
-          <span class="featured-title">{featuredTitle}</span>
-          <span class="featured-year">{featuredYear}</span>
-        </div>
-      </button>
-    )}
+    {
+      featured && (
+        <button
+          class="featured-card project-trigger is-loading"
+          data-title={featuredTitle}
+          data-description={featuredDesc}
+          data-image={featuredLang?.coverImage}
+          data-credit={featuredCredit}
+          data-alt={featuredAlt}
+          type="button"
+        >
+          <div class="featured-img-wrap">
+            <div class="loader"></div>
+            <Picture
+              src={featuredLang!.coverImage}
+              formats={['avif', 'webp']}
+              alt={featuredAlt}
+              width={1200}
+              height={675}
+              widths={[800, 1200]}
+              sizes="(max-width: 768px) 100vw, 80vw"
+              loading="lazy"
+              class="featured-img"
+            />
+          </div>
+          <div class="featured-caption">
+            <span class="featured-title">{featuredTitle}</span>
+            <span class="featured-year">{featuredYear}</span>
+          </div>
+        </button>
+      )
+    }
 
     <!-- Rest grid (2-col, 4:3) -->
-    {rest.length > 0 && (
-      <div class="rest-grid">
-        {rest.map(project => (
-          <ProjectCard project={project} />
-        ))}
-      </div>
-    )}
+    {
+      rest.length > 0 && (
+        <div class="rest-grid">
+          {rest.map((project) => (
+            <ProjectCard project={project} />
+          ))}
+        </div>
+      )
+    }
   </div>
 </section>
 
@@ -184,6 +195,36 @@ const featuredCredit = featuredLang?.credit ?? '';
     overflow: hidden;
     background: #141417;
     border-radius: 3px;
+  }
+
+  .loader {
+    display: none;
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -25px;
+    margin-left: -25px;
+    z-index: 10;
+  }
+
+  .is-loading {
+    pointer-events: none;
+  }
+
+  .is-loading .loader {
+    display: block;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   .featured-img {
