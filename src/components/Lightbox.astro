@@ -169,6 +169,10 @@
       });
 
     document
+      .getElementById('lb-close')
+      ?.addEventListener('click', close);
+
+    document
       .getElementById('prev-project')
       ?.addEventListener('click', () => step(-1));
     document

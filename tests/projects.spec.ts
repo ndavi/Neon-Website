@@ -58,6 +58,14 @@ test.describe('Interactions: Exploring project details', () => {
       await dialog.click();
       await expect(dialog).not.toBeVisible();
     });
+
+    await test.step('Reopening and closing by clicking the cross button', async () => {
+      await firstProject.click();
+      await expect(dialog).toBeVisible();
+
+      await page.locator('#lb-close').click();
+      await expect(dialog).not.toBeVisible();
+    });
   });
 
   test('The visitor navigates through the carousel', async ({ page }) => {
