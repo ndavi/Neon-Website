@@ -45,19 +45,25 @@ const sortedCollections = {
     <main class="pt-[70px] max-w-[1380px] mx-auto px-[clamp(20px,5vw,64px)]">
       <div class="w-full">
         {
-          CATEGORIES.map((cat, i) => (
-            <>
-              <ProjectSection
-                category={cat}
-                projects={
-                  sortedCollections[cat.id as keyof typeof sortedCollections] ||
-                  []
-                }
-                index={i}
-              />
-              {cat.id === 'conception-3d' && <VideoSection index={4} />}
-            </>
-          ))
+          CATEGORIES.map((cat, i) => {
+            let catIndex = i;
+            if (cat.id === 'arts-numeriques') catIndex = 4;
+
+            return (
+              <>
+                <ProjectSection
+                  category={cat}
+                  projects={
+                    sortedCollections[
+                      cat.id as keyof typeof sortedCollections
+                    ] || []
+                  }
+                  index={catIndex}
+                />
+                {cat.id === 'conception-3d' && <VideoSection index={3} />}
+              </>
+            );
+          })
         }
       </div>
     </main>

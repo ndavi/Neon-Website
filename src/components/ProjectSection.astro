@@ -261,12 +261,18 @@ const featuredCredit = featuredLang?.credit ?? '';
     flex-shrink: 0;
   }
 
-  /* Rest 2-col grid */
+  /* Rest masonry grid (Pinterest-style) */
   .rest-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: clamp(14px, 1.7vw, 22px);
+    column-count: 2;
+    column-gap: clamp(14px, 1.7vw, 22px);
     margin-top: 4px;
+  }
+
+  /* Applying margin to children for vertical gap */
+  .rest-grid > :global(*) {
+    margin-bottom: clamp(14px, 1.7vw, 22px);
+    break-inside: avoid;
+    display: block; /* prevents inline splitting */
   }
 
   /* Responsive */
@@ -278,7 +284,7 @@ const featuredCredit = featuredLang?.credit ?? '';
       position: static;
     }
     .rest-grid {
-      grid-template-columns: repeat(2, 1fr);
+      column-count: 2;
     }
   }
 </style>

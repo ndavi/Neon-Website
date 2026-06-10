@@ -21,12 +21,12 @@ export const CATEGORIES: Category[] = [
     pictoClass: 'picto-sd',
   },
   {
-    id: 'arts-numeriques',
-    pictoClass: 'picto-an',
-  },
-  {
     id: 'conception-3d',
     pictoClass: 'picto-3d',
+  },
+  {
+    id: 'arts-numeriques',
+    pictoClass: 'picto-an',
   },
 ];
 
