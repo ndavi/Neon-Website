@@ -5,117 +5,117 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const navItems = [
-  { id: 'stage-design', name: t('nav.stage-design') },
-  { id: 'on-tour', name: t('nav.on-tour') },
-  { id: 'arts-numeriques', name: t('nav.arts-numeriques') },
-  { id: 'conception-3d', name: t('nav.conception-3d') },
-  { id: 'videos', name: t('nav.videos') },
+  { id: 'stage-design',    label: t('nav.stage-design') },
+  { id: 'on-tour',         label: t('nav.on-tour') },
+  { id: 'arts-numeriques', label: t('nav.arts-numeriques') },
+  { id: 'conception-3d',   label: t('nav.conception-3d') },
+  { id: 'videos',          label: t('nav.videos') },
 ];
 ---
 
-<div id="description" class="header-container hidden lg:flex py-12">
-  {
-    navItems.map((item, index) => (
-      <>
-        <div class="header-item">
-          <a href={`/${lang}/#${item.id}`}>
-            <p>{item.name}</p>
-          </a>
-        </div>
-        {index < navItems.length - 1 && <div class="vl" />}
-      </>
-    ))
-  }
-  <div class="vl"></div>
-  <div class="header-item lang-switcher">
-    <a href="/fr/" class={`lang-link ${lang === 'fr' ? 'active' : ''}`}>FR</a>
-    <span>|</span>
-    <a href="/en/" class={`lang-link ${lang === 'en' ? 'active' : ''}`}>EN</a>
+<header class="site-header" id="site-header">
+  <a href={`/${lang}/`} class="header-logo" aria-label="NEON — retour accueil">
+    <img
+      src="/img/neonAssets/neon-white-baseline.png"
+      alt="NEON — Stage Design & Arts Numériques"
+      width="160"
+      height="72"
+      class="logo-img"
+      loading="eager"
+    />
+  </a>
+
+  <nav class="header-nav" aria-label="Navigation principale">
+    {navItems.map(item => (
+      <a href={`/${lang}/#${item.id}`} class="nav-link">{item.label}</a>
+    ))}
+  </nav>
+
+  <div class="header-right">
+    <div class="lang-switcher" role="navigation" aria-label="Langue">
+      <a href="/fr/" class={`lang-link ${lang === 'fr' ? 'active' : ''}`}>FR</a>
+      <span class="lang-sep" aria-hidden="true">|</span>
+      <a href="/en/" class={`lang-link ${lang === 'en' ? 'active' : ''}`}>EN</a>
+    </div>
   </div>
-</div>
+</header>
+
+<!-- Mobile menu trigger (to be implemented) -->
 
 <style>
-  .header-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-around;
-    align-items: center;
-    align-content: center;
-    margin: 0rem 5rem 0rem 5rem;
-  }
-
-  .header-item {
-    font-family: 'M PLUS Rounded 1c', sans-serif;
-    font-weight: 500;
-    font-size: 1.4rem;
-    display: block;
-    flex-grow: 0;
-    flex-shrink: 1;
-    flex-basis: auto;
-    align-self: auto;
-    order: 0;
-  }
-
-  .header-item a {
-    text-decoration: none;
-    color: black;
-    font-style: normal;
-  }
-
-  .header-item p {
-    display: inline-block;
-    position: relative;
-    cursor: pointer;
-    margin: 0;
-  }
-
-  .header-item p::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 2px;
-    bottom: 0;
+  .site-header {
+    position: fixed;
+    top: 0;
     left: 0;
-    background-color: #000000;
-    transform-origin: center;
-    transition: transform 0.25s ease-in-out;
+    right: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px clamp(20px, 5vw, 64px);
+    background: rgba(10, 10, 11, 0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    gap: 24px;
   }
 
-  .header-item p:hover::after {
-    transform: scaleX(1);
-    transform-origin: center;
+  .header-logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .logo-img {
+    height: 36px;
+    width: auto;
+    display: block;
+  }
+
+  .header-nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(16px, 2.2vw, 32px);
+    flex-wrap: nowrap;
+  }
+
+  .nav-link {
+    color: #b6b6bd;
+    font-size: 12.5px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    transition: color 0.25s;
+    white-space: nowrap;
+  }
+  .nav-link:hover { color: #fff; }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
   }
 
   .lang-switcher {
     display: flex;
-    gap: 0.5rem;
     align-items: center;
+    gap: 7px;
   }
 
-  .lang-switcher a {
-    opacity: 0.4;
-    transition: opacity 0.2s;
-  }
+  .lang-sep { color: rgba(255,255,255,0.18); font-size: 12px; }
 
-  .lang-switcher a.active {
-    opacity: 1;
-    font-weight: 700;
+  .lang-link {
+    color: #67676e;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    transition: color 0.2s;
+    padding: 2px 3px;
   }
+  .lang-link:hover { color: #fff; }
+  .lang-link.active { color: #fff; font-weight: 700; }
 
-  .lang-switcher a:hover {
-    opacity: 1;
-  }
-
-  .vl {
-    border-left: 1px solid black;
-    height: 1.5rem;
-  }
-
-  @media screen and (max-width: 1000px) {
-    .header-container {
-      display: none;
-    }
+  @media (max-width: 768px) {
+    .header-nav { display: none; }
   }
 </style>

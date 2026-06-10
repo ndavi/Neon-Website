@@ -5,21 +5,60 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<div id="intro-text" class="intro-description mx-auto px-4 pb-16">
-  <p>
-    {t('intro.p1')}
-    <br />{t('intro.p2')}
-  </p>
-</div>
+<section id="description" class="intro">
+  <div class="intro-eyebrow" aria-hidden="true">
+    <span class="eyebrow-line"></span>
+    <span class="eyebrow-label">LYON · FR</span>
+    <span class="eyebrow-line"></span>
+  </div>
+  <p id="intro-text" class="intro-p1">{t('intro.p1')}</p>
+  <p class="intro-p2">{t('intro.p2')}</p>
+</section>
 
 <style>
-  .intro-description {
-    font-family: 'M PLUS Rounded 1c', sans-serif;
-    font-weight: 300;
+  .intro {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: clamp(80px, 12vh, 140px) 28px clamp(60px, 9vh, 100px);
     text-align: center;
-    justify-content: center;
-    padding-top: 2vh;
-    font-size: 1.4rem;
-    color: black;
+  }
+
+  .intro-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 34px;
+  }
+
+  .eyebrow-line {
+    display: block;
+    width: 36px;
+    height: 1px;
+    background: rgba(212,212,216,0.5);
+  }
+
+  .eyebrow-label {
+    color: #d4d4d8;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.34em;
+  }
+
+  .intro-p1 {
+    margin: 0 0 22px;
+    font-size: clamp(20px, 2.6vw, 30px);
+    font-weight: 300;
+    line-height: 1.5;
+    color: #ececef;
+    text-wrap: balance;
+  }
+
+  .intro-p2 {
+    margin: 0;
+    font-size: clamp(15px, 1.7vw, 18px);
+    font-weight: 300;
+    line-height: 1.6;
+    color: #8e8e96;
+    text-wrap: pretty;
   }
 </style>

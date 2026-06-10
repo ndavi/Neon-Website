@@ -1,15 +1,9 @@
 ---
+import { Picture } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import ProjectCard from './ProjectCard.astro';
-import SectionHeader from './SectionHeader.astro';
-
 import type { Category } from '../config/site';
-
-import {
-  getLangFromUrl,
-  useTranslations,
-  type TranslationKey,
-} from '../i18n/utils';
+import { getLangFromUrl, useTranslations, type TranslationKey } from '../i18n/utils';
 
 interface Props {
   category: Category;
@@ -19,83 +13,231 @@ interface Props {
     | CollectionEntry<'arts-numeriques'>
     | CollectionEntry<'conception-3d'>
   )[];
+  index: number; // 0-based, used for "01", "02" numbering
 }
 
-const { category, projects } = Astro.props;
-const { id, pictoClass } = category;
+const { category, projects, index } = Astro.props;
+const { id } = category;
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-// Dynamically construct the keys for the category
 const nameKey = `nav.${id}` as TranslationKey;
 const descKey = `cat.${id}.desc` as TranslationKey;
 
 const title = t(nameKey);
 const description = t(descKey);
+const num = String(index + 1).padStart(2, '0');
+const count = String(projects.length).padStart(2, '0');
+
+const featured = projects[0];
+const rest = projects.slice(1);
+
+const featuredLang = featured?.data;
+const featuredTitle = featuredLang?.title[lang] ?? '';
+const featuredAlt = featuredLang?.alt?.[lang] ?? featuredTitle;
+const featuredYear = featuredLang?.date ? new Date(featuredLang.date).getFullYear().toString() : '';
+const featuredDesc = featuredLang?.description?.[lang] ?? '';
+const featuredCredit = featuredLang?.credit ?? '';
 ---
 
-<section id={id} class={id.toLowerCase().replace(' ', '-')}>
-  <SectionHeader
-    title={title}
-    pictoClass={pictoClass}
-    description={description}
-  />
+<section id={id} class="project-section">
+  <!-- LEFT: sticky category panel -->
+  <div class="section-panel">
+    <div class="panel-meta">
+      <span class="panel-num">{num}</span>
+      <span class="panel-line" aria-hidden="true"></span>
+      <span class="panel-count">{count}</span>
+    </div>
+    <h2 class="panel-title">{title}</h2>
+    <p class="panel-desc">{description}</p>
+  </div>
 
-  <div class="photos">
-    {projects.map((project) => <ProjectCard project={project} />)}
+  <!-- RIGHT: featured + rest grid -->
+  <div class="section-gallery">
+    <!-- Featured image (16:9, full width of gallery column) -->
+    {featured && (
+      <button
+        class="featured-card project-trigger"
+        data-title={featuredTitle}
+        data-description={featuredDesc}
+        data-image={featuredLang?.coverImage}
+        data-credit={featuredCredit}
+        data-alt={featuredAlt}
+        type="button"
+      >
+        <div class="featured-img-wrap">
+          <Picture
+            src={featuredLang!.coverImage}
+            formats={['avif', 'webp']}
+            alt={featuredAlt}
+            width={1200}
+            height={675}
+            widths={[800, 1200]}
+            sizes="(max-width: 768px) 100vw, 80vw"
+            loading="lazy"
+            class="featured-img"
+          />
+        </div>
+        <div class="featured-caption">
+          <span class="featured-title">{featuredTitle}</span>
+          <span class="featured-year">{featuredYear}</span>
+        </div>
+      </button>
+    )}
+
+    <!-- Rest grid (2-col, 4:3) -->
+    {rest.length > 0 && (
+      <div class="rest-grid">
+        {rest.map(project => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+    )}
   </div>
 </section>
 
 <style>
-  .photos {
+  .project-section {
+    display: grid;
+    grid-template-columns: minmax(150px, 210px) 1fr;
+    gap: clamp(26px, 3.5vw, 64px);
+    padding: clamp(44px, 7vh, 84px) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* Sticky left panel */
+  .section-panel {
+    position: sticky;
+    top: 88px; /* height of fixed nav + some breathing room */
+    align-self: start;
+    height: max-content;
+  }
+
+  .panel-meta {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .panel-num {
+    color: #d4d4d8;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+  }
+
+  .panel-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.14);
+  }
+
+  .panel-count {
+    color: #5f5f66;
+    font-size: 12px;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+
+  .panel-title {
+    margin: 0 0 16px;
+    font-size: clamp(22px, 2.4vw, 30px);
+    font-weight: 700;
+    line-height: 1.1;
+    color: #fff;
+  }
+
+  .panel-desc {
+    margin: 0;
+    font-size: 14.5px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: #8e8e96;
+  }
+
+  /* Gallery column */
+  .section-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(14px, 1.7vw, 22px);
+  }
+
+  /* Featured card */
+  .featured-card {
+    display: block;
+    text-align: left;
     padding: 0;
+    margin: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    width: 100%;
   }
 
-  :global(.photos .image-div) {
+  .featured-img-wrap {
     position: relative;
-    transition: 0.4s;
-    text-align: center;
-    padding: 1.5vh;
-    box-sizing: border-box;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #141417;
+    border-radius: 3px;
   }
 
-  :global(.photos img) {
+  .featured-img {
     width: 100%;
     height: 100%;
-    padding: 0 2.5%;
     object-fit: cover;
-    cursor: pointer;
-    box-sizing: border-box;
+    display: block;
+    transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
   }
 
-  :global(.photos .image-div:hover) {
-    transform: scale(0.98);
-    opacity: 0.7;
+  .featured-card:hover .featured-img {
+    transform: scale(1.035);
   }
 
-  @media screen and (min-width: 769px) {
-    :global(.photos .image-div) {
-      width: calc(100vw / 3.5);
-      height: calc(100vh / 3.5);
+  .featured-caption {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 13px 2px 0;
+  }
+
+  .featured-title {
+    color: #ededf0;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .featured-year {
+    color: #67676e;
+    font-size: 11.5px;
+    font-weight: 400;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Rest 2-col grid */
+  .rest-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(14px, 1.7vw, 22px);
+    margin-top: 4px;
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .project-section {
+      grid-template-columns: 1fr;
     }
-  }
-
-  @media screen and (min-width: 481px) and (max-width: 768px) {
-    :global(.photos .image-div) {
-      width: calc(100vw / 3);
-      height: calc(100vh / 3);
+    .section-panel {
+      position: static;
     }
-  }
-
-  @media screen and (min-width: 321px) and (max-width: 480px) {
-    :global(.photos .image-div) {
-      width: 50vw;
-      height: 30vh; /* Reduced from 50vh to be more proportional */
+    .rest-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 </style>
