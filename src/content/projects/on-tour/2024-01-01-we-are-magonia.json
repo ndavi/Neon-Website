@@ -7,7 +7,7 @@
     "fr": "Création lumière",
     "en": "creation lighting"
   },
-  "coverImage": "/img/tour/wam-1.jpeg",
+  "coverImage": "../../../assets/img/tour/wam-1.jpeg",
   "date": "2024-01-01",
   "category": "ON TOUR",
   "credit": "NEON",

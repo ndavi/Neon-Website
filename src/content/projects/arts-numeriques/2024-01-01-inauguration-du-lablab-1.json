@@ -7,7 +7,7 @@
     "fr": "Spectacle de danse et virtual production en collaboration avec Théoriz",
     "en": "Dance show and virtual production in collaboration with Théoriz"
   },
-  "coverImage": "/img/artsNumeriques/neon-inauguration-lablab-2.jpeg",
+  "coverImage": "../../../assets/img/artsNumeriques/neon-inauguration-lablab-2.jpeg",
   "date": "2024-01-01",
   "category": "ARTS NUMERIQUES",
   "credit": "NEON",

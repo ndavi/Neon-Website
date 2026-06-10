@@ -7,7 +7,7 @@
     "fr": "Création lumière & contenu visuel",
     "en": "creation lighting & contenu visuel"
   },
-  "coverImage": "/img/tour/romane-9.jpg",
+  "coverImage": "../../../assets/img/tour/romane-9.jpg",
   "date": "2026-06-11",
   "category": "ON TOUR",
   "credit": "NEON",

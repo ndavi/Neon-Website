@@ -7,7 +7,7 @@
     "fr": "Scénographie pour l'édition 2022 de la Citrik Birthday à la Robia",
     "en": "Scenography pour l'édition 2022 de la Citrik Birthday à la Robia"
   },
-  "coverImage": "/img/stageDesign/neon-citrik-3.jpeg",
+  "coverImage": "../../../assets/img/stageDesign/neon-citrik-3.jpeg",
   "date": "2022-01-01",
   "category": "STAGE DESIGN",
   "credit": "NEON",

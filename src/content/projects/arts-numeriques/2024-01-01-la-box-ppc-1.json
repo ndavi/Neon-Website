@@ -7,7 +7,7 @@
     "fr": "Tournage video 'La BOX' avec le duo d'artiste PPC",
     "en": "Tournage video 'La BOX' avec le duo d'artiste PPC"
   },
-  "coverImage": "/img/artsNumeriques/neon-ppc-3.jpeg",
+  "coverImage": "../../../assets/img/artsNumeriques/neon-ppc-3.jpeg",
   "date": "2024-01-01",
   "category": "ARTS NUMERIQUES",
   "credit": "Hit The Stills",

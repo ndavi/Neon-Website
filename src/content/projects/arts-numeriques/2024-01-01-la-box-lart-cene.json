@@ -7,7 +7,7 @@
     "fr": "Tournage video 'La BOX' avec l'artiste L'Art Cene",
     "en": "Tournage video 'La BOX' avec l'artiste L'Art Cene"
   },
-  "coverImage": "/img/artsNumeriques/neon-lartcene-2.jpeg",
+  "coverImage": "../../../assets/img/artsNumeriques/neon-lartcene-2.jpeg",
   "date": "2024-01-01",
   "category": "ARTS NUMERIQUES",
   "credit": "NEON",

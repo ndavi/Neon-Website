@@ -7,7 +7,7 @@
     "fr": "Tournage video 'La BOX' avec l'artiste Lassanai",
     "en": "Tournage video 'La BOX' avec l'artiste Lassanai"
   },
-  "coverImage": "/img/artsNumeriques/neon-lassanai-1.jpeg",
+  "coverImage": "../../../assets/img/artsNumeriques/neon-lassanai-1.jpeg",
   "date": "2024-01-01",
   "category": "ARTS NUMERIQUES",
   "credit": "NEON",

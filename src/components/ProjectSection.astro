@@ -1,5 +1,5 @@
 ---
-import { Picture } from 'astro:assets';
+
 import type { CollectionEntry } from 'astro:content';
 import ProjectCard from './ProjectCard.astro';
 import type { Category } from '../config/site';
@@ -68,21 +68,18 @@ const featuredCredit = featuredLang?.credit ?? '';
           class="featured-card project-trigger is-loading"
           data-title={featuredTitle}
           data-description={featuredDesc}
-          data-image={featuredLang?.coverImage}
+          data-image={featuredLang?.coverImage.src}
           data-credit={featuredCredit}
           data-alt={featuredAlt}
           type="button"
         >
           <div class="featured-img-wrap">
             <div class="loader" />
-            <Picture
-              src={featuredLang!.coverImage}
-              formats={['avif', 'webp']}
+            <img
+              src={featuredLang!.coverImage.src}
+              width={featuredLang!.coverImage.width}
+              height={featuredLang!.coverImage.height}
               alt={featuredAlt}
-              width={1200}
-              height={675}
-              widths={[800, 1200]}
-              sizes="(max-width: 768px) 100vw, 80vw"
               loading="lazy"
               class="featured-img"
             />

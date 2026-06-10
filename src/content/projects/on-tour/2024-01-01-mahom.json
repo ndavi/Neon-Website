@@ -7,7 +7,7 @@
     "fr": "Création lumière",
     "en": "creation lighting"
   },
-  "coverImage": "/img/tour/mahom-2.jpeg",
+  "coverImage": "../../../assets/img/tour/mahom-2.jpeg",
   "date": "2024-01-01",
   "category": "ON TOUR",
   "credit": "NEON",

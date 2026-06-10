@@ -7,11 +7,11 @@ const localizedString = z.object({
   en: z.string(),
 });
 
-const projectSchema = z.object({
+const projectSchema = ({ image }) => z.object({
   id: z.string(),
   title: localizedString,
   description: localizedString.optional(),
-  coverImage: z.string(),
+  coverImage: image(),
   date: z.string(),
   category: z.enum([
     'STAGE DESIGN',

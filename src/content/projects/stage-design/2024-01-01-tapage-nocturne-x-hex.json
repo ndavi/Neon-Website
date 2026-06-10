@@ -7,7 +7,7 @@
     "fr": "Show lumière et video générative au Transbordeur pour Tapage Nocturne x HEX",
     "en": "Show lighting et video générative at the Transbordeur pour Tapage Nocturne x HEX"
   },
-  "coverImage": "/img/stageDesign/neon-tapage-HEX-1.jpeg",
+  "coverImage": "../../../assets/img/stageDesign/neon-tapage-HEX-1.jpeg",
   "date": "2024-01-01",
   "category": "STAGE DESIGN",
   "credit": "Brice Robert",
