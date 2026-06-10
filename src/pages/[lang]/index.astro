@@ -53,9 +53,9 @@ const sortedCollections = {
                   sortedCollections[cat.id as keyof typeof sortedCollections] ||
                   []
                 }
-                index={i >= 3 ? i + 1 : i}
+                index={i}
               />
-              {cat.id === 'arts-numeriques' && <VideoSection index={3} />}
+              {cat.id === 'conception-3d' && <VideoSection index={4} />}
             </>
           ))
         }
