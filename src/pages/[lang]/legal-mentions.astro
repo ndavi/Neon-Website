@@ -15,7 +15,7 @@ const t = useTranslations(lang as keyof typeof ui);
 ---
 
 <BaseLayout title={t('legal.title')} lang={lang}>
-  <div id="app-root" class="app min-h-screen bg-[#dbdbdb] flex flex-col">
+  <div id="app-root" class="app min-h-screen bg-[#0a0a0b] flex flex-col">
     <div class="pt-8 pb-4 text-center">
       <a href={`/${lang}/`} class="inline-block">
         <Image
@@ -33,7 +33,7 @@ const t = useTranslations(lang as keyof typeof ui);
     <Header />
 
     <main
-      class="flex-grow py-16 px-4 max-w-4xl mx-auto m-plus font-light leading-relaxed text-black"
+      class="flex-grow py-16 px-4 max-w-4xl mx-auto m-plus font-light leading-relaxed text-[#f4f4f5] pt-[70px]"
     >
       <h1
         class="text-4xl font-bold mb-12 text-center"
@@ -43,7 +43,7 @@ const t = useTranslations(lang as keyof typeof ui);
       <div class="space-y-8">
         <section>
           <h2
-            class="text-xl font-bold mb-2"
+            class="text-xl font-bold mb-2 text-[#d4d4d8]"
             set:html={t('legal.section1.title')}
           />
           <p set:html={t('legal.section1.content')} />
@@ -51,7 +51,7 @@ const t = useTranslations(lang as keyof typeof ui);
 
         <section>
           <h2
-            class="text-xl font-bold mb-2"
+            class="text-xl font-bold mb-2 text-[#d4d4d8]"
             set:html={t('legal.section2.title')}
           />
           <p set:html={t('legal.section2.content')} />
@@ -59,7 +59,7 @@ const t = useTranslations(lang as keyof typeof ui);
 
         <section>
           <h2
-            class="text-xl font-bold mb-2"
+            class="text-xl font-bold mb-2 text-[#d4d4d8]"
             set:html={t('legal.section3.title')}
           />
           <p set:html={t('legal.section3.content')} />
@@ -67,7 +67,7 @@ const t = useTranslations(lang as keyof typeof ui);
 
         <section>
           <h2
-            class="text-xl font-bold mb-2"
+            class="text-xl font-bold mb-2 text-[#d4d4d8]"
             set:html={t('legal.section4.title')}
           />
           <p set:html={t('legal.section4.content')} />
@@ -75,7 +75,7 @@ const t = useTranslations(lang as keyof typeof ui);
 
         <section>
           <h2
-            class="text-xl font-bold mb-2"
+            class="text-xl font-bold mb-2 text-[#d4d4d8]"
             set:html={t('legal.section5.title')}
           />
           <p set:html={t('legal.section5.content')} />
