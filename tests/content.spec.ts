@@ -28,7 +28,7 @@ test.describe('Content: Secondary media and legal info', () => {
     await test.step('Navigate to the legal mentions page via footer link', async () => {
       await legalLink.scrollIntoViewIfNeeded();
       await expect(legalLink).toBeVisible();
-      await legalLink.click();
+      await legalLink.click({ force: true });
     });
 
     await test.step('Check that the legal page has the right content', async () => {

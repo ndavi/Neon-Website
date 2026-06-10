@@ -13,7 +13,7 @@ test.describe('Discovery: First Impression', () => {
     });
 
     await test.step('Verify the main landing logo is visible', async () => {
-      const logo = page.locator('img[alt="logo-neon"]');
+      const logo = page.locator('img.hero-logo');
       await expect(logo).toBeVisible();
     });
 
@@ -23,7 +23,7 @@ test.describe('Discovery: First Impression', () => {
     });
 
     await test.step('Ensure the landing background image is loaded', async () => {
-      const bgImage = page.locator('.home-image');
+      const bgImage = page.locator('.hero-bg');
       await expect(bgImage).toBeVisible();
       const isLoaded = await bgImage.evaluate(
         (img: HTMLImageElement) => img.complete && img.naturalWidth > 0
