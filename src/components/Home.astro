@@ -1,33 +1,32 @@
 ---
-import { Picture } from 'astro:assets';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import neonMain from '../assets/img/neon-main-2.jpeg';
+import neonLogo from '../assets/img/neonAssets/neon-white-sans-baseline.png';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
 <section class="hero">
-  <Picture
-    src="/img/neon-main-2.jpeg"
+  <img
+    src={neonMain.src}
     alt="NEON — Scénographie live"
-    width={1920}
-    height={1080}
+    width={neonMain.width}
+    height={neonMain.height}
     class="hero-bg"
     loading="eager"
-    formats={['avif', 'webp']}
   />
   <div class="hero-overlay" aria-hidden="true"></div>
 
   <div class="hero-content">
     <h1 class="sr-only">{t('home.sr-only')}</h1>
-    <Picture
-      src="/img/neonAssets/neon-white-sans-baseline.png"
+    <img
+      src={neonLogo.src}
       alt="NEON — Stage Design & Arts Numériques"
-      width={2604}
-      height={1164}
+      width={neonLogo.width}
+      height={neonLogo.height}
       class="hero-logo"
       loading="eager"
-      formats={['avif', 'webp']}
     />
     <p class="hero-tagline">Lyon — France</p>
   </div>

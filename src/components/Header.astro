@@ -1,5 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import neonLogo from '../assets/img/neonAssets/neon-white-sans-baseline.png';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -16,10 +17,10 @@ const navItems = [
 <header class="site-header header-container" id="site-header">
   <a href={`/${lang}/`} class="header-logo" aria-label="NEON — retour accueil">
     <img
-      src="/img/neonAssets/neon-white-sans-baseline.png"
+      src={neonLogo.src}
       alt="NEON — Stage Design & Arts Numériques"
-      width="160"
-      height="72"
+      width={neonLogo.width}
+      height={neonLogo.height}
       class="logo-img"
       loading="eager"
     />

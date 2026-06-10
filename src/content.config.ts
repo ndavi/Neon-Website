@@ -7,23 +7,24 @@ const localizedString = z.object({
   en: z.string(),
 });
 
-const projectSchema = ({ image }) => z.object({
-  id: z.string(),
-  title: localizedString,
-  description: localizedString.optional(),
-  coverImage: image(),
-  date: z.string(),
-  category: z.enum([
-    'STAGE DESIGN',
-    'ON TOUR',
-    'ARTS NUMERIQUES',
-    'CONCEPTION 3D',
-  ]),
-  credit: z.string().optional(),
-  lienCredit: z.string().optional(),
-  alt: localizedString.optional(),
-  order: z.number().optional(),
-});
+const projectSchema = ({ image }) =>
+  z.object({
+    id: z.string(),
+    title: localizedString,
+    description: localizedString.optional(),
+    coverImage: image(),
+    date: z.string(),
+    category: z.enum([
+      'STAGE DESIGN',
+      'ON TOUR',
+      'ARTS NUMERIQUES',
+      'CONCEPTION 3D',
+    ]),
+    credit: z.string().optional(),
+    lienCredit: z.string().optional(),
+    alt: localizedString.optional(),
+    order: z.number().optional(),
+  });
 
 export const collections = {
   'stage-design': defineCollection({
