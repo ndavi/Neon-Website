@@ -1,12 +1,22 @@
 ---
 import { VIDEOS } from '../config/site';
+
+interface Props {
+  index?: number;
+}
+
+const { index = 3 } = Astro.props;
+const num = String(index + 1).padStart(2, '0');
+const count = String(VIDEOS.length).padStart(2, '0');
 ---
 
 <section id="videos" class="project-section">
   <!-- LEFT: sticky category panel -->
   <div class="section-panel">
     <div class="panel-meta">
+      <span class="panel-num">{num}</span>
       <span class="panel-line" aria-hidden="true"></span>
+      <span class="panel-count">{count}</span>
     </div>
     <h2 class="panel-title">VIDEOS</h2>
     <p class="panel-desc">Capsules vidéos et aftermovies.</p>
@@ -57,10 +67,25 @@ import { VIDEOS } from '../config/site';
     margin-bottom: 18px;
   }
 
+  .panel-num {
+    color: #d4d4d8;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+  }
+
   .panel-line {
     flex: 1;
     height: 1px;
     background: rgba(255, 255, 255, 0.14);
+  }
+
+  .panel-count {
+    color: #5f5f66;
+    font-size: 12px;
+    font-weight: 500;
+    flex-shrink: 0;
   }
 
   .panel-title {
