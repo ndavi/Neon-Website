@@ -34,8 +34,19 @@ const t = useTranslations(lang);
 
   <button class="hero-scroll" id="home-arrow" aria-label={t('home.sr-only')}>
     <span class="scroll-hint">DÉCOUVRIR</span>
-    <svg width="26" height="16" viewBox="0 0 26 16" fill="none" aria-hidden="true">
-      <path d="M2 2L13 13L24 2" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <svg
+      width="26"
+      height="16"
+      viewBox="0 0 26 16"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M2 2L13 13L24 2"
+        stroke="#ffffff"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
     </svg>
   </button>
 </section>
@@ -43,7 +54,9 @@ const t = useTranslations(lang);
 <script>
   const btn = document.getElementById('home-arrow');
   btn?.addEventListener('click', () => {
-    const target = document.getElementById('description') ?? document.getElementById('stage-design');
+    const target =
+      document.getElementById('description') ??
+      document.getElementById('stage-design');
     if (target) {
       const y = target.getBoundingClientRect().top + window.scrollY - 72;
       window.scrollTo({ top: y, behavior: 'smooth' });
@@ -77,9 +90,9 @@ const t = useTranslations(lang);
     z-index: 1;
     background: radial-gradient(
       120% 90% at 50% 38%,
-      rgba(10,10,11,0) 30%,
-      rgba(10,10,11,0.55) 78%,
-      rgba(10,10,11,0.95) 100%
+      rgba(10, 10, 11, 0) 30%,
+      rgba(10, 10, 11, 0.55) 78%,
+      rgba(10, 10, 11, 0.95) 100%
     );
   }
 
@@ -97,12 +110,12 @@ const t = useTranslations(lang);
     width: min(560px, 64vw);
     height: auto;
     display: block;
-    filter: drop-shadow(0 8px 40px rgba(0,0,0,0.6));
+    filter: drop-shadow(0 8px 40px rgba(0, 0, 0, 0.6));
   }
 
   .hero-tagline {
     margin: 34px 0 0;
-    color: rgba(255,255,255,0.62);
+    color: rgba(255, 255, 255, 0.62);
     font-weight: 300;
     font-size: clamp(12px, 1.2vw, 15px);
     letter-spacing: 0.46em;
@@ -126,7 +139,7 @@ const t = useTranslations(lang);
   }
 
   .scroll-hint {
-    color: rgba(255,255,255,0.6);
+    color: rgba(255, 255, 255, 0.6);
     font-size: 10.5px;
     letter-spacing: 0.3em;
     font-weight: 500;
@@ -138,7 +151,14 @@ const t = useTranslations(lang);
   }
 
   @keyframes heroBob {
-    0%, 100% { transform: translateY(0); opacity: .6; }
-    50%       { transform: translateY(7px); opacity: 1; }
+    0%,
+    100% {
+      transform: translateY(0);
+      opacity: 0.6;
+    }
+    50% {
+      transform: translateY(7px);
+      opacity: 1;
+    }
   }
 </style>

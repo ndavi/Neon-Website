@@ -14,24 +14,23 @@ import { VIDEOS } from '../config/site';
 
   <!-- RIGHT: video gallery -->
   <div class="section-gallery">
-
-  <div class="video-grid">
-    {
-      VIDEOS.map((vid) => (
-        <div class="player-wrapper">
-          <iframe
-            width="100%"
-            height="100%"
-            src={vid.url}
-            title={vid.alt}
-            loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          />
-        </div>
-      ))
-    }
-  </div>
+    <div class="video-grid">
+      {
+        VIDEOS.map((vid) => (
+          <div class="player-wrapper">
+            <iframe
+              width="100%"
+              height="100%"
+              src={vid.url}
+              title={vid.alt}
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            />
+          </div>
+        ))
+      }
+    </div>
   </div>
 </section>
 

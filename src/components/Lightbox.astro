@@ -87,9 +87,13 @@
     if (!it) return;
     const img = document.getElementById('modal-image') as HTMLImageElement;
     const loader = document.getElementById('modal-loader') as HTMLElement;
-    const prevBtn = document.getElementById('prev-project') as HTMLButtonElement;
-    const nextBtn = document.getElementById('next-project') as HTMLButtonElement;
-    
+    const prevBtn = document.getElementById(
+      'prev-project'
+    ) as HTMLButtonElement;
+    const nextBtn = document.getElementById(
+      'next-project'
+    ) as HTMLButtonElement;
+
     isLoading = true;
     img.style.opacity = '0';
     loader.style.display = 'block';
@@ -106,13 +110,13 @@
 
     img.onload = onDone;
     img.onerror = onDone;
-    
+
     img.src = it.src;
-    
+
     if (img.complete) {
       onDone();
     }
-    
+
     img.alt = it.title;
     (document.getElementById('lb-cat') as HTMLElement).textContent = it.cat;
     (document.getElementById('modal-title') as HTMLElement).textContent =
@@ -155,12 +159,14 @@
       });
 
     // Close on backdrop or image click
-    document.getElementById('project-dialog')?.addEventListener('click', (e) => {
-      const t = e.target as HTMLElement;
-      if (t.closest('.lb-btn')) return; // buttons handled
-      if (t.closest('.lb-meta')) return; // let text be selectable
-      close();
-    });
+    document
+      .getElementById('project-dialog')
+      ?.addEventListener('click', (e) => {
+        const t = e.target as HTMLElement;
+        if (t.closest('.lb-btn')) return; // buttons handled
+        if (t.closest('.lb-meta')) return; // let text be selectable
+        close();
+      });
 
     document
       .getElementById('prev-project')
@@ -169,7 +175,8 @@
       .getElementById('next-project')
       ?.addEventListener('click', () => step(1));
     document.addEventListener('keydown', (e) => {
-      if (document.getElementById('project-dialog')?.hidden || isLoading) return;
+      if (document.getElementById('project-dialog')?.hidden || isLoading)
+        return;
       if (e.key === 'Escape') close();
       if (e.key === 'ArrowLeft') step(-1);
       if (e.key === 'ArrowRight') step(1);
@@ -279,7 +286,9 @@
   }
 
   @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   .lb-meta {
