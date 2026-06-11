@@ -158,15 +158,25 @@
 
   function close() {
     const lb = document.getElementById('project-dialog')!;
+    if (lb.hidden) return;
+
+    let isDone = false;
+    const complete = () => {
+      if (isDone) return;
+      isDone = true;
+      lb.hidden = true;
+      document.body.style.overflow = '';
+    };
+
     gsap.to(lb, {
       opacity: 0,
       duration: 0.3,
       ease: 'power2.in',
-      onComplete: () => {
-        lb.hidden = true;
-        document.body.style.overflow = '';
-      },
+      onComplete: complete,
     });
+
+    // Failsafe for headless browsers throttling requestAnimationFrame
+    setTimeout(complete, 400);
   }
 
   function step(n: number) {
