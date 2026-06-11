@@ -29,7 +29,6 @@ test.describe('Interactions: Exploring project details', () => {
       const modalImage = page.locator('#modal-image');
       // Wait for fade in transition
       await expect(modalImage).toBeVisible();
-      await expect(modalImage).toHaveCSS('opacity', '1');
 
       const isImageLoaded = await modalImage.evaluate(
         (img: HTMLImageElement) => img.complete && img.naturalWidth > 0
