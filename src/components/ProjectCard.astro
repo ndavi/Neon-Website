@@ -213,8 +213,6 @@ const tYear = project.data.date
       if (img) {
         const removeLoading = () => {
           trigger.classList.remove('is-loading');
-          // No need to refresh ScrollTrigger here because images have width/height attributes
-          // preventing any layout shifts. Calling refresh here was causing the scroll to freeze.
         };
 
         if (img.complete) {
