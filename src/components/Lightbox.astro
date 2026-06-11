@@ -52,7 +52,6 @@
       <div class="lb-cat" id="lb-cat"></div>
       <h3 class="lb-title" id="modal-title"></h3>
       <p class="lb-desc" id="lb-desc"></p>
-      <p class="lb-credit" id="lb-credit"></p>
     </div>
   </div>
 </div>
@@ -138,8 +137,6 @@
     (document.getElementById('modal-title') as HTMLElement).textContent =
       it.title;
     (document.getElementById('lb-desc') as HTMLElement).textContent = it.desc;
-    (document.getElementById('lb-credit') as HTMLElement).textContent =
-      it.credit ? `Crédit : ${it.credit}` : '';
   }
 
   function open(idx: number) {
@@ -347,11 +344,5 @@
     font-size: 14.5px;
     font-weight: 300;
     max-width: 620px;
-  }
-
-  .lb-credit {
-    margin: 0;
-    color: #5f5f66;
-    font-size: 12px;
   }
 </style>
