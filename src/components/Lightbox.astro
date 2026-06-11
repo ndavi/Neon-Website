@@ -123,9 +123,7 @@
       it.title;
     (document.getElementById('lb-desc') as HTMLElement).textContent = it.desc;
     (document.getElementById('lb-credit') as HTMLElement).textContent =
-      it.credit
-        ? `Crédit : ${it.credit}  ·  ${idx + 1} / ${items.length}`
-        : `${idx + 1} / ${items.length}`;
+      it.credit ? `Crédit : ${it.credit}` : '';
   }
 
   function open(idx: number) {
