@@ -170,6 +170,7 @@ const featuredCredit = featuredLang?.credit ?? '';
     display: flex;
     flex-direction: column;
     gap: clamp(14px, 1.7vw, 22px);
+    min-width: 0; /* prevents flex items from overflowing grid columns */
   }
 
   /* Featured card */
@@ -269,6 +270,9 @@ const featuredCredit = featuredLang?.credit ?? '';
     margin-bottom: clamp(14px, 1.7vw, 22px);
     break-inside: avoid;
     display: block; /* prevents inline splitting */
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
   }
 
   /* Responsive */
