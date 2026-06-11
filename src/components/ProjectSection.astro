@@ -74,14 +74,16 @@ const featuredCredit = featuredLang?.credit ?? '';
         >
           <div class="featured-img-wrap">
             <div class="loader" />
-            <img
-              src={featuredLang!.coverImage.src}
-              width={featuredLang!.coverImage.width}
-              height={featuredLang!.coverImage.height}
-              alt={featuredAlt}
-              loading="lazy"
-              class="featured-img"
-            />
+            <div class="parallax-wrap">
+              <img
+                src={featuredLang!.coverImage.src}
+                width={featuredLang!.coverImage.width}
+                height={featuredLang!.coverImage.height}
+                alt={featuredAlt}
+                loading="lazy"
+                class="featured-img"
+              />
+            </div>
           </div>
           <div class="featured-caption">
             <span class="featured-title">{featuredTitle}</span>
@@ -192,6 +194,21 @@ const featuredCredit = featuredLang?.credit ?? '';
     overflow: hidden;
     background: #141417;
     border-radius: 3px;
+    transition: transform 0.5s ease-out, box-shadow 0.5s ease-out;
+    will-change: transform;
+  }
+
+  .featured-card:hover .featured-img-wrap {
+    box-shadow:
+      0 0 30px rgba(212, 212, 216, 0.15),
+      0 0 12px rgba(212, 212, 216, 0.1);
+  }
+
+  .parallax-wrap {
+    transform: scale(1.3);
+    transform-origin: center;
+    width: 100%;
+    height: 100%;
   }
 
   .loader {
@@ -272,7 +289,7 @@ const featuredCredit = featuredLang?.credit ?? '';
     display: block; /* prevents inline splitting */
     width: 100%;
     max-width: 100%;
-    overflow: hidden;
+    /* Removed overflow: hidden so the neon glow can bleed outside */
   }
 
   /* Responsive */
