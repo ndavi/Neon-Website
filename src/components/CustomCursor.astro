@@ -1,11 +1,15 @@
 ---
+
 ---
+
 <div class="custom-cursor"></div>
 
 <style>
   /* Only show the custom cursor if the device has a fine pointer (mouse/trackpad) */
   @media (pointer: fine) {
-    :global(body), :global(a), :global(button) {
+    :global(body),
+    :global(a),
+    :global(button) {
       cursor: none !important;
     }
 
@@ -22,15 +26,17 @@
       z-index: 99999;
       transform: translate(-50%, -50%);
       will-change: transform;
-      transition: width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), height 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transition:
+        width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+        height 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
-    
+
     .custom-cursor.hovering {
       width: 60px;
       height: 60px;
     }
   }
-  
+
   @media (pointer: coarse) {
     .custom-cursor {
       display: none;
@@ -44,12 +50,12 @@
   function initCursor() {
     const cursor = document.querySelector('.custom-cursor');
     if (!cursor) return;
-    
+
     // Check if device has fine pointer before running JS animation
     if (window.matchMedia('(pointer: fine)').matches) {
       // Use GSAP quickTo for highly performant mouse following
-      const xTo = gsap.quickTo(cursor, "x", {duration: 0.15, ease: "power3"});
-      const yTo = gsap.quickTo(cursor, "y", {duration: 0.15, ease: "power3"});
+      const xTo = gsap.quickTo(cursor, 'x', { duration: 0.15, ease: 'power3' });
+      const yTo = gsap.quickTo(cursor, 'y', { duration: 0.15, ease: 'power3' });
 
       window.addEventListener('mousemove', (e) => {
         xTo(e.clientX);
@@ -58,8 +64,10 @@
 
       // Add hover effect to interactive elements
       const setupInteractiveElements = () => {
-        const interactiveElements = document.querySelectorAll('a, button, .project-trigger');
-        
+        const interactiveElements = document.querySelectorAll(
+          'a, button, .project-trigger'
+        );
+
         interactiveElements.forEach((el) => {
           // Avoid attaching multiple listeners by checking a dataset flag
           if (!(el as HTMLElement).dataset.cursorBound) {
@@ -69,13 +77,13 @@
             el.addEventListener('mouseleave', () => {
               cursor.classList.remove('hovering');
             });
-            (el as HTMLElement).dataset.cursorBound = "true";
+            (el as HTMLElement).dataset.cursorBound = 'true';
           }
         });
       };
 
       setupInteractiveElements();
-      
+
       // Also setup after view transitions or dynamic DOM updates if any
       document.addEventListener('astro:after-swap', setupInteractiveElements);
     }

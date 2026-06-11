@@ -49,15 +49,17 @@ const navItems = [
   import { gsap } from 'gsap';
 
   function initMagneticLinks() {
-    const links = document.querySelectorAll('.nav-link, .lang-link') as NodeListOf<HTMLElement>;
-    
+    const links = document.querySelectorAll(
+      '.nav-link, .lang-link'
+    ) as NodeListOf<HTMLElement>;
+
     links.forEach((link) => {
       link.addEventListener('mousemove', (e: MouseEvent) => {
         const rect = link.getBoundingClientRect();
         // Calculate distance from center of element
         const x = e.clientX - (rect.left + rect.width / 2);
         const y = e.clientY - (rect.top + rect.height / 2);
-        
+
         // Move element towards mouse (using a smaller multiplier for subtlety)
         gsap.to(link, {
           x: x * 0.15,
@@ -66,7 +68,7 @@ const navItems = [
           ease: 'power2.out',
         });
       });
-      
+
       link.addEventListener('mouseleave', () => {
         // Reset position
         gsap.to(link, {
