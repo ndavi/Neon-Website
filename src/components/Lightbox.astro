@@ -58,6 +58,7 @@
 </div>
 
 <script>
+  import { gsap } from 'gsap';
   interface LbItem {
     src: string;
     title: string;
@@ -95,17 +96,32 @@
     ) as HTMLButtonElement;
 
     isLoading = true;
-    img.style.opacity = '0';
+    gsap.set(img, { opacity: 0, scale: 1.05, y: 20 });
+    gsap.set('.lb-meta', { opacity: 0, y: 15 });
     loader.style.display = 'block';
     if (prevBtn) prevBtn.style.pointerEvents = 'none';
     if (nextBtn) nextBtn.style.pointerEvents = 'none';
 
     const onDone = () => {
       isLoading = false;
-      img.style.opacity = '1';
       loader.style.display = 'none';
       if (prevBtn) prevBtn.style.pointerEvents = 'auto';
       if (nextBtn) nextBtn.style.pointerEvents = 'auto';
+
+      gsap.to(img, {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 0.6,
+        ease: 'power3.out',
+      });
+      gsap.to('.lb-meta', {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        delay: 0.1,
+        ease: 'power3.out',
+      });
     };
 
     img.onload = onDone;
@@ -129,16 +145,31 @@
   function open(idx: number) {
     current = idx;
     buildItems();
-    render(current);
     const lb = document.getElementById('project-dialog')!;
     lb.hidden = false;
     lb.removeAttribute('hidden');
     document.body.style.overflow = 'hidden';
+
+    gsap.fromTo(
+      lb,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.4, ease: 'power2.out' }
+    );
+
+    render(current);
   }
 
   function close() {
-    document.getElementById('project-dialog')!.hidden = true;
-    document.body.style.overflow = '';
+    const lb = document.getElementById('project-dialog')!;
+    gsap.to(lb, {
+      opacity: 0,
+      duration: 0.3,
+      ease: 'power2.in',
+      onComplete: () => {
+        lb.hidden = true;
+        document.body.style.overflow = '';
+      },
+    });
   }
 
   function step(n: number) {
@@ -266,7 +297,6 @@
     object-fit: contain;
     border-radius: 4px;
     box-shadow: 0 30px 90px rgba(0, 0, 0, 0.6);
-    transition: opacity 0.3s ease;
   }
 
   .loader {
