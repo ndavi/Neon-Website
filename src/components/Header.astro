@@ -45,6 +45,44 @@ const navItems = [
   </div>
 </header>
 
+<script>
+  import { gsap } from 'gsap';
+
+  function initMagneticLinks() {
+    const links = document.querySelectorAll('.nav-link, .lang-link') as NodeListOf<HTMLElement>;
+    
+    links.forEach((link) => {
+      link.addEventListener('mousemove', (e: MouseEvent) => {
+        const rect = link.getBoundingClientRect();
+        // Calculate distance from center of element
+        const x = e.clientX - (rect.left + rect.width / 2);
+        const y = e.clientY - (rect.top + rect.height / 2);
+        
+        // Move element towards mouse (using a smaller multiplier for subtlety)
+        gsap.to(link, {
+          x: x * 0.15,
+          y: y * 0.15,
+          duration: 0.3,
+          ease: 'power2.out',
+        });
+      });
+      
+      link.addEventListener('mouseleave', () => {
+        // Reset position
+        gsap.to(link, {
+          x: 0,
+          y: 0,
+          duration: 0.7,
+          ease: 'elastic.out(1, 0.3)',
+        });
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initMagneticLinks);
+  document.addEventListener('astro:after-swap', initMagneticLinks);
+</script>
+
 <!-- Mobile menu trigger (to be implemented) -->
 
 <style>
@@ -91,6 +129,9 @@ const navItems = [
     letter-spacing: 0.14em;
     transition: color 0.25s;
     white-space: nowrap;
+    display: inline-block; /* Needed for transform */
+    padding: 10px; /* Expand hover area */
+    margin: -10px;
   }
   .nav-link:hover {
     color: #fff;
@@ -120,7 +161,9 @@ const navItems = [
     font-weight: 400;
     letter-spacing: 0.1em;
     transition: color 0.2s;
-    padding: 2px 3px;
+    padding: 10px 5px; /* Expand hover area */
+    margin: -8px 0;
+    display: inline-block; /* Needed for transform */
   }
   .lang-link:hover {
     color: #fff;

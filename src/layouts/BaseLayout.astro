@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import SEO from '../components/SEO.astro';
+import CustomCursor from '../components/CustomCursor.astro';
 
 interface Props {
   title: string;
@@ -48,6 +49,7 @@ const {
   <body
     class="selection:bg-neon-cyan/30 selection:text-white overflow-x-hidden"
   >
+    <CustomCursor />
     <slot />
 
     <script>

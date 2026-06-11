@@ -84,7 +84,9 @@ const tYear = project.data.date
     overflow: hidden;
     background: #141417;
     border-radius: 3px;
-    transition: transform 0.5s ease-out, box-shadow 0.5s ease-out;
+    transition:
+      transform 0.5s ease-out,
+      box-shadow 0.5s ease-out;
     will-change: transform;
   }
 
@@ -179,7 +181,7 @@ const tYear = project.data.date
 
   function initParallax() {
     if (ctx) ctx.revert();
-    
+
     ctx = gsap.context(() => {
       const cards = document.querySelectorAll('.project-card, .featured-card');
       cards.forEach((card) => {
@@ -226,35 +228,40 @@ const tYear = project.data.date
   }
 
   function initTiltEffect() {
-    const cards = document.querySelectorAll('.project-card, .featured-card') as NodeListOf<HTMLElement>;
+    const cards = document.querySelectorAll(
+      '.project-card, .featured-card'
+    ) as NodeListOf<HTMLElement>;
     cards.forEach((card) => {
-      const imgWrap = card.querySelector('.card-img-wrap, .featured-img-wrap') as HTMLElement;
+      const imgWrap = card.querySelector(
+        '.card-img-wrap, .featured-img-wrap'
+      ) as HTMLElement;
       if (!imgWrap) return;
 
       card.addEventListener('mousemove', (e: MouseEvent) => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-        
+
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
-        
+
         // Normalize the tilt so it feels identical regardless of card size.
         // We aim for a maximum Z-displacement of ~6 pixels at the edges.
         const maxDisplacement = 6;
         const maxRotateX = (maxDisplacement / centerY) * (180 / Math.PI);
         const maxRotateY = (maxDisplacement / centerX) * (180 / Math.PI);
-        
-        const rotateX = ((y - centerY) / centerY) * -maxRotateX; 
+
+        const rotateX = ((y - centerY) / centerY) * -maxRotateX;
         const rotateY = ((x - centerX) / centerX) * maxRotateY;
-        
+
         imgWrap.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
         imgWrap.style.transition = 'box-shadow 0.5s ease-out';
       });
-      
+
       card.addEventListener('mouseleave', () => {
         imgWrap.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
-        imgWrap.style.transition = 'transform 0.5s ease-out, box-shadow 0.5s ease-out';
+        imgWrap.style.transition =
+          'transform 0.5s ease-out, box-shadow 0.5s ease-out';
       });
     });
   }
@@ -264,7 +271,7 @@ const tYear = project.data.date
     initProjectLoaders();
     initTiltEffect();
   });
-  
+
   document.addEventListener('astro:after-swap', () => {
     initParallax();
     initProjectLoaders();
