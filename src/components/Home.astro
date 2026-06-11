@@ -51,16 +51,84 @@ const t = useTranslations(lang);
 </section>
 
 <script>
-  const btn = document.getElementById('home-arrow');
-  btn?.addEventListener('click', () => {
-    const target =
-      document.getElementById('description') ??
-      document.getElementById('stage-design');
-    if (target) {
-      const y = target.getBoundingClientRect().top + window.scrollY - 72;
-      window.scrollTo({ top: y, behavior: 'smooth' });
+  import { gsap } from 'gsap';
+
+  function initHome() {
+    // 1. Mouse Parallax
+    const hero = document.querySelector('.hero') as HTMLElement;
+    const bg = document.querySelector('.hero-bg') as HTMLElement;
+    if (hero && bg) {
+      // Create quickTo functions for performance
+      const xTo = gsap.quickTo(bg, 'x', { duration: 0.6, ease: 'power3' });
+      const yTo = gsap.quickTo(bg, 'y', { duration: 0.6, ease: 'power3' });
+
+      // Need a small scale so we don't see the edges when it moves
+      gsap.set(bg, { scale: 1.05 });
+
+      hero.addEventListener('mousemove', (e) => {
+        const rect = hero.getBoundingClientRect();
+        // Calculate position relative to center of the section (-0.5 to 0.5)
+        const xPos = (e.clientX - rect.left) / rect.width - 0.5;
+        const yPos = (e.clientY - rect.top) / rect.height - 0.5;
+
+        // Move opposite to mouse direction
+        xTo(xPos * -30);
+        yTo(yPos * -30);
+      });
+
+      hero.addEventListener('mouseleave', () => {
+        xTo(0);
+        yTo(0);
+      });
     }
-  });
+
+    // 2. Entrance Animations
+    const logo = document.querySelector('.hero-logo');
+    const tagline = document.querySelector('.hero-tagline');
+    const arrow = document.querySelector('.hero-scroll');
+
+    // Hide initially to prevent FOUC before animation starts
+    gsap.set([logo, tagline, arrow], { opacity: 0 });
+
+    function playEntrance() {
+      const tl = gsap.timeline();
+      tl.fromTo(
+        logo,
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out' }
+      )
+        .fromTo(
+          tagline,
+          { opacity: 0, letterSpacing: '0.1em' },
+          {
+            opacity: 1,
+            letterSpacing: '0.46em',
+            duration: 1.2,
+            ease: 'power3.out',
+          },
+          '-=0.8'
+        )
+        .fromTo(arrow, { opacity: 0 }, { opacity: 1, duration: 1 }, '-=0.6');
+    }
+
+    // Run entrance animation immediately
+    playEntrance();
+
+    // Scroll Arrow Logic
+    const btn = document.getElementById('home-arrow');
+    btn?.addEventListener('click', () => {
+      const target =
+        document.getElementById('description') ??
+        document.getElementById('stage-design');
+      if (target) {
+        const y = target.getBoundingClientRect().top + window.scrollY - 72;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initHome);
+  document.addEventListener('astro:after-swap', initHome);
 </script>
 
 <style>
@@ -153,11 +221,9 @@ const t = useTranslations(lang);
     0%,
     100% {
       transform: translateY(0);
-      opacity: 0.6;
     }
     50% {
       transform: translateY(7px);
-      opacity: 1;
     }
   }
 </style>

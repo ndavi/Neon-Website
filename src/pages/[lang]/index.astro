@@ -37,38 +37,40 @@ const sortedCollections = {
   description={t('seo.description')}
   lang={lang}
 >
-  <div id="app-root" class="app min-h-screen bg-[#0a0a0b]">
-    <Home />
-    <Header />
-    <Description />
+  <div id="app-root" class="app min-h-screen">
+    <div class="content-wrapper bg-[#0a0a0b] relative z-10">
+      <Home />
+      <Header />
+      <Description />
 
-    <main class="pt-[70px] max-w-[1380px] mx-auto px-[clamp(20px,5vw,64px)]">
-      <div class="w-full">
-        {
-          CATEGORIES.map((cat, i) => {
-            let catIndex = i;
-            if (cat.id === 'arts-numeriques') catIndex = 4;
+      <main class="pt-[70px] max-w-[1380px] mx-auto px-[clamp(20px,5vw,64px)]">
+        <div class="w-full">
+          {
+            CATEGORIES.map((cat, i) => {
+              let catIndex = i;
+              if (cat.id === 'arts-numeriques') catIndex = 4;
 
-            return (
-              <>
-                <ProjectSection
-                  category={cat}
-                  projects={
-                    sortedCollections[
-                      cat.id as keyof typeof sortedCollections
-                    ] || []
-                  }
-                  index={catIndex}
-                />
-                {cat.id === 'conception-3d' && <VideoSection index={3} />}
-              </>
-            );
-          })
-        }
-      </div>
-    </main>
+              return (
+                <>
+                  <ProjectSection
+                    category={cat}
+                    projects={
+                      sortedCollections[
+                        cat.id as keyof typeof sortedCollections
+                      ] || []
+                    }
+                    index={catIndex}
+                  />
+                  {cat.id === 'conception-3d' && <VideoSection index={3} />}
+                </>
+              );
+            })
+          }
+        </div>
+      </main>
 
-    <Lightbox />
+      <Lightbox />
+    </div>
     <Footer />
   </div>
 </BaseLayout>
