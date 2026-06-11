@@ -207,14 +207,22 @@ const tYear = project.data.date
   }
 
   function initProjectLoaders() {
+    let refreshTimeout: ReturnType<typeof setTimeout>;
+    const debouncedRefresh = () => {
+      clearTimeout(refreshTimeout);
+      refreshTimeout = setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 150);
+    };
+
     const triggers = document.querySelectorAll('.project-trigger');
     triggers.forEach((trigger) => {
       const img = trigger.querySelector('img');
       if (img) {
         const removeLoading = () => {
           trigger.classList.remove('is-loading');
-          // Refresh ScrollTrigger to recalculate heights when image loads
-          ScrollTrigger.refresh();
+          // Refresh ScrollTrigger to recalculate heights when image loads, but debounced to prevent freezing
+          debouncedRefresh();
         };
 
         if (img.complete) {
