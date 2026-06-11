@@ -79,9 +79,6 @@ const t = useTranslations(lang);
     padding: clamp(70px, 11vh, 120px) clamp(20px, 5vw, 64px) 40px;
     text-align: center;
     background: #0a0a0b;
-    position: sticky;
-    bottom: 0;
-    z-index: 1;
   }
 
   .footer-inner {
@@ -184,3 +181,40 @@ const t = useTranslations(lang);
     color: #fff;
   }
 </style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initFooterReveal() {
+    const footer = document.querySelector('.site-footer');
+    const footerInner = document.querySelector('.footer-inner');
+
+    if (
+      footer &&
+      footerInner &&
+      window.matchMedia('(min-width: 768px)').matches
+    ) {
+      gsap.fromTo(
+        footerInner,
+        { yPercent: -50, opacity: 0.5 },
+        {
+          yPercent: 0,
+          opacity: 1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: footer,
+            start: 'top bottom',
+            end: 'bottom bottom',
+            scrub: true,
+          },
+        }
+      );
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', initFooterReveal);
+  document.addEventListener('astro:after-swap', initFooterReveal);
+</script>
