@@ -37,8 +37,12 @@
     "glob": "^13.0.6",
     "globals": "^17.6.0",
     "husky": "^9.1.7",
+    "lint-staged": "^17.0.7",
     "prettier": "^3.8.3",
     "prettier-plugin-astro": "^0.14.1",
     "typescript-eslint": "^8.60.1"
+  },
+  "lint-staged": {
+    "*.{astro,js,ts,css,md,json}": "prettier --write"
   }
 }
