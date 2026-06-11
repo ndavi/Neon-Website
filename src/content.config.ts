@@ -1,4 +1,4 @@
-import { defineCollection } from 'astro:content';
+import { defineCollection, type SchemaContext } from 'astro:content';
 import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
 
@@ -7,7 +7,7 @@ const localizedString = z.object({
   en: z.string(),
 });
 
-const projectSchema = ({ image }) =>
+const projectSchema = ({ image }: SchemaContext) =>
   z.object({
     id: z.string(),
     title: localizedString,
