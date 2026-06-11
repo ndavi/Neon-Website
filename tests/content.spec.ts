@@ -30,7 +30,8 @@ test.describe('Content: Secondary media and legal info', () => {
     const legalLink = page.locator('a[href="/fr/legal-mentions"]');
 
     await test.step('Navigate to the legal mentions page via footer link', async () => {
-      await legalLink.click();
+      await legalLink.scrollIntoViewIfNeeded();
+      await legalLink.click({ force: true });
     });
 
     await test.step('Check that the legal page has the right content', async () => {
