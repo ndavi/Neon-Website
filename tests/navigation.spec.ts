@@ -51,7 +51,7 @@ test.describe('Exploration: Moving through the portfolio', () => {
       }) => {
         const link = page.locator(`a[href="/fr/${section.id}"]`).first();
         await link.click();
-        
+
         // Check if the URL hash was updated
         await expect(page).toHaveURL(new RegExp('.*' + section.id + '$'));
 

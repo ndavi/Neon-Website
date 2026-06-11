@@ -4,7 +4,9 @@ test.describe('Content: Secondary media and legal info', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/fr/');
     // Remove dev toolbar to prevent it from intercepting clicks (like on the footer)
-    await page.evaluate(() => document.querySelector('astro-dev-toolbar')?.remove());
+    await page.evaluate(() =>
+      document.querySelector('astro-dev-toolbar')?.remove()
+    );
   });
 
   test('The visitor watches video showcases', async ({ page }) => {
