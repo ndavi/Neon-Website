@@ -44,6 +44,8 @@ test.describe('Interactions: Exploring project details', () => {
 
     const dialog = page.locator('#project-dialog');
     await expect(dialog).toBeVisible();
+    // Wait for image to load before interacting
+    await expect(dialog.locator('#modal-loader')).not.toBeVisible();
 
     await test.step('Closing using the Escape key', async () => {
       await page.keyboard.press('Escape');
@@ -53,6 +55,7 @@ test.describe('Interactions: Exploring project details', () => {
     await test.step('Reopening and closing by clicking anywhere', async () => {
       await firstProject.click();
       await expect(dialog).toBeVisible();
+      await expect(dialog.locator('#modal-loader')).not.toBeVisible();
 
       // Click at the center (on image/text) should close it
       await dialog.click();
@@ -62,6 +65,7 @@ test.describe('Interactions: Exploring project details', () => {
     await test.step('Reopening and closing by clicking the cross button', async () => {
       await firstProject.click();
       await expect(dialog).toBeVisible();
+      await expect(dialog.locator('#modal-loader')).not.toBeVisible();
 
       await page.locator('#lb-close').click();
       await expect(dialog).not.toBeVisible();
@@ -99,6 +103,7 @@ test.describe('Interactions: Exploring project details', () => {
 
     const dialog = page.locator('#project-dialog');
     await expect(dialog).toBeVisible();
+    await expect(dialog.locator('#modal-loader')).not.toBeVisible();
     const modalTitle = page.locator('#modal-title');
 
     // Initial state check
@@ -106,6 +111,7 @@ test.describe('Interactions: Exploring project details', () => {
 
     await test.step('Navigate back to the previous project using the UI button', async () => {
       await page.locator('button#prev-project').click();
+      await expect(dialog.locator('#modal-loader')).not.toBeVisible();
       // We might have multiple images for project1, so we just check it's not title2 anymore
       // or if we know specifically what's before index2
       await expect(modalTitle).not.toHaveText(title2 || '');
@@ -113,6 +119,7 @@ test.describe('Interactions: Exploring project details', () => {
 
     await test.step('Navigate to the next project using the keyboard', async () => {
       await page.keyboard.press('ArrowRight');
+      await expect(dialog.locator('#modal-loader')).not.toBeVisible();
       await expect(modalTitle).toHaveText(title2 || '');
     });
   });

@@ -11,7 +11,7 @@ test.describe('Image Loader and Interaction', () => {
     await context.addCookies([]);
 
     // Intercept BEFORE page.goto
-    await page.route('**/*.{png,jpg,jpeg,webp,avif}', async (route) => {
+    await page.route('**/*.{png,jpg,jpeg,webp,avif}*', async (route) => {
       await new Promise((resolve) => setTimeout(resolve, 2000));
       await route.continue();
     });

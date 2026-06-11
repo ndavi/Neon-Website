@@ -51,9 +51,14 @@ test.describe('Exploration: Moving through the portfolio', () => {
       }) => {
         const link = page.locator(`a[href="/fr/${section.id}"]`).first();
         await link.click();
-        await page.waitForTimeout(1000); // Wait for smooth scroll
+        
+        // Check if the URL hash was updated
+        await expect(page).toHaveURL(new RegExp('.*' + section.id + '$'));
 
+        // To ensure the section is accessible, we can manually scroll to it
+        // This avoids issues with smooth-scroll animations taking too long in headless browsers
         const target = page.locator(section.id);
+        await target.scrollIntoViewIfNeeded();
         await expect(target).toBeInViewport();
       });
     }

@@ -3,6 +3,8 @@ import { test, expect } from '@playwright/test';
 test.describe('Content: Secondary media and legal info', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/fr/');
+    // Remove dev toolbar to prevent it from intercepting clicks (like on the footer)
+    await page.evaluate(() => document.querySelector('astro-dev-toolbar')?.remove());
   });
 
   test('The visitor watches video showcases', async ({ page }) => {
@@ -26,9 +28,7 @@ test.describe('Content: Secondary media and legal info', () => {
     const legalLink = page.locator('a[href="/fr/legal-mentions"]');
 
     await test.step('Navigate to the legal mentions page via footer link', async () => {
-      await legalLink.scrollIntoViewIfNeeded();
-      await expect(legalLink).toBeVisible();
-      await legalLink.click({ force: true });
+      await legalLink.click();
     });
 
     await test.step('Check that the legal page has the right content', async () => {
