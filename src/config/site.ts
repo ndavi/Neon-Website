@@ -1,4 +1,6 @@
 export const SITE_NAME = 'NEON';
+/** Legal entity publishing the site (EURL), used for copyright notices. */
+export const COMPANY_NAME = 'Studio NEON';
 export const SITE_DESCRIPTION = 'NEON - Arts Numériques et Scénographie';
 
 export interface Category {

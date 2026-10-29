@@ -41,5 +41,20 @@ test.describe('Content: Secondary media and legal info', () => {
         .first();
       await expect(mainHeading).toBeVisible();
     });
+
+    await test.step('Confirm the publisher is the Studio NEON company', async () => {
+      const main = page.locator('main');
+      await expect(main).toContainText('Studio NEON');
+      await expect(main).toContainText('109 920 447');
+      await expect(main).not.toContainText('NEON LIVE');
+    });
+  });
+
+  test('The visitor sees the company copyright in the footer', async ({
+    page,
+  }) => {
+    await expect(page.locator('.footer-copy')).toHaveText(
+      /© \d{4} Studio NEON/
+    );
   });
 });
