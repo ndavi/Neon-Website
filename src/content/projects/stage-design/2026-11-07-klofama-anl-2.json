@@ -1,0 +1,21 @@
+{
+  "title": {
+    "fr": "KLOFAMA All Night Long",
+    "en": "KLOFAMA All Night Long"
+  },
+  "description": {
+    "fr": "Scénographie et création lumière pour le All Night Long de KLOFAMA",
+    "en": "Scenography and lighting design for KLOFAMA's All Night Long"
+  },
+  "coverImage": "../../../assets/img/stageDesign/neon-klofama-anl-2026-3.jpg",
+  "date": "2026-11-07",
+  "category": "STAGE DESIGN",
+  "credit": "Tom Jacomelli (@tomjacomelli)",
+  "lienCredit": "https://www.instagram.com/tomjacomelli/",
+  "alt": {
+    "fr": "neon stripled lyon scénographie lumière klofama anl all night long",
+    "en": "neon stripled lyon Scenography lighting klofama anl all night long"
+  },
+  "id": "2026-11-07-klofama-anl-2",
+  "order": 3
+}

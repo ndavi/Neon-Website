@@ -71,6 +71,41 @@ test.describe('Interactions: Exploring project details', () => {
     });
   });
 
+  test('The visitor sees the credit of external photographers only', async ({
+    page,
+  }) => {
+    const dialog = page.locator('#project-dialog');
+    const credit = page.locator('#lb-credit');
+
+    await test.step('An external photographer is credited with a link', async () => {
+      await page
+        .locator(
+          '.project-trigger[data-credit="Tom Jacomelli (@tomjacomelli)"]'
+        )
+        .first()
+        .click();
+      await expect(dialog.locator('#modal-loader')).not.toBeVisible();
+
+      await expect(credit).toBeVisible();
+      await expect(credit).toContainText(
+        'Crédit photo : Tom Jacomelli (@tomjacomelli)'
+      );
+      await expect(page.locator('#lb-credit-link')).toHaveAttribute(
+        'href',
+        'https://www.instagram.com/tomjacomelli/'
+      );
+      await page.keyboard.press('Escape');
+      await expect(dialog).not.toBeVisible();
+    });
+
+    await test.step('In-house photos carry no credit line', async () => {
+      await page.locator('.project-trigger:not([data-credit])').first().click();
+      await expect(dialog.locator('#modal-loader')).not.toBeVisible();
+
+      await expect(credit).toBeHidden();
+    });
+  });
+
   test('The visitor navigates through the carousel', async ({ page }) => {
     // Ensure we have at least 2 projects with different titles
     const projects = page.locator('.project-trigger');

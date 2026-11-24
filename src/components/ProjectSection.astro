@@ -7,6 +7,7 @@ import {
   useTranslations,
   type TranslationKey,
 } from '../i18n/utils';
+import { getDisplayedCredit } from '../utils/credits';
 
 interface Props {
   category: Category;
@@ -43,7 +44,9 @@ const featuredYear = featuredLang?.date
   ? new Date(featuredLang.date).getFullYear().toString()
   : '';
 const featuredDesc = featuredLang?.description?.[lang] ?? '';
-const featuredCredit = featuredLang?.credit ?? '';
+const featuredCredit = featuredLang
+  ? getDisplayedCredit(featuredLang)
+  : undefined;
 ---
 
 <section id={id} class="project-section">
@@ -68,7 +71,8 @@ const featuredCredit = featuredLang?.credit ?? '';
           data-title={featuredTitle}
           data-description={featuredDesc}
           data-image={featuredLang?.coverImage.src}
-          data-credit={featuredCredit}
+          data-credit={featuredCredit?.name}
+          data-lien-credit={featuredCredit?.url}
           data-alt={featuredAlt}
           type="button"
         >

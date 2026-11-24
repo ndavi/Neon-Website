@@ -1,0 +1,20 @@
+{
+  "title": {
+    "fr": "ENCORE x CAROUSE - La Rayonne",
+    "en": "ENCORE x CAROUSE - La Rayonne"
+  },
+  "description": {
+    "fr": "Scénographie led et lumière à La Rayonne pour ENCORE et CAROUSE",
+    "en": "LED and lighting scenography at La Rayonne for ENCORE and CAROUSE"
+  },
+  "coverImage": "../../../assets/img/stageDesign/neon-encore-carouse-2024-2.jpg",
+  "date": "2024-09-14",
+  "category": "STAGE DESIGN",
+  "credit": "NEON",
+  "lienCredit": "https://www.instagram.com/neonlivefr/",
+  "alt": {
+    "fr": "neon stripled rayonne lyon scénographie lumière encore carouse",
+    "en": "neon stripled rayonne lyon Scenography lighting encore carouse"
+  },
+  "id": "2024-09-14-encore-x-carouse-rayonne-1"
+}

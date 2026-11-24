@@ -1,6 +1,9 @@
 ---
 // No props — this component manages itself via JS.
 // Place once in the page layout, outside all sections.
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const t = useTranslations(getLangFromUrl(Astro.url));
 ---
 
 <div
@@ -52,6 +55,14 @@
       <div class="lb-cat" id="lb-cat"></div>
       <h3 class="lb-title" id="modal-title"></h3>
       <p class="lb-desc" id="lb-desc"></p>
+      <p class="lb-credit" id="lb-credit" hidden>
+        {t('project.credit')}
+        <a
+          class="lb-credit-link"
+          id="lb-credit-link"
+          target="_blank"
+          rel="noopener noreferrer"></a>
+      </p>
     </div>
   </div>
 </div>
@@ -63,6 +74,7 @@
     title: string;
     desc: string;
     credit: string;
+    creditUrl: string;
     cat: string;
   }
 
@@ -77,6 +89,7 @@
       title: el.dataset.title ?? '',
       desc: el.dataset.description ?? '',
       credit: el.dataset.credit ?? '',
+      creditUrl: el.dataset.lienCredit ?? '',
       cat:
         el.closest('section')?.querySelector('h2')?.textContent?.trim() ?? '',
     }));
@@ -137,6 +150,22 @@
     (document.getElementById('modal-title') as HTMLElement).textContent =
       it.title;
     (document.getElementById('lb-desc') as HTMLElement).textContent = it.desc;
+    renderCredit(it);
+  }
+
+  function renderCredit(it: LbItem) {
+    const creditLine = document.getElementById('lb-credit') as HTMLElement;
+    const creditLink = document.getElementById(
+      'lb-credit-link'
+    ) as HTMLAnchorElement;
+
+    creditLine.hidden = !it.credit;
+    creditLink.textContent = it.credit;
+    if (it.creditUrl) {
+      creditLink.href = it.creditUrl;
+    } else {
+      creditLink.removeAttribute('href');
+    }
   }
 
   function open(idx: number) {
@@ -354,5 +383,23 @@
     font-size: 14.5px;
     font-weight: 300;
     max-width: 620px;
+  }
+
+  .lb-credit {
+    margin: 0;
+    color: #5f5f66;
+    font-size: 12px;
+  }
+
+  .lb-credit[hidden] {
+    display: none;
+  }
+
+  .lb-credit-link {
+    color: #9a9aa1;
+  }
+
+  .lb-credit-link[href]:hover {
+    color: #fff;
   }
 </style>

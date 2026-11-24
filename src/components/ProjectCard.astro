@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { getLangFromUrl } from '../i18n/utils';
+import { getDisplayedCredit } from '../utils/credits';
 
 interface Props {
   project:
@@ -13,8 +14,8 @@ interface Props {
 
 const { project, loading = 'lazy' } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
-const { title, description, coverImage, credit, lienCredit, alt } =
-  project.data;
+const { title, description, coverImage, alt } = project.data;
+const photoCredit = getDisplayedCredit(project.data);
 
 const tTitle = title[lang];
 const tDescription = description ? description[lang] : '';
@@ -29,8 +30,8 @@ const tYear = project.data.date
   data-title={tTitle}
   data-description={tDescription}
   data-image={coverImage.src}
-  data-credit={credit}
-  data-lien-credit={lienCredit}
+  data-credit={photoCredit?.name}
+  data-lien-credit={photoCredit?.url}
   data-alt={tAlt}
   type="button"
 >
